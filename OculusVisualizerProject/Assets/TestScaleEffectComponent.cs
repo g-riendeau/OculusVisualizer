@@ -15,7 +15,7 @@ public class TestScaleEffectComponent : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		float scaleEffect = Mathf.Sin(_x * Time.time * 0.5f) * Mathf.Sin(_y * Time.time);
+		float scaleEffect = Mathf.Sin((2.0f*_x+0.5f*_y)*Time.time * 1.0f);
 		this.transform.localScale = new Vector3(1f, scaleEffect, 1f);
 	}
 }
