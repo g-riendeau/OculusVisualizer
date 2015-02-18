@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class AudioProcessor : MonoBehaviour {
+	public float[] amplitude = new float[4096];
 
 	// Use this for initialization
 	void Start () {

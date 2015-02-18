@@ -4,15 +4,20 @@ using System.Collections.Generic;
 
 public class CubeWallComponent : MonoBehaviour 
 {
-	private const float kWidth = 10f;
-	private const float kDepth = 100f;
+	private const float cWidth = 10f;
+	private const float cDepth = 100f;
+	public GameObject[,] cubeArray = new GameObject[(int)cWidth,(int)cDepth];
 
 	// Use this for initialization
 	void Start() 
 	{
-		for (float i = -(kWidth * 0.5f); i < (kWidth * 0.5f); i++)
+		//On veut des indice entiers
+		int idxi = 0;
+		int idxj = 0;
+		for (float i = -(cWidth * 0.5f); i < (cWidth * 0.5f); i++)
 		{
-			for (float j = 0f; j < kDepth; j++)
+			idxj = 0;
+			for (float j = 0f; j < cDepth; j++)
 			{
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.parent = this.transform;
@@ -21,7 +26,14 @@ public class CubeWallComponent : MonoBehaviour
 
 				TestScaleEffectComponent effectComp = cube.AddComponent<TestScaleEffectComponent>();
 				effectComp.Initialize(i, j);
+
+				CubeIndex depth = cube.AddComponent<CubeIndex>();
+				depth.Initialize(idxi);
+
+				cubeArray[idxi,idxj] = cube;
+				idxj ++;
 			}
+			idxi ++;
 		}
 	}
 }
