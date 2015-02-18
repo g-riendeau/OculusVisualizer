@@ -4,7 +4,7 @@ using System.Collections;
 public class CubeIndex : MonoBehaviour {
 	//Position 0 = caméra
 	private int _idxDepth;
-
+	public float scale;
 	// Use this for initialization
 	void Start () {
 	

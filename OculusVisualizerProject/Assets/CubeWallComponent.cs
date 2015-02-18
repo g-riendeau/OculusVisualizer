@@ -7,8 +7,10 @@ public class CubeWallComponent : MonoBehaviour
 
 	public GameObject[,] cubeArray = new GameObject[(int)cWidth,(int)cDepth];
 	public Material FloorMat;
+	//private AudioProcessor audioProcessor = new AudioProcessor();
 	private const float cWidth = 10f;
 	private const float cDepth = 50f;
+
 
 	// Use this for initialization
 	void Start() 
@@ -28,8 +30,8 @@ public class CubeWallComponent : MonoBehaviour
 				cube.transform.localScale = new Vector3(1f, 0.1f, 1f);
 				cube.renderer.material = FloorMat;
 
-				TestScaleEffectComponent effectComp = cube.AddComponent<TestScaleEffectComponent>();
-				effectComp.Initialize(i, j);
+				//TestScaleEffectComponent effectComp = cube.AddComponent<TestScaleEffectComponent>();
+				//effectComp.Initialize(i, j);
 
 				CubeIndex depth = cube.AddComponent<CubeIndex>();
 				depth.Initialize(idxi);
