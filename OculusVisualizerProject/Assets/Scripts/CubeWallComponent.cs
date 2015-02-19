@@ -19,12 +19,12 @@ public class CubeWallComponent : MonoBehaviour
 		//On veut des indice entiers
 		int idxi = 0;
 		int idxj = 0;
-		for (float i = -(cWidth * 0.5f) + 0.5f; i < (cWidth * 0.5f); i++)//Sans espacement
-		//for (float i = -(cWidth * 0.5f) - 0.5f*(cWidth*cOffset/2); i < (cWidth * 0.5f)+ (cWidth*cOffset/2); i = i+1f+cOffset)
+		//for (float i = -(cWidth * 0.5f) + 0.5f; i < (cWidth * 0.5f); i++)//Sans espacement
+		for (float i = -(cWidth * 0.5f) - 0.5f*(cWidth*cOffset/2); i < (cWidth * 0.5f)+ (cWidth*cOffset/2); i = i+1f+cOffset)
 		{
 			idxj = 0; 
-			for (float j = 0f; j < cDepth; j++)
-			//for (float j = 0f; j < cDepth + (cDepth*cOffset); j = j+1f+cOffset)
+			//for (float j = 0f; j < cDepth; j++)
+			for (float j = 0f; j < cDepth + (cDepth*cOffset); j = j+1f+cOffset)
 			{
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.parent = this.transform;

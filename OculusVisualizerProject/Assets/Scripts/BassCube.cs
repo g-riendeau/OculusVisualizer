@@ -51,10 +51,10 @@ public class BassCube : MonoBehaviour {
 			floorCubes[i,0].transform.localScale = new Vector3( 1f, floorCubes[i-1,0].lastScale, 1f) ;
 		}
 		//On affecte le reste des cubes
-		ApplyWave();
+		ApplyScaleWave();
 
 		//On colore
-		ApplyColor ();
+		ApplyColorWave ();
 	}
 
 	private float Tanh( float x ){
@@ -62,7 +62,7 @@ public class BassCube : MonoBehaviour {
 		return 0.5f*(exp2x-1f)/(exp2x+1f)+0.5f;
 	}
 
-	void ApplyWave(){
+	void ApplyScaleWave(){
 		for(int i = 0; i<floorCubes.GetLength(0); i++){
 			for(int j = 1; j<floorCubes.GetLength(1); j++){
 				//Debug.Log (j);
@@ -71,7 +71,7 @@ public class BassCube : MonoBehaviour {
 			}
 		}
 	} 
-	void ApplyColor(){
+	void ApplyColorWave(){
 		for(int i = 0; i<floorCubes.GetLength(0); i++){
 			for(int j = 0; j<floorCubes.GetLength(1); j++){
 				//Debug.Log (j);
