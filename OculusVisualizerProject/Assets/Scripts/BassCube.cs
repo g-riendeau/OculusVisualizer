@@ -35,12 +35,20 @@ public class BassCube : MonoBehaviour {
 		if (hauteurGraves < 0.1f)
 			hauteurGraves = 0.1f;
 
-		floorCubes[0,0].transform.localScale = new Vector3( 1f, hauteurGraves, 1f) ;
+		//On efect la premiere rangée des cubes du plancher (depth = 0)
+		for(int i = 0; i<floorCubes.GetLength(0); i++){
+			floorCubes[i,0].transform.localScale = new Vector3( 1f, hauteurGraves, 1f) ;
+		}
 	}
 
 	private float Tanh( float x ){
 		float exp2x = Mathf.Exp(x-5f);
 		return 0.5f*(exp2x-1f)/(exp2x+1f)+0.5f;
 	}
+
+	void ApplyWave(){
+
+
+	} 
 }
  

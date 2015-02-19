@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CubeIndex : MonoBehaviour {
+public class CubeInfo: MonoBehaviour {
 	//Position 0 = caméra
 	private int _idxDepth;
 	public float scale;

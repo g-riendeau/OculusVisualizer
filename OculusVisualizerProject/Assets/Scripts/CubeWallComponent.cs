@@ -18,7 +18,7 @@ public class CubeWallComponent : MonoBehaviour
 		//On veut des indice entiers
 		int idxi = 0;
 		int idxj = 0;
-		for (float i = -(cWidth * 0.5f); i < (cWidth * 0.5f); i++)
+		for (float i = -(cWidth * 0.5f)+0.5f; i < (cWidth * 0.5f); i++)
 		{
 			idxj = 0;
 			for (float j = 0f; j < cDepth; j++)
@@ -33,8 +33,8 @@ public class CubeWallComponent : MonoBehaviour
 				//TestScaleEffectComponent effectComp = cube.AddComponent<TestScaleEffectComponent>();
 				//effectComp.Initialize(i, j);
 
-				CubeIndex depth = cube.AddComponent<CubeIndex>();
-				depth.Initialize(idxi);
+				CubeInfo info = cube.AddComponent<CubeInfo>();
+				info.Initialize(idxi);
 
 				cubeArray[idxi,idxj] = cube;
 				idxj ++;
