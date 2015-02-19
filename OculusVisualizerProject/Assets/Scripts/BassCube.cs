@@ -16,7 +16,7 @@ public class BassCube : MonoBehaviour {
 	private const int cutoffGraves = 8;
 	private float[] amplitudesGraves;
 
-	private GameObject[,] floorCubes;
+	private CubeInfo[,] floorCubes;
 
 
 	// Use this for initialization
@@ -37,8 +37,10 @@ public class BassCube : MonoBehaviour {
 
 		//On efect la premiere rangée des cubes du plancher (depth = 0)
 		for(int i = 0; i<floorCubes.GetLength(0); i++){
+			floorCubes[i,0].lastScale = floorCubes[i,0].transform.localScale.y;
 			floorCubes[i,0].transform.localScale = new Vector3( 1f, hauteurGraves, 1f) ;
 		}
+		ApplyWave();
 	}
 
 	private float Tanh( float x ){
@@ -47,7 +49,13 @@ public class BassCube : MonoBehaviour {
 	}
 
 	void ApplyWave(){
-
+		for(int i = 0; i<floorCubes.GetLength(0); i++){
+			for(int j = 1; j<floorCubes.GetLength(1); j++){
+				//Debug.Log (j);
+				floorCubes[i,j].lastScale = floorCubes[i,j].transform.localScale.y;
+				floorCubes[i,j].transform.localScale = new Vector3( 1f, floorCubes[i,j-1].lastScale, 1f) ;
+			}
+		}
 
 	} 
 }

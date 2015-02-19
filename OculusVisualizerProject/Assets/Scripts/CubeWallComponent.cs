@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class CubeWallComponent : MonoBehaviour 
 {
 
-	public GameObject[,] cubeArray = new GameObject[(int)cWidth,(int)cDepth];
+	public CubeInfo[,] cubeArray = new CubeInfo[(int)cWidth,(int)cDepth];
 	public Material FloorMat;
 	//private AudioProcessor audioProcessor = new AudioProcessor();
 	private const float cWidth = 10f;
@@ -36,7 +36,7 @@ public class CubeWallComponent : MonoBehaviour
 				CubeInfo info = cube.AddComponent<CubeInfo>();
 				info.Initialize(idxi);
 
-				cubeArray[idxi,idxj] = cube;
+				cubeArray[idxi,idxj] = cube.GetComponent<CubeInfo>();
 				idxj ++;
 			}
 			idxi ++;

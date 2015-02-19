@@ -4,10 +4,10 @@ using System.Collections;
 public class CubeInfo: MonoBehaviour {
 	//Position 0 = caméra
 	private int _idxDepth;
-	public float scale;
+	public float lastScale;
 	// Use this for initialization
 	void Start () {
-	
+		lastScale = 0.1f;
 	}
 	
 	// Update is called once per frame

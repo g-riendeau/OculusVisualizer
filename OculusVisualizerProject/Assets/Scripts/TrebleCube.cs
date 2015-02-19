@@ -14,7 +14,7 @@ public class TrebleCube : MonoBehaviour {
 	private const int cutoffAigues = 512;  // cutoff
 	private float[] amplitudesAigues;
 	
-	private GameObject[,] floorCubes;
+	private CubeInfo[,] floorCubes;
 	
 	
 	// Use this for initialization
