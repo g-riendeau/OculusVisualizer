@@ -36,10 +36,21 @@ public class BassCube : MonoBehaviour {
 			hauteurGraves = 0.1f;
 
 		//On efect la premiere rangée des cubes du plancher (depth = 0)
-		for(int i = 0; i<floorCubes.GetLength(0); i++){
+		floorCubes[4,0].lastScale = floorCubes[4,0].transform.localScale.y;
+		floorCubes[4,0].transform.localScale = new Vector3( 1f, hauteurGraves, 1f) ;
+		floorCubes[5,0].lastScale = floorCubes[5,0].transform.localScale.y;
+		floorCubes[5,0].transform.localScale = new Vector3( 1f, hauteurGraves, 1f) ;
+
+		for (int i = 3 ; i >= 0 ; i--){
 			floorCubes[i,0].lastScale = floorCubes[i,0].transform.localScale.y;
-			floorCubes[i,0].transform.localScale = new Vector3( 1f, hauteurGraves, 1f) ;
+			floorCubes[i,0].transform.localScale = new Vector3( 1f, floorCubes[i+1,0].lastScale, 1f) ;
 		}
+		for (int i = 6 ; i < floorCubes.GetLength(0) ; i++){
+			floorCubes[i,0].lastScale = floorCubes[i,0].transform.localScale.y;
+			floorCubes[i,0].transform.localScale = new Vector3( 1f, floorCubes[i-1,0].lastScale, 1f) ;
+		}
+
+
 		ApplyWave();
 	}
 
