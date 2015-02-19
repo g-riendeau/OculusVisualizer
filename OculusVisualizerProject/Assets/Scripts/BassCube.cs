@@ -35,7 +35,8 @@ public class BassCube : MonoBehaviour {
 		if (hauteurGraves < 0.1f)
 			hauteurGraves = 0.1f;
 
-		//On efect la premiere rangée des cubes du plancher (depth = 0)
+		//On effecte la premiere rangée des cubes du plancher (depth = 0)
+		//TODO Éviter les valeurs 4, 5 pour le milieu.
 		floorCubes[4,0].lastScale = floorCubes[4,0].transform.localScale.y;
 		floorCubes[4,0].transform.localScale = new Vector3( 1f, hauteurGraves, 1f) ;
 		floorCubes[5,0].lastScale = floorCubes[5,0].transform.localScale.y;
@@ -49,9 +50,11 @@ public class BassCube : MonoBehaviour {
 			floorCubes[i,0].lastScale = floorCubes[i,0].transform.localScale.y;
 			floorCubes[i,0].transform.localScale = new Vector3( 1f, floorCubes[i-1,0].lastScale, 1f) ;
 		}
-
-
+		//On affecte le reste des cubes
 		ApplyWave();
+
+		//On colore
+		ApplyColor ();
 	}
 
 	private float Tanh( float x ){
@@ -67,7 +70,17 @@ public class BassCube : MonoBehaviour {
 				floorCubes[i,j].transform.localScale = new Vector3( 1f, floorCubes[i,j-1].lastScale, 1f) ;
 			}
 		}
-
+	} 
+	void ApplyColor(){
+		for(int i = 0; i<floorCubes.GetLength(0); i++){
+			for(int j = 0; j<floorCubes.GetLength(1); j++){
+				//Debug.Log (j);
+				floorCubes[i,j].renderer.material.SetColor("_Color", new Color(floorCubes[i,j].transform.localScale.y/4f, 
+				                                                               Mathf.Sin(Time.realtimeSinceStartup/3)*0.9f,
+				                                                               0.5f - (floorCubes[i,j].transform.localScale.y/4f)*0.5f));
+			}
+		}
+		
 	} 
 }
  
