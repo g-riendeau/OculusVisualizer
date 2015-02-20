@@ -10,34 +10,81 @@ public class TrebleCube : MonoBehaviour {
 	
 	public AudioProcessor audioProcessor ;
 	public CubeWallComponent wallComponent;
-	
-	private const int cutoffAigues = 512;  // cutoff
-	private float[] amplitudesAigues;
-	
 	private CubeInfo[,] ceilingCubes;
 	
 	
 	// Use this for initialization
 	void Start () {
-		amplitudesAigues = new float[1024-cutoffAigues];
 		ceilingCubes = wallComponent.cubeArray;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Array.Copy(audioProcessor.amplitudes, cutoffAigues, amplitudesAigues, 0, 1024-(cutoffAigues));
-		//hauteurAigues = 1.5f * Tanh(1000f * amplitudesAigues.Average ());
-		hauteurAigues = 100f * ( Tanh(2000f * amplitudesAigues.Average ()));
-		//Debug.Log (hauteurAigues);
-		if (hauteurAigues < 0.1f)
-			hauteurAigues = 0.1f;
+
+		hauteurAigues = HauteurCube( 2 );
 
 		ApplyFirstRow(hauteurAigues);
 		ApplyScaleWave();
 		ApplyColorWave ();
 	}
 	
-	private float Tanh( float x ){
+
+
+	float HauteurCube( int range ){
+		// range :
+		// Basses -> 0
+		// Mids   -> 1
+		// Aigues -> 2
+
+		int cuton = 0;
+		int cutoff = 0;
+		float scale = 0f;
+		float[] amplitudes;
+		float cumul = 0f;
+		float moy;
+		float hauteur;
+
+		// Selection des parametres
+		switch ( range )
+		{
+		case 0 :
+			cuton = 0;
+			cutoff = 8;
+			scale = 100f;
+			amplitudes = new float[8];
+			break;
+		case 1 :
+			cuton = 32;
+			cutoff = 128;
+			scale = 50f;
+			amplitudes = new float[96];
+			break;
+		case 2 :
+			cuton = 512;
+			cutoff = 1024;
+			scale = 10000f;
+			amplitudes = new float[512];
+			break;
+		default :
+			amplitudes = new float[1];
+			Debug.LogError("range doit etre entre 0 et 2");
+			break;
+		}
+
+		// moyenne du range de la FFT
+		Array.Copy(audioProcessor.amplitudes, cuton, amplitudes, 0, cutoff-cuton);
+		moy = scale * amplitudes.Average ();
+
+		// application de la transformation mathematique
+		cumul = 0.9f * cumul + 0.5f * Tanh (moy);
+		hauteur = 1f * cumul + 0.2f * moy;
+		if (hauteur < 0.1f)
+			hauteur = 0.1f;
+
+		return hauteur;
+	}	
+
+	float Tanh( float x ){
 		float exp2x = Mathf.Exp(x-5f);
 		return 0.5f*(exp2x-1f)/(exp2x+1f)+0.5f;
 	}
