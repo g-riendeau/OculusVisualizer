@@ -430,7 +430,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioProcessor: {fileID: 332611556}
-  wallComponent: {fileID: 1929429490}
+  bassWallComponent: {fileID: 1860926006}
+  trebleWallComponent: {fileID: 1929429490}
+  leftMiddleComponent: {fileID: 2093109539}
+  rightMiddleComponent: {fileID: 1044827699}
 --- !u!4 &1155844090
 Transform:
   m_ObjectHideFlags: 0
@@ -457,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1312017468
 MonoBehaviour:
   m_ObjectHideFlags: 0
