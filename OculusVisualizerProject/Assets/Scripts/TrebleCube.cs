@@ -7,25 +7,49 @@ public class TrebleCube : MonoBehaviour {
 	//private float _posX;
 	//private float _posY;
 	private float hauteurAigues;
+	private float hauteurBasses;
+	private float hauteurMoyennes;
 	
 	public AudioProcessor audioProcessor ;
-	public CubeWallComponent wallComponent;
-	private CubeInfo[,] ceilingCubes;
+	public CubeWallComponent bassWallComponent;
+	public CubeWallComponent trebleWallComponent;
+	public CubeWallComponent leftMiddleComponent;
+	public CubeWallComponent rightMiddleComponent;
+	private CubeInfo[,] _ceilingCubes;
+	private CubeInfo[,] _floorCubes;
+	private CubeInfo[,] _leftWallCubes;
+	private CubeInfo[,] _rightWallCubes;
 	
 	
 	// Use this for initialization
 	void Start () {
-		ceilingCubes = wallComponent.cubeArray;
+		_ceilingCubes = trebleWallComponent.cubeArray;
+		_floorCubes = bassWallComponent.cubeArray;
+		_leftWallCubes = leftMiddleComponent.cubeArray;
+		_rightWallCubes = rightMiddleComponent.cubeArray;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+		hauteurBasses = HauteurCube( 0 );
 		hauteurAigues = HauteurCube( 2 );
+		//hauteurAigues = HauteurCube( 2 );
 
-		ApplyFirstRow(hauteurAigues);
-		ApplyScaleWave();
-		ApplyColorWave ();
+		ApplyFirstRow(_ceilingCubes, hauteurAigues, 2);
+		ApplyFirstRow(_floorCubes, hauteurBasses, 0);
+		ApplyFirstRow(_leftWallCubes, hauteurAigues, 2);
+		ApplyFirstRow(_rightWallCubes, hauteurAigues, 2);
+
+		ApplyScaleWave(_ceilingCubes);
+		ApplyScaleWave(_floorCubes);
+		ApplyScaleWave(_leftWallCubes);
+		ApplyScaleWave(_rightWallCubes);
+
+		ApplyColorWave (_ceilingCubes);
+		ApplyColorWave (_floorCubes);
+		ApplyColorWave (_leftWallCubes);
+		ApplyColorWave (_rightWallCubes);
 	}
 	
 
@@ -89,52 +113,84 @@ public class TrebleCube : MonoBehaviour {
 		return 0.5f*(exp2x-1f)/(exp2x+1f)+0.5f;
 	}
 
-	void ApplyFirstRow(float hauteurAigues)
+	void ApplyFirstRow(CubeInfo[,] cubes, float hauteurAigues, int range)
 	{
 		//On effecte la premiere rangée des cubes du plancher (depth = 0)
 		//TODO Éviter les valeurs 4, 5 pour le milieu.
-		ceilingCubes[4,0].lastScale = ceilingCubes[4,0].transform.localScale.y;
-		ceilingCubes[4,0].transform.localScale = new Vector3( 1f, hauteurAigues, 1f) ;
-		ceilingCubes[5,0].lastScale = ceilingCubes[5,0].transform.localScale.y;
-		ceilingCubes[5,0].transform.localScale = new Vector3( 1f, hauteurAigues, 1f) ;
+		cubes[4,0].lastScale = cubes[4,0].transform.localScale.y;
+		cubes[4,0].transform.localScale = new Vector3( 1f, hauteurAigues, 1f) ;
+		cubes[5,0].lastScale = cubes[5,0].transform.localScale.y;
+		cubes[5,0].transform.localScale = new Vector3( 1f, hauteurAigues, 1f) ;
 		
 		for (int i = 3 ; i >= 0 ; i--){
-			ceilingCubes[i,0].lastScale = ceilingCubes[i,0].transform.localScale.y;
-			ceilingCubes[i,0].transform.localScale = new Vector3( 1f, ceilingCubes[i+1,0].lastScale, 1f) ;
+			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			cubes[i,0].transform.localScale = new Vector3( 1f, cubes[i+1,0].lastScale, 1f) ;
 		}
-		for (int i = 6 ; i < ceilingCubes.GetLength (0) ; i++){
-			ceilingCubes[i,0].lastScale = ceilingCubes[i,0].transform.localScale.y;
-			ceilingCubes[i,0].transform.localScale = new Vector3( 1f, ceilingCubes[i-1,0].lastScale, 1f) ;
+		for (int i = 6 ; i < cubes.GetLength (0) ; i++){
+			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			cubes[i,0].transform.localScale = new Vector3( 1f, cubes[i-1,0].lastScale, 1f) ;
 		}
 
-		for (int i = 0 ; i < ceilingCubes.GetLength (0) ; i++){
-			ceilingCubes[i,0].lastColor = ceilingCubes[i,0].renderer.material.GetColor("_Color");
+		//for (int i = 0 ; i < cubes.GetLength (0) ; i++){
+		//	cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
+		//	float r = 0f;
+		//	float g = Mathf.Sin(Time.realtimeSinceStartup/1f)*cubes[i,0].transform.localScale.y;
+		//	float b = 1f-g;
+		//	cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+		//}
 
-			float r = 0f;
-			float g = Mathf.Sin(Time.realtimeSinceStartup/1f)*ceilingCubes[i,0].transform.localScale.y;
-			float b = 1f-g;
-
-			ceilingCubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
-
+		switch ( range )
+		{
+		case 0 :
+			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
+				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
+				
+				float r = cubes[i,0].transform.localScale.y/4f;
+				float g = Mathf.Sin(Time.realtimeSinceStartup/3)*0.9f;
+				float b = 0.5f - (cubes[i,0].transform.localScale.y/4f)*0.5f;				
+				cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));		
+			}
+			break;
+		case 1 :
+			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
+				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
+				float r = 0f;
+				float g = Mathf.Sin(Time.realtimeSinceStartup/1f)*cubes[i,0].transform.localScale.y;
+				float b = 1f-g;
+				cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+			}
+			break;
+		case 2 :
+			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
+				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
+				float r = 0f;
+				float g = Mathf.Sin(Time.realtimeSinceStartup/1f)*cubes[i,0].transform.localScale.y;
+				float b = 1f-g;
+				cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+			}
+			break;
+		default :
+			Debug.LogError("range doit etre entre 0 et 2");
+			break;
 		}
 	}
 
 
-	void ApplyScaleWave(){
-		for(int i = 0; i<ceilingCubes.GetLength(0); i++){
-			for(int j = 1; j<ceilingCubes.GetLength(1); j++){
+	void ApplyScaleWave(CubeInfo[,] cubes){
+		for(int i = 0; i<cubes.GetLength(0); i++){
+			for(int j = 1; j<cubes.GetLength(1); j++){
 				//Debug.Log (j);
-				ceilingCubes[i,j].lastScale = ceilingCubes[i,j].transform.localScale.y;
-				ceilingCubes[i,j].transform.localScale = new Vector3( 1f, ceilingCubes[i,j-1].lastScale, 1f) ;
+				cubes[i,j].lastScale = cubes[i,j].transform.localScale.y;
+				cubes[i,j].transform.localScale = new Vector3( 1f, cubes[i,j-1].lastScale, 1f) ;
 			}
 		}
 	} 
 
-	void ApplyColorWave(){
-		for(int i = 0; i<ceilingCubes.GetLength(0); i++){
-			for(int j = 1; j<ceilingCubes.GetLength(1); j++){
-				ceilingCubes[i,j].lastColor = ceilingCubes[i,j].renderer.material.GetColor("_Color");
-				ceilingCubes[i,j].renderer.material.SetColor("_Color", ceilingCubes[i,j-1].lastColor);
+	void ApplyColorWave(CubeInfo[,] cubes){
+		for(int i = 0; i<cubes.GetLength(0); i++){
+			for(int j = 1; j<cubes.GetLength(1); j++){
+				cubes[i,j].lastColor = cubes[i,j].renderer.material.GetColor("_Color");
+				cubes[i,j].renderer.material.SetColor("_Color", cubes[i,j-1].lastColor);
 			}
 		}
 	}
