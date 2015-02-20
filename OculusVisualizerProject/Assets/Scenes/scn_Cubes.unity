@@ -142,8 +142,11 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!4 &302059070
 Transform:
   m_ObjectHideFlags: 0
@@ -155,6 +158,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!45 &302059071
 Skybox:
   m_ObjectHideFlags: 0
@@ -203,6 +207,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!82 &332611558
 AudioSource:
   m_ObjectHideFlags: 0
@@ -300,6 +305,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &1155844088
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &1312017467
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,6 +387,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!1 &1860926004
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +415,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!114 &1860926006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +467,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!1 &2088102743
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +530,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &2093109538
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,3 +570,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 6
