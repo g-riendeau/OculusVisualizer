@@ -9,7 +9,7 @@ public class CubeWallComponent : MonoBehaviour
 	public Material FloorMat;
 	//private AudioProcessor audioProcessor = new AudioProcessor();
 	private const float cWidth = 10f;
-	private const float cDepth = 50f;
+	private const float cDepth = 20f;
 	private const float cOffset = 0.2f;
 
 
@@ -41,6 +41,9 @@ public class CubeWallComponent : MonoBehaviour
 
 				cubeArray[idxi,idxj] = cube.GetComponent<CubeInfo>();
 				idxj ++;
+
+				// no collisions pour un plus faible temps de calcul
+				cube.collider.enabled = false;
 			}
 			idxi ++;
 		}

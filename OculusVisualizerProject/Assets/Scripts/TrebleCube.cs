@@ -33,13 +33,13 @@ public class TrebleCube : MonoBehaviour {
 	void Update () {
 
 		hauteurBasses = HauteurCube( 0 );
+		hauteurMoyennes = HauteurCube( 1 );
 		hauteurAigues = HauteurCube( 2 );
-		//hauteurAigues = HauteurCube( 2 );
 
 		ApplyFirstRow(_ceilingCubes, hauteurAigues, 2);
 		ApplyFirstRow(_floorCubes, hauteurBasses, 0);
-		ApplyFirstRow(_leftWallCubes, hauteurAigues, 2);
-		ApplyFirstRow(_rightWallCubes, hauteurAigues, 2);
+		ApplyFirstRow(_leftWallCubes, hauteurMoyennes, 1);
+		ApplyFirstRow(_rightWallCubes, hauteurMoyennes, 1);
 
 		ApplyScaleWave(_ceilingCubes);
 		ApplyScaleWave(_floorCubes);
@@ -75,19 +75,17 @@ public class TrebleCube : MonoBehaviour {
 			cuton = 0;
 			cutoff = 8;
 			scale = 100f;
-			amplitudes = new float[8];
+
 			break;
 		case 1 :
-			cuton = 32;
+			cuton = 16;
 			cutoff = 128;
-			scale = 50f;
-			amplitudes = new float[96];
+			scale = 700f;
 			break;
 		case 2 :
 			cuton = 512;
 			cutoff = 1024;
 			scale = 10000f;
-			amplitudes = new float[512];
 			break;
 		default :
 			amplitudes = new float[1];
@@ -96,11 +94,12 @@ public class TrebleCube : MonoBehaviour {
 		}
 
 		// moyenne du range de la FFT
+		amplitudes = new float[cutoff-cuton];
 		Array.Copy(audioProcessor.amplitudes, cuton, amplitudes, 0, cutoff-cuton);
 		moy = scale * amplitudes.Average ();
 
 		// application de la transformation mathematique
-		cumul = 0.9f * cumul + 0.5f * Tanh (moy);
+		cumul = 0.95f * cumul + 0.5f * Tanh (moy);
 		hauteur = 1f * cumul + 0.2f * moy;
 		if (hauteur < 0.1f)
 			hauteur = 0.1f;
