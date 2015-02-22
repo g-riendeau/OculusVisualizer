@@ -140,6 +140,7 @@ public class CubeWaver : MonoBehaviour {
 
 		switch ( range )
 		{
+			/*
 		case 0 :
 			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
 				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
@@ -153,9 +154,9 @@ public class CubeWaver : MonoBehaviour {
 		case 1 :
 			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
 				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-				float r = 0f;
-				float g = Mathf.Sin(Time.realtimeSinceStartup/1f)*cubes[i,0].transform.localScale.y;
-				float b = 1f-g;
+				float r = (1f-Mathf.Sin(Time.realtimeSinceStartup)/3f) * (0.02f + cubes[i,0].transform.localScale.y/3f);
+				float g =0.2f - cubes[i,0].transform.localScale.y/2f; 
+				float b = (Mathf.Sin(Time.realtimeSinceStartup)/3f) * (0.01f + cubes[i,0].transform.localScale.y/2f);
 				cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
 			}
 			break;
@@ -163,13 +164,22 @@ public class CubeWaver : MonoBehaviour {
 			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
 				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
 				float r = 0f;
-				float g = Mathf.Sin(Time.realtimeSinceStartup/1f)*cubes[i,0].transform.localScale.y;
+				float g = Mathf.Sin(Time.realtimeSinceStartup)*cubes[i,0].transform.localScale.y;
 				float b = 1f-g;
 				cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
 			}
 			break;
+			*/
 		default :
-			Debug.LogError("range doit etre entre 0 et 2");
+			//Debug.LogError("range doit etre entre 0 et 2");
+			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
+				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
+				
+				float r = cubes[i,0].transform.localScale.y/3f;
+				float g = Mathf.Sin(Time.realtimeSinceStartup/4)*0.9f;
+				float b = 0.5f - (cubes[i,0].transform.localScale.y/3f)*0.5f;				
+				cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));		
+			}
 			break;
 		}
 	}
