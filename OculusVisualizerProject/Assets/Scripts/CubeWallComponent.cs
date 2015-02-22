@@ -37,7 +37,6 @@ public class CubeWallComponent : MonoBehaviour
 				//effectComp.Initialize(i, j);
 
 				CubeInfo info = cube.AddComponent<CubeInfo>();
-				info.Initialize(idxi);
 
 				cubeArray[idxi,idxj] = cube.GetComponent<CubeInfo>();
 				idxj ++;

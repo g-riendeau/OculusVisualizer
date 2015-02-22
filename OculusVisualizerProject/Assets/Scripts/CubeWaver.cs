@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Linq;
 
-public class TrebleCube : MonoBehaviour {
+public class CubeWaver : MonoBehaviour {
 	//private float _posX;
 	//private float _posY;
 	private float hauteurAigues;

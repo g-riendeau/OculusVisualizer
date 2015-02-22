@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class CubeInfo: MonoBehaviour {
-	//Position 0 = caméra
-	private int _idxDepth;
 	public float lastScale;
 	public Color lastColor;
 	// Use this for initialization
@@ -15,9 +13,5 @@ public class CubeInfo: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-	}
-
-	public void Initialize(int depth){
-		_idxDepth = depth;
 	}
 }
