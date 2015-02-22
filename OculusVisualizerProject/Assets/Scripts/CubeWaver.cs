@@ -174,10 +174,12 @@ public class CubeWaver : MonoBehaviour {
 			//Debug.LogError("range doit etre entre 0 et 2");
 			for (int i = 0 ; i < cubes.GetLength (0) ; i++){
 				cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-				
-				float r = cubes[i,0].transform.localScale.y/3f;
-				float g = Mathf.Sin(Time.realtimeSinceStartup/4)*0.9f;
-				float b = 0.5f - (cubes[i,0].transform.localScale.y/3f)*0.5f;				
+
+				float ampli = cubes[i,0].transform.localScale.y;
+				float g = (Mathf.Sin(Time.realtimeSinceStartup/7f)*0.7f) * (ampli/2f);
+				float r = (ampli/7f) - (0.8f*g);
+				float b = 0.5f - (ampli/3f)*0.5f;				
+
 				cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));		
 			}
 			break;

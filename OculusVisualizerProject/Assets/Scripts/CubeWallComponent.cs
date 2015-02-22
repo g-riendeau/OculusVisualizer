@@ -9,7 +9,7 @@ public class CubeWallComponent : MonoBehaviour
 	public Material FloorMat;
 	//private AudioProcessor audioProcessor = new AudioProcessor();
 	private const float cWidth = 10f;
-	private const float cDepth = 20f;
+	private const float cDepth = 70f;
 	private const float cOffset = 0.2f;
 
 
