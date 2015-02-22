@@ -531,6 +531,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2070038661}
+  - 114: {fileID: 2070038662}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -549,6 +550,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &2070038662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070038660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be3dc129182147cdb651a6e4b334a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FloorMat: {fileID: 2100000, guid: 4eb2e162ef4df1f419d2f34671472b0d, type: 2}
 --- !u!1 &2088102743
 GameObject:
   m_ObjectHideFlags: 0

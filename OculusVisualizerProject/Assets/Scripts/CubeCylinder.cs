@@ -36,7 +36,7 @@ public class CubeCylinder : MonoBehaviour {
 				float tiltAroundZ = Input.GetAxis("Horizontal") * dTheta;
 				float tiltAroundX = Input.GetAxis("Vertical") * dAlpha;
 				Quaternion target = Quaternion.Euler(tiltAroundX, 0, tiltAroundZ);
-				cube.transform.localRotation = target;
+				cube.transform.rotation = target;
 				cube.transform.localScale = new Vector3(width, 0.1f, width);
 				cube.renderer.material = FloorMat;
 
