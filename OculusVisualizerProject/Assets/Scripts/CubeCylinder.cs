@@ -6,10 +6,10 @@ public class CubeCylinder : MonoBehaviour {
 
 	public Material FloorMat;
 
-	private const float nCubes = 24f;   // nb de cubes sur la circonference
+	private const float nCubes = 32f;   // nb de cubes sur la circonference
 	private const float nZ = 31f;       // nb de cubes de profondeur
 	private const float cRadius = 4f;   // rayon du cylindre
-	private const float cHole = 0.1f;   // fraction restante du rayon
+	private const float cHole = 0f;   // fraction restante du rayon
 	public CubeInfo[,] cubeArray = new CubeInfo[(int)nCubes,(int)nZ];
 	
 	private float height = 0.1f;
