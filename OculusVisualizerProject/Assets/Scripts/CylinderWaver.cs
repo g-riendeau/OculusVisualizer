@@ -164,7 +164,7 @@ public class CylinderWaver : MonoBehaviour {
 
 			prop1 = (1f - (float)(i-idxMidRight)/dist);
 			prop2 = 1f-prop1;
-			scale = (prop1*hauteurMoyennes) + (prop2*hauteurAigues);
+  			scale = (prop1*hauteurMoyennes) + (prop2*hauteurAigues);
 			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
 
 			r = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").r;
@@ -178,6 +178,7 @@ public class CylinderWaver : MonoBehaviour {
 		dist = idxMidLeft - idxAigues;
 		for(int i = idxAigues+1; i<idxMidLeft; i++){
 			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+
 			prop1 = (1f - (float)(i-idxAigues)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurAigues) + (prop2*hauteurMoyennes);
@@ -193,6 +194,7 @@ public class CylinderWaver : MonoBehaviour {
 		dist = idxGraves - idxMidLeft;
 		for(int i = idxMidLeft+1; i<idxGraves; i++){
 			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+
 			prop1 = (1f - (float)(i-idxMidLeft)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurMoyennes) + (prop2*hauteurBasses);
@@ -208,6 +210,7 @@ public class CylinderWaver : MonoBehaviour {
 		dist = largeur - idxGraves;
 		for(int i = idxGraves+1; i<largeur; i++){
 			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+
 			prop1 = (1f - (float)(i-idxGraves)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurBasses) + (prop2*hauteurMoyennes);
