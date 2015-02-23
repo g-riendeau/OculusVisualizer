@@ -10,8 +10,8 @@ public class Spinner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Time.realtimeSinceStartup > 10f){
-			transform.Rotate(transform.forward, 5*Time.deltaTime);
+		if(Time.realtimeSinceStartup > 224f){
+			transform.Rotate(new Vector3(0f, 0f, 1f), 8*Time.deltaTime, Space.World);
 		}
 	}
 }
