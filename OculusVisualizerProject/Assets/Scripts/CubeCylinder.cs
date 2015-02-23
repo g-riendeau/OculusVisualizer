@@ -50,7 +50,7 @@ public class CubeCylinder : MonoBehaviour {
 				cube.transform.localRotation = target;
 
 				//Pour se retrouver
-				if(i==0f)
+				if(i==5f)
 				{
 					cube.renderer.material.SetColor("_Color", new Color(1f, 1f, 1f));
 				}

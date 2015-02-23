@@ -100,9 +100,9 @@ public class CylinderWaver : MonoBehaviour {
 		//On effecte la premiere rangée des cubes du plancher (depth = 0)
 		int largeur = cubes.GetLength(0);
 		int idxMidRight = 0;
-		int idxGraves = largeur/4;
+		int idxGraves = 3*largeur/4;
 		int idxMidLeft = largeur/2;
-		int idxAigues = 3*largeur/4;
+		int idxAigues = largeur/4;
 		float ampli = 0.1f;
 		float g = 0f;
 		float r = 0f;
@@ -158,64 +158,64 @@ public class CylinderWaver : MonoBehaviour {
 
 		//interpoller:
 		float scale = 0f;
-		int dist = idxGraves - idxMidRight;
-		for(int i = idxMidRight+1; i<idxGraves; i++){
+		int dist = idxAigues - idxMidRight;
+		for(int i = idxMidRight+1; i<idxAigues; i++){
 			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
 
 			prop1 = (1f - (float)(i-idxMidRight)/dist);
 			prop2 = 1f-prop1;
-			scale = (prop1*hauteurMoyennes) + (prop2*hauteurBasses);
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
-
-			r = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").b;
-			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
-
-		}
-
-		dist = idxMidLeft - idxGraves;
-		for(int i = idxGraves+1; i<idxMidLeft; i++){
-			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
-			prop1 = (1f - (float)(i-idxGraves)/dist);
-			prop2 = 1f-prop1;
-			scale = (prop1*hauteurBasses) + (prop2*hauteurMoyennes);
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
-
-			r = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").b;
-			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
-		}
-
-		dist = idxAigues - idxMidLeft;
-		for(int i = idxMidLeft+1; i<idxAigues; i++){
-			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
-			prop1 = (1f - (float)(i-idxMidLeft)/dist);
-			prop2 = 1f-prop1;
 			scale = (prop1*hauteurMoyennes) + (prop2*hauteurAigues);
 			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
 
-			r = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").b;
+			r = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").r;
+			g = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").g;
+			b = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").b;
 			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
 			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+
 		}
 
-		dist = largeur - idxAigues;
-		for(int i = idxAigues+1; i<largeur; i++){
+		dist = idxMidLeft - idxAigues;
+		for(int i = idxAigues+1; i<idxMidLeft; i++){
 			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
 			prop1 = (1f - (float)(i-idxAigues)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurAigues) + (prop2*hauteurMoyennes);
 			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
 
-			r = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").b;
+			r = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").r;
+			g = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").g;
+			b = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").b;
+			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
+			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+		}
+
+		dist = idxGraves - idxMidLeft;
+		for(int i = idxMidLeft+1; i<idxGraves; i++){
+			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			prop1 = (1f - (float)(i-idxMidLeft)/dist);
+			prop2 = 1f-prop1;
+			scale = (prop1*hauteurMoyennes) + (prop2*hauteurBasses);
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
+
+			r = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").r;
+			g = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").g;
+			b = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").b;
+			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
+			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+		}
+
+		dist = largeur - idxGraves;
+		for(int i = idxGraves+1; i<largeur; i++){
+			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			prop1 = (1f - (float)(i-idxGraves)/dist);
+			prop2 = 1f-prop1;
+			scale = (prop1*hauteurBasses) + (prop2*hauteurMoyennes);
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
+
+			r = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").r;
+			g = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").g;
+			b = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").b;
 			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
 			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
 		}
