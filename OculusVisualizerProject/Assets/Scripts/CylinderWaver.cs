@@ -10,7 +10,8 @@ public class CylinderWaver : MonoBehaviour {
 	private float hauteurBasses;
 	private float hauteurMoyennes;
 	private float w = 2f * 10f * Mathf.Sin (180f / 60f);
-	
+	private float cumul = 0f;
+
 	public AudioProcessor audioProcessor ;
 	public CubeCylinder cylinder;
 	private CubeInfo[,] _cubeArray;
@@ -48,7 +49,7 @@ public class CylinderWaver : MonoBehaviour {
 		int cutoff = 0;
 		float scale = 0f;
 		float[] amplitudes;
-		float cumul = 0f;
+		//float cumul = 0f;
 		float moy;
 		float hauteur;
 
@@ -59,7 +60,6 @@ public class CylinderWaver : MonoBehaviour {
 			cuton = 0;
 			cutoff = 8;
 			scale = 100f;
-
 			break;
 		case 1 :
 			cuton = 16;
@@ -83,8 +83,8 @@ public class CylinderWaver : MonoBehaviour {
 		moy = scale * amplitudes.Average ();
 
 		// application de la transformation mathematique
-		cumul = 0.95f * cumul + 0.5f * Tanh (moy);
-		hauteur = 1.2f * (1f * cumul + 0.2f * moy);
+		cumul = 0.90f * cumul + 0.3f * Tanh (moy);
+		hauteur = (0.4f * cumul +  0.3f*(moy) );
 		if (hauteur < 0.1f)
 			hauteur = 0.1f;
 
@@ -108,6 +108,8 @@ public class CylinderWaver : MonoBehaviour {
 		float g = 0f;
 		float r = 0f;
 		float b = 0f;	
+		float timeSin=Mathf.Sin(Time.realtimeSinceStartup/7f);
+		float fastTime=Mathf.Sin(Time.realtimeSinceStartup*2);
 
 		///Valeurs connues:
 		/// MidsR:
@@ -115,9 +117,9 @@ public class CylinderWaver : MonoBehaviour {
 		cubes[idxMidRight,0].transform.localScale = new Vector3( w, hauteurMoyennes, w) ;
 		cubes[idxMidRight,0].lastColor = cubes[idxMidRight,0].renderer.material.GetColor("_Color");
 		ampli = cubes[idxMidRight,0].transform.localScale.y;
-		g = (Mathf.Sin(Time.realtimeSinceStartup/7f)*0.7f) * (ampli/2f);
-		r = (ampli/7f) - (0.8f*g);
-		b = 0.5f - (ampli/3f)*0.5f;	
+		g =  ((timeSin*0.7f) * (ampli/6f))-0.4f;
+		r = (ampli/6f) - (g);
+		b = 0.8f - (ampli/3);	
 		cubes[idxMidRight,0].renderer.material.SetColor("_Color", new Color(r,g,b));
 
 
@@ -126,9 +128,9 @@ public class CylinderWaver : MonoBehaviour {
 		cubes[idxMidLeft,0].transform.localScale = new Vector3( w, hauteurMoyennes, w) ;
 		cubes[idxMidLeft,0].lastColor = cubes[idxMidLeft,0].renderer.material.GetColor("_Color");
 		ampli = cubes[idxMidLeft,0].transform.localScale.y;
-		g = (Mathf.Sin(Time.realtimeSinceStartup/7f)*0.7f) * (ampli/2f);
-		r = (ampli/7f) - (0.8f*g);
-		b = 0.5f - (ampli/3f)*0.5f;	
+		g = ((timeSin*0.7f) * (ampli/6f))-0.4f;
+		r = (ampli/6f) - (0.8f*g);
+		b = 0.8f - (ampli/3);	
 		cubes[idxMidLeft,0].renderer.material.SetColor("_Color", new Color(r,g,b));
 
 		// Graves:
@@ -136,9 +138,9 @@ public class CylinderWaver : MonoBehaviour {
 		cubes[idxGraves,0].transform.localScale = new Vector3( w, hauteurBasses, w) ;
 		cubes[idxGraves,0].lastColor = cubes[idxGraves,0].renderer.material.GetColor("_Color");
 		ampli = cubes[idxGraves,0].transform.localScale.y;
-		g = (1f - ((Mathf.Sin(Time.realtimeSinceStartup/7f)*0.7f) * (ampli/2f)));
-		r = (ampli/7f) - (0.8f*g);
-		b = 0.5f - (ampli/3f)*0.5f;	
+		g = ((0.8f - ((timeSin*0.7f) * (ampli/6)))-0.2f);
+		r = (ampli/4f) - (0.8f*g);
+		b = 0.8f - (ampli/3);	
 		cubes[idxGraves,0].renderer.material.SetColor("_Color", new Color(r,g,b));
 
 		// Aigues:
@@ -146,9 +148,9 @@ public class CylinderWaver : MonoBehaviour {
 		cubes[idxAigues,0].transform.localScale = new Vector3( w, hauteurAigues, w) ;
 		cubes[idxAigues,0].lastColor = cubes[idxAigues,0].renderer.material.GetColor("_Color");
 		ampli = cubes[idxAigues,0].transform.localScale.y;
-		g = (Mathf.Sin(Time.realtimeSinceStartup/7f)*0.7f) * (ampli/2f);
-		r = (ampli/7f) - (0.8f*g);
-		b = 0.5f - (ampli/3f)*0.5f;	
+		g = (ampli/4f);
+		r = 0.4f*fastTime - (ampli/6);
+		b = 0.5f - (ampli/6);	
 		cubes[idxAigues,0].renderer.material.SetColor("_Color", new Color(r,g,b));
 
 		float prop1 = 0f;

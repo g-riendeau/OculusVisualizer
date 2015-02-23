@@ -8,7 +8,7 @@ public class CubeCylinder : MonoBehaviour {
 	//private AudioProcessor audioProcessor = new AudioProcessor();
 	private const float nTheta = 60f;   // nb de cubes sur la circonference
 	private const int realNCirc = 36;  //vrai nombre de cubes sur la circonférence.
-	private const float nZ = 50f;       // nb de cubes de profondeur
+	private const float nZ = 35f;       // nb de cubes de profondeur
 	private const float cRadius = 10f;  // rayon du cylindre
 	private const float cHole = 0.1f;   // fraction restante du rayon
 	public CubeInfo[,] cubeArray = new CubeInfo[realNCirc,(int)nZ]; //TODO : no constant

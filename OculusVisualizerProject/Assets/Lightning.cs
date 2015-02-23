@@ -36,7 +36,7 @@ public class Lightning : MonoBehaviour {
 
 			// Check if light reached its destination. If so, set new target position
 			if (Vector3.Distance(TargetPLPos[i],light.transform.position) <=0.5f) {
-				TargetPLPos[i] = new Vector3(Random.Range (-3f,3f),Random.Range (2,8f),Random.Range (0f,20f));
+				TargetPLPos[i] = new Vector3(Random.Range (-3f,3f),7.5f,Random.Range (-9.0f,18f));
 			}
 			i++;
 		}
