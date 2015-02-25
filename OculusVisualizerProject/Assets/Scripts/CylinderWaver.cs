@@ -10,8 +10,10 @@ public class CylinderWaver : MonoBehaviour {
 	private float hauteurBasses;
 	private float hauteurMoyennes;
 	private float cumul = 0f;
+	private const float cSongTime = 360f; //secondes
 
 	public AudioProcessor audioProcessor ;
+	public AudioProcessor micProcessor ;
 	public CubeCylinder cylinder;
 	private CubeInfo[,] _cubeArray;
 	
@@ -19,6 +21,7 @@ public class CylinderWaver : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_cubeArray = cylinder.cubeArray;
+		micProcessor.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -33,6 +36,13 @@ public class CylinderWaver : MonoBehaviour {
 		ApplyScaleWave(_cubeArray);
 
 		ApplyColorWave (_cubeArray);
+
+		//On overwrite audioProcessor et remplace par le micro
+		if(Time.realtimeSinceStartup > cSongTime)
+		{
+			audioProcessor = micProcessor;
+			micProcessor.enabled = true;
+		}
 
 	}
 	
