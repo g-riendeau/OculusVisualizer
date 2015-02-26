@@ -38,7 +38,7 @@ public class CylinderWaver : MonoBehaviour {
 		ApplyColorWave (_cubeArray);
 
 		//On overwrite audioProcessor et remplace par le micro
-		if(Time.realtimeSinceStartup > cSongTime)
+		if(Time.realtimeSinceStartup > 5)
 		{
 			audioProcessor = micProcessor;
 			micProcessor.enabled = true;
