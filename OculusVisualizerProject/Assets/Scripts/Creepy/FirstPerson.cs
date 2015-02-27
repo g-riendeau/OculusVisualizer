@@ -5,7 +5,6 @@ public class FirstPerson : MonoBehaviour {
 
 	public Camera FirstPersonCamera;
 
-	private float JumpSpeed;
 	private float MouseSensitivity;
 	private float MouvSpeed;
 	private float PitchRange;
@@ -24,7 +23,6 @@ public class FirstPerson : MonoBehaviour {
 		MouvSpeed = 4;
 		MouseSensitivity = 3;
 		PitchRange = 60f;
-		JumpSpeed = 4f;
 
 		// Hides the mouse
 		//Screen.lockCursor = false;
@@ -47,23 +45,8 @@ public class FirstPerson : MonoBehaviour {
 		//rotPitch = Mathf.Clamp (rotPitch, -PitchRange, PitchRange);
 		FirstPersonCamera.transform.localRotation = Quaternion.Euler (rotPitch,0, 0);
 
-
 			float FwdSpeed = Input.GetAxis ("Vertical") * MouvSpeed;
 			float SideSpeed = Input.GetAxis ("Horizontal") * MouvSpeed;
-
-			if (characterController.isGrounded) {
-				VertVelocity = 0;
-			}
-			else {
-
-				VertVelocity += Physics.gravity.y * Time.deltaTime;
-			}
-
-			// JUMPING
-			if (Input.GetButtonDown ("Jump")&& characterController.isGrounded) {
-				VertVelocity = JumpSpeed;
-
-			}
 
 		Vector3 speed = new Vector3(SideSpeed,VertVelocity,FwdSpeed);
 
