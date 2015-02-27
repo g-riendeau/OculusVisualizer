@@ -9,14 +9,14 @@ public class Ghyslain : MonoBehaviour {
 	private float timer;
 	private int sphereNb;
 	private GameObject[] spheres;
-	private LineRenderer[] eclairs;
+    private LineRenderer[] eclairs;
 	private Vector3 relDist;
 
 	// parametres qui influencent la force
 	private float attractionForce = 300f;
 	private float topSpeed = 10f;
 	private float cDrag = 0.5f;
-	
+
 	// Use this for initialization
 	void Start () {
 		attractionForce = 2000f;
