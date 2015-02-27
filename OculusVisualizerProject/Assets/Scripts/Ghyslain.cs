@@ -7,7 +7,6 @@ public class Ghyslain : MonoBehaviour {
 	public GameObject Eclair;
 	public GameObject evilLight;
 
-	private float timer;
 	private int sphereNb;
 	private GameObject[] spheres;
     private LineRenderer[] eclairs;
@@ -29,7 +28,6 @@ public class Ghyslain : MonoBehaviour {
 
 		for (int i=0; i<sphereNb; i++) {
 
-			timer = 0;
 			spheres[i] = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 			//sphere.transform.parent = this.transform;
 			spheres[i].renderer.material = sphereMat;
@@ -60,7 +58,6 @@ public class Ghyslain : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		timer = Time.realtimeSinceStartup;
 
 		for (int i = 0; i<sphereNb; i++) {
 			relDist = transform.position - spheres [i].transform.position;
@@ -79,15 +76,6 @@ public class Ghyslain : MonoBehaviour {
 
 			eclairs[i].SetPosition (0, transform.position);
 			eclairs[i].SetPosition (1, spheres[i].transform.position);
-		}
-
-		if (timer > 1f)	{	
-
-		}
-
-		if (timer > 5)	{	
-			timer = 0;
-
 		}
 
 		
