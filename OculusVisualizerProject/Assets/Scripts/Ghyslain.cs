@@ -6,18 +6,20 @@ public class Ghyslain : MonoBehaviour {
 	public Material sphereMat;
 	public GameObject evilLight;
 
+	private float timer;
 	private int sphereNb;
 	private GameObject[] spheres;
-	private Vector3 relDist;
-	private float attractionForce = 5000f;
-	private float orbiteMax = 100;
-	private float timer;
-
 	private LineRenderer[] eclairs;
+	private Vector3 relDist;
 
+	// parametres qui influencent la force
+	private float attractionForce = 300f;
+	private float topSpeed = 10f;
+	private float cDrag = 0.5f;
+	
 	// Use this for initialization
 	void Start () {
-		attractionForce = 5000f;
+		attractionForce = 2000f;
 		sphereNb = 13;
 		spheres = new GameObject[sphereNb];
 
@@ -37,7 +39,7 @@ public class Ghyslain : MonoBehaviour {
 			if (Random.Range(-1,1) < 0){
 				spheres[i].rigidbody.velocity = new Vector3(0,0,200/spheres[i].transform.position.x);
 			}
-			else		{
+			else{
 				spheres[i].rigidbody.velocity = new Vector3(0,0,-200/spheres[i].transform.position.x);
 			}
 			spheres[i].rigidbody.angularDrag = 0;
@@ -56,13 +58,23 @@ public class Ghyslain : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		timer += Time.deltaTime;
+		timer = Time.realtimeSinceStartup;
 
 		for (int i = 0; i<sphereNb; i++) {
 			relDist = transform.position - spheres [i].transform.position;
-			//if( relDist 
-			spheres [i].rigidbody.AddForce (attractionForce / Mathf.Pow (relDist.magnitude, 3f) * relDist);
-			spheres [i].rigidbody.AddForce (0, 10, 0);
+
+			// kind of drag en v^4
+			if( spheres[i].rigidbody.velocity.magnitude > topSpeed ){
+				spheres[i].rigidbody.AddForce ( relDist / relDist.magnitude *
+					cDrag * Mathf.Pow (spheres[i].rigidbody.velocity.magnitude/topSpeed , 4f) );
+			}
+			// force en 1/r^2
+			spheres[i].rigidbody.AddForce (attractionForce / Mathf.Pow (relDist.magnitude, 3f) * relDist);
+			// force de repulsion a courte distance en 1/r^5
+			spheres[i].rigidbody.AddForce (- attractionForce / Mathf.Pow (relDist.magnitude, 6f) * relDist);
+			// anti gravite
+			spheres[i].rigidbody.AddForce (0, 10, 0);
+
 			eclairs[i].SetPosition (0, transform.position);
 			eclairs[i].SetPosition (1, spheres[i].transform.position);
 		}
