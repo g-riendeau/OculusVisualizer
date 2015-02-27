@@ -2210,7 +2210,6 @@ GameObject:
   - 136: {fileID: 2106555002}
   - 23: {fileID: 2106555001}
   - 114: {fileID: 2106555000}
-  - 114: {fileID: 2106555005}
   m_Layer: 0
   m_Name: Ghyslain
   m_TagString: Untagged
@@ -2230,6 +2229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphereMat: {fileID: 2100000, guid: 4d032a3215a5b9343af551273e7eeccd, type: 2}
+  Eclair: {fileID: 133660, guid: a34171708c8274e4680b9f5ecbdab391, type: 2}
   evilLight: {fileID: 21498139}
 --- !u!23 &2106555001
 Renderer:
@@ -2284,18 +2284,6 @@ Transform:
   - {fileID: 21498141}
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &2106555005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2106554999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a112f29481faaf940be9a7a83cd7b5a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Eclair: {fileID: 133660, guid: a34171708c8274e4680b9f5ecbdab391, type: 2}
 --- !u!1 &2136229335
 GameObject:
   m_ObjectHideFlags: 0

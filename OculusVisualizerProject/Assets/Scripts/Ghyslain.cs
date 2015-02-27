@@ -4,6 +4,7 @@ using System.Collections;
 public class Ghyslain : MonoBehaviour {
 
 	public Material sphereMat;
+	public GameObject Eclair;
 	public GameObject evilLight;
 
 	private float timer;
@@ -11,6 +12,7 @@ public class Ghyslain : MonoBehaviour {
 	private GameObject[] spheres;
 	private LineRenderer[] eclairs;
 	private Vector3 relDist;
+	private float temps1 = 5;
 
 	// parametres qui influencent la force
 	private float attractionForce = 300f;
@@ -80,16 +82,41 @@ public class Ghyslain : MonoBehaviour {
 		}
 
 		if (timer > 1f)	{	
-			evilLight.light.intensity = Mathf.Lerp (evilLight.light.intensity,1,Time.deltaTime*5);
-			evilLight.light.range =  Mathf.Lerp (evilLight.light.range,20,Time.deltaTime*5);
+
 		}
 
 		if (timer > 5)	{	
 			timer = 0;
-			evilLight.light.intensity = Mathf.Lerp (evilLight.light.intensity,8,Time.deltaTime*5);
-			evilLight.light.range = Mathf.Lerp (evilLight.light.range,200,Time.deltaTime*5);
+
 		}
 
+		
+		// Un éclair!
+		if (Time.realtimeSinceStartup > temps1)	{
+
+			evilLight.light.intensity = Mathf.Lerp (evilLight.light.intensity,8,Time.deltaTime*5);
+			evilLight.light.range = Mathf.Lerp (evilLight.light.range,200,Time.deltaTime*5);
+
+			for (int j = 0; j < Random.Range(1,4); j++) {
+				GameObject unEclair = (GameObject)Instantiate (Eclair);
+				LineRenderer elcairLR = unEclair.GetComponent<LineRenderer>();
+				
+				elcairLR.SetPosition( 0, new Vector3(0,-1,0));
+				
+				for (int i = 1; i < 10; i++) {
+					elcairLR.SetPosition( i, new Vector3(Random.Range (-5,5),i*10-1,Random.Range (-5,5)));
+				}
+				StartCoroutine(WaitAndDestroy(0.1f,unEclair));
+			}
+			temps1 = temps1+Random.Range (2,15);			
+			evilLight.light.intensity = Mathf.Lerp (evilLight.light.intensity,1,Time.deltaTime*50);
+			evilLight.light.range =  Mathf.Lerp (evilLight.light.range,20,Time.deltaTime*50);
+		}	
+	}
 	
+	IEnumerator WaitAndDestroy(float waitTime,GameObject gameObject) {
+		yield return new WaitForSeconds(waitTime);
+		Destroy(gameObject);
+
 	}
 }
