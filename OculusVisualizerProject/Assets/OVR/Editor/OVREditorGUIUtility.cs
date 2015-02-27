@@ -1,9 +1,9 @@
 ﻿/************************************************************************************
 
-Filename    :   OVRPrefabs.cs
-Content     :   Prefab creation editor interface. 
-				This script adds the ability to add OVR prefabs into the scene.
-Created     :   February 19, 2013
+Filename    :   OVREditorGUIUtility.cs
+Content     :   Player controller interface. 
+				This script adds extended editor functionality
+Created     :   January 17, 2013
 Authors     :   Peter Giokaris
 
 Copyright   :   Copyright 2013 Oculus VR, Inc. All Rights reserved.
@@ -25,28 +25,21 @@ limitations under the License.
 
 ************************************************************************************/
 using UnityEngine;
-using System.Collections;
 using UnityEditor;
 
 //-------------------------------------------------------------------------------------
-// ***** OVRPrefabs
+// ***** OVREditorGUIUtility
 //
-// OculusPrefabs adds menu items under the Oculus main menu. It allows for quick creation
-// of the main Oculus prefabs without having to open the Prefab folder and dragging/dropping
-// into the scene.
-class OVRPrefabs
+// OVREditorGUIUtility contains a collection of GUI utilities for editor classes.
+//
+public static class OVREditorGUIUtility
 {
-	[MenuItem ("Oculus/Prefabs/OVRCameraController")]	
-	static void CreateOVRCameraController ()
+	public static void Separator()
 	{
-		Object ovrcam = AssetDatabase.LoadAssetAtPath ("Assets/OVR/Prefabs/OVRCameraController.prefab", typeof(UnityEngine.Object));
-		PrefabUtility.InstantiatePrefab(ovrcam);
-    }	
-	
-	[MenuItem ("Oculus/Prefabs/OVRPlayerController")]	
-	static void CreateOVRPlayerController ()
-	{
-		Object ovrcam = AssetDatabase.LoadAssetAtPath ("Assets/OVR/Prefabs/OVRPlayerController.prefab", typeof(UnityEngine.Object));
-		PrefabUtility.InstantiatePrefab(ovrcam);
-    }	
+		GUI.color = new Color(1, 1, 1, 0.25f);
+		GUILayout.Box("", "HorizontalSlider", GUILayout.Height(16));
+		GUI.color = Color.white;
+	}
+
 }
+

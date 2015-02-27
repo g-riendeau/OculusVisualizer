@@ -1,9 +1,8 @@
 ﻿/************************************************************************************
 
-Filename    :   OVRPrefabs.cs
-Content     :   Prefab creation editor interface. 
-				This script adds the ability to add OVR prefabs into the scene.
-Created     :   February 19, 2013
+Filename    :   OVRComponent.cs
+Content     :   Base component OVR class
+Created     :   January 8, 2013
 Authors     :   Peter Giokaris
 
 Copyright   :   Copyright 2013 Oculus VR, Inc. All Rights reserved.
@@ -25,28 +24,43 @@ limitations under the License.
 
 ************************************************************************************/
 using UnityEngine;
-using System.Collections;
-using UnityEditor;
+using System.Collections.Generic;
+
 
 //-------------------------------------------------------------------------------------
-// ***** OVRPrefabs
+// ***** OVRComponent
 //
-// OculusPrefabs adds menu items under the Oculus main menu. It allows for quick creation
-// of the main Oculus prefabs without having to open the Prefab folder and dragging/dropping
-// into the scene.
-class OVRPrefabs
+// OVRComponent is the base class for many of the OVR classes. It is used to provide base
+// functionality to classes derived from it.
+//
+// NOTE: It is important that any overloaded functions in derived classes call 
+// base.<NAME OF FUNCTION (i.e. Awake)> to allow for base functionality.
+// 
+public class OVRComponent : MonoBehaviour
 {
-	[MenuItem ("Oculus/Prefabs/OVRCameraController")]	
-	static void CreateOVRCameraController ()
+	protected float DeltaTime = 1.0f;
+
+	// Awake
+	public virtual void Awake()
 	{
-		Object ovrcam = AssetDatabase.LoadAssetAtPath ("Assets/OVR/Prefabs/OVRCameraController.prefab", typeof(UnityEngine.Object));
-		PrefabUtility.InstantiatePrefab(ovrcam);
-    }	
+	}
+
+	// Start
+	public virtual void Start()
+	{
+	}
+
+	// Update
+	public virtual void Update()
+	{
+		// If we are running at 60fps, DeltaTime will be set to 1.0 
+		DeltaTime = (Time.deltaTime * 60.0f);
+	}
 	
-	[MenuItem ("Oculus/Prefabs/OVRPlayerController")]	
-	static void CreateOVRPlayerController ()
+	// LateUpdate
+	public virtual void LateUpdate()
 	{
-		Object ovrcam = AssetDatabase.LoadAssetAtPath ("Assets/OVR/Prefabs/OVRPlayerController.prefab", typeof(UnityEngine.Object));
-		PrefabUtility.InstantiatePrefab(ovrcam);
-    }	
+	}
 }
+
+
