@@ -24,13 +24,13 @@ Material:
       data:
         first:
           name: _LineWidth
-        second: 59.7055244
+        second: .00999999978
       data:
         first:
           name: _LightSaberFactor
-        second: .611940205
+        second: 0
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 0, g: 1, b: .255172491, a: 1}
+        second: {r: .683823526, g: .683823526, b: 1, a: 1}
