@@ -41,12 +41,5 @@ public class Lights : MonoBehaviour {
 			i++;
 		}
 
-
-		/*
-		PointLight1.transform.position = Vector3.Lerp(PointLight1.transform.position, TargetPLPos,Time.deltaTime*3f);
-		if (Vector3.Distance(TargetPLPos,PointLight1.transform.position) <=0.5f) {
-			TargetPLPos = new Vector3(Random.Range (-5f,5f),Random.Range (0,10f),PointLight1.transform.position.z);
-		}
-		*/
 	}
 }

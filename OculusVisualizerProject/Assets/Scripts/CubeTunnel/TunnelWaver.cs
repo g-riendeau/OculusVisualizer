@@ -17,12 +17,14 @@ public class TunnelWaver : MonoBehaviour {
 	public CubeTunnel tunnel;
 	private CubeInfo[,] _cubeConeArray;
 	private CubeInfo[,] _cubeCylinderArray;
+	private CubeInfo[,] _cubeCenterArray;
 	
 	
 	// Use this for initialization
 	void Start () {
 		_cubeConeArray = tunnel.cubeConeArray;
 		_cubeCylinderArray = tunnel.cubeCylinderArray;
+		_cubeCenterArray = tunnel.cubeCenterArray;
 		micProcessor.enabled = false;
 	}
 	
@@ -34,7 +36,8 @@ public class TunnelWaver : MonoBehaviour {
 		hauteurAigues = HauteurCube( 2 );
 
 		ApplyFirstRow(_cubeConeArray, hauteurBasses, hauteurMoyennes, hauteurAigues);
-		ApplyFirstRow(_cubeCylinderArray, hauteurBasses, hauteurMoyennes, hauteurAigues);
+		CopyFirstRow (_cubeConeArray, _cubeCylinderArray, 0, 1);
+		CopyFirstRow (_cubeConeArray, _cubeCenterArray, 0, _cubeCenterArray.GetLength(1));
 
 		ApplyScaleWave(_cubeConeArray);
 		ApplyScaleWave(_cubeCylinderArray);
@@ -239,6 +242,16 @@ public class TunnelWaver : MonoBehaviour {
 
 	}
 
+	void CopyFirstRow(CubeInfo[,] original, CubeInfo[,] copy, int z0, int nZ){
+		for (int i = 0; i<original.GetLength(0); i++) {
+			for (int j = z0; j<(z0+nZ); j++) {
+				copy[i,j].transform.localScale = original[i,0].transform.localScale;
+				copy[i,j].lastScale = original[i,0].lastScale;
+				copy[i,j].renderer.material.SetColor("_Color",original[i,0].renderer.material.GetColor("_Color"));
+				copy[i,j].lastColor = original[i,0].lastColor;
+			}
+		}
+	}
 
 	void ApplyScaleWave(CubeInfo[,] cubes){
 

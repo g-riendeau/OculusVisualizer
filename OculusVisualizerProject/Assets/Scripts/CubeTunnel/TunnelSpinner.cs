@@ -34,6 +34,14 @@ public class TunnelSpinner : MonoBehaviour {
 				}
 			}
 
+			for (int i = 0 ; i<tunnel.cubeCenterArray.GetLength(0); i++)
+			{
+				for (int j = 0 ; j<tunnel.cubeCenterArray.GetLength(1); j++)
+				{
+					tunnel.cubeCenterArray[i,j].transform.Rotate(new Vector3(0f, 0f, 1f), 20f*Time.deltaTime, Space.World);
+				}
+			}
+
 
 		}
 	}
