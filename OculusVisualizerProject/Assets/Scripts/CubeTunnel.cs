@@ -72,7 +72,6 @@ public class CubeTunnel : MonoBehaviour {
 
 		// construction du cylindre ----------------------------------------------------------------
 		dAlpha = 0f;
-		cubeCylinderArray = new CubeInfo[(int)nCubes,(int)nZCylinder];
 
 		for (float j = 0f; j < nZCylinder; j++)
 		{

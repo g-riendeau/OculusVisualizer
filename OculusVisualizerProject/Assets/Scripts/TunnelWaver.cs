@@ -16,11 +16,13 @@ public class TunnelWaver : MonoBehaviour {
 	public AudioProcessor micProcessor ;
 	public CubeTunnel tunnel;
 	private CubeInfo[,] _cubeConeArray;
+	private CubeInfo[,] _cubeCylinderArray;
 	
 	
 	// Use this for initialization
 	void Start () {
 		_cubeConeArray = tunnel.cubeConeArray;
+		_cubeCylinderArray = tunnel.cubeCylinderArray;
 		micProcessor.enabled = false;
 	}
 	
@@ -32,10 +34,13 @@ public class TunnelWaver : MonoBehaviour {
 		hauteurAigues = HauteurCube( 2 );
 
 		ApplyFirstRow(_cubeConeArray, hauteurBasses, hauteurMoyennes, hauteurAigues);
+		ApplyFirstRow(_cubeCylinderArray, hauteurBasses, hauteurMoyennes, hauteurAigues);
 
 		ApplyScaleWave(_cubeConeArray);
+		ApplyScaleWave(_cubeCylinderArray);
 
 		ApplyColorWave (_cubeConeArray);
+		ApplyColorWave (_cubeCylinderArray);
 
 		//On overwrite audioProcessor et remplace par le micro
 		if(Time.realtimeSinceStartup > cSongTime)
@@ -46,8 +51,7 @@ public class TunnelWaver : MonoBehaviour {
 
 	}
 	
-
-
+	
 	float HauteurCube( int range ){
 		// range :
 		// Basses -> 0
