@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Lightning : MonoBehaviour {
+public class Lights : MonoBehaviour {
 
 	public GameObject DirLight1;
 	public GameObject PointLight1;

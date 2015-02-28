@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Spinner : MonoBehaviour {
+public class TunnelSpinner : MonoBehaviour {
 
-	public CubeCylinder cylinder;
+	public CubeTunnel tunnel;
 
 	// Use this for initialization
 	void Start () {
@@ -18,11 +18,11 @@ public class Spinner : MonoBehaviour {
 			transform.Rotate(new Vector3(0f, 0f, 1f), 8.1f*Time.deltaTime, Space.World);
 
 			//Spin les cubes!?
-			for (int i = 0 ; i<cylinder.cubeArray.GetLength(0); i++)
+			for (int i = 0 ; i<tunnel.cubeConeArray.GetLength(0); i++)
 			{
-				for (int j = 0 ; j<cylinder.cubeArray.GetLength(1); j++)
+				for (int j = 0 ; j<tunnel.cubeConeArray.GetLength(1); j++)
 				{
-					cylinder.cubeArray[i,j].transform.Rotate(new Vector3(0f, 0f, 1f), 20f*Time.deltaTime, Space.World);
+					tunnel.cubeConeArray[i,j].transform.Rotate(new Vector3(0f, 0f, 1f), 20f*Time.deltaTime, Space.World);
 				}
 			}
 

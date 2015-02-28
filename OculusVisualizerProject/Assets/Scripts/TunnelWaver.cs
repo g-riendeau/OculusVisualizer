@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Linq;
 
-public class CylinderWaver : MonoBehaviour {
+public class TunnelWaver : MonoBehaviour {
 	//private float _posX;
 	//private float _posY;
 	private float hauteurAigues;
@@ -14,13 +14,13 @@ public class CylinderWaver : MonoBehaviour {
 
 	public AudioProcessor audioProcessor ;
 	public AudioProcessor micProcessor ;
-	public CubeCylinder cylinder;
-	private CubeInfo[,] _cubeArray;
+	public CubeTunnel tunnel;
+	private CubeInfo[,] _cubeConeArray;
 	
 	
 	// Use this for initialization
 	void Start () {
-		_cubeArray = cylinder.cubeArray;
+		_cubeConeArray = tunnel.cubeConeArray;
 		micProcessor.enabled = false;
 	}
 	
@@ -31,11 +31,11 @@ public class CylinderWaver : MonoBehaviour {
 		hauteurMoyennes = HauteurCube( 1 );
 		hauteurAigues = HauteurCube( 2 );
 
-		ApplyFirstRow(_cubeArray, hauteurBasses, hauteurMoyennes, hauteurAigues);
+		ApplyFirstRow(_cubeConeArray, hauteurBasses, hauteurMoyennes, hauteurAigues);
 
-		ApplyScaleWave(_cubeArray);
+		ApplyScaleWave(_cubeConeArray);
 
-		ApplyColorWave (_cubeArray);
+		ApplyColorWave (_cubeConeArray);
 
 		//On overwrite audioProcessor et remplace par le micro
 		if(Time.realtimeSinceStartup > cSongTime)
@@ -68,7 +68,7 @@ public class CylinderWaver : MonoBehaviour {
 		case 0 :
 			cuton = 0;
 			cutoff = 8;
-			scale = 100f;
+			scale = 120f;
 			break;
 		case 1 :
 			cuton = 16;
