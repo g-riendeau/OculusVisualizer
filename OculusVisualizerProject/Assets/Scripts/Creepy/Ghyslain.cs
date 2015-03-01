@@ -180,8 +180,8 @@ public class Ghyslain : MonoBehaviour {
 	// Add a new sphere. A soft pull will attrack some spheres in range
 	public void SphereInRange(GameObject uneSphere)  {
 		sphereInRangeList.Add (uneSphere);
-		timerOnAddSphere = Mathf.Clamp(1,200 / sphereInRangeList.Count,20);
-		Debug.Log (sphereInRangeList.Count);
+		timerOnAddSphere = Mathf.Clamp(1,50 / Mathf.Pow (sphereInRangeList.Count,0.5f),20);
+		Debug.Log (timerOnAddSphere);
 		//Debug.Log (timerOnAddSphere);
 
 	}
