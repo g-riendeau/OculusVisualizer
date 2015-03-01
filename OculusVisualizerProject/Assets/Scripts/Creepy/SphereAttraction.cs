@@ -10,7 +10,7 @@ public class SphereAttraction : MonoBehaviour {
 		if (Enterer.tag == "PassiveSphere") {
 			Debug.Log (Enterer);
 
-			//GetComponent<Ghyslain> ().AddThisSphere(gameObject);
+			GetComponent<Ghyslain> ().AddThisSphere(Enterer.gameObject);
 		}
 
 

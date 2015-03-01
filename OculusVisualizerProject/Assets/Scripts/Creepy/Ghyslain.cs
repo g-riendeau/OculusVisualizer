@@ -154,11 +154,11 @@ public class Ghyslain : MonoBehaviour {
 		Destroy(gameObject);
 
 	}
-	/*
+
 	public void AddThisSphere(GameObject uneSphere)  {
 		uneSphere.transform.rigidbody.isKinematic = false;
 		sphereList.Add (new gSphere(uneSphere,Random.Range (3,8),Random.Range (22,35)));
 
 	}
-	*/
+
 }
