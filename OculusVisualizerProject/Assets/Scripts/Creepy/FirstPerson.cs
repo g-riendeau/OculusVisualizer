@@ -19,14 +19,12 @@ public class FirstPerson : MonoBehaviour {
 
 		FirstPersonCamera.enabled = true;
 
-
 		MouvSpeed = 4;
 		MouseSensitivity = 3;
 		PitchRange = 60f;
 
 		// Hides the mouse
 		//Screen.lockCursor = false;
-
 
 		characterController = GetComponent<CharacterController>();
 		if (characterController == null) {
@@ -37,7 +35,7 @@ public class FirstPerson : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {		
 
-			//Rotation
+		//Rotation
 		float rotYaw = Input.GetAxis ("Mouse X")*MouseSensitivity;
 		transform.Rotate (0, rotYaw, 0);
 
@@ -45,8 +43,8 @@ public class FirstPerson : MonoBehaviour {
 		//rotPitch = Mathf.Clamp (rotPitch, -PitchRange, PitchRange);
 		FirstPersonCamera.transform.localRotation = Quaternion.Euler (rotPitch,0, 0);
 
-			float FwdSpeed = Input.GetAxis ("Vertical") * MouvSpeed;
-			float SideSpeed = Input.GetAxis ("Horizontal") * MouvSpeed;
+		float FwdSpeed = Input.GetAxis ("Vertical") * MouvSpeed;
+		float SideSpeed = Input.GetAxis ("Horizontal") * MouvSpeed;
 
 		Vector3 speed = new Vector3(SideSpeed,VertVelocity,FwdSpeed);
 
