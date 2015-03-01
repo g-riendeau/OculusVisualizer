@@ -75,11 +75,15 @@ public class Ghyslain : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		// Mouvement simple de Ghyslain pour tester le ontriggerCollider
+		transform.position = new Vector3 (transform.position.x+0.01f, transform.position.y, transform.position.z);
+
+
 		for (int i = 0; i<sphereList.Count; i++) {
 			//Calcul de la distance relative de la sphere avec Ghyslain
 			relDist = transform.position - sphereList [i].go.transform.position;
 
-			// kind of drag en v^4
+			// kind of drag en v^4 mais pas dans la direction de la vitesse
 			if( sphereList[i].go.rigidbody.velocity.magnitude > topSpeed ){
 				sphereList[i].go.rigidbody.AddForce ( relDist / relDist.magnitude *
 				                                     cDrag * Mathf.Pow (sphereList[i].go.rigidbody.velocity.magnitude/topSpeed , 4f) );
@@ -89,6 +93,7 @@ public class Ghyslain : MonoBehaviour {
 			if (relDist.magnitude > 200){
 				Destroy(sphereList[i].go);
 				sphereList.Remove(sphereList[i]);
+				Debug.Log ("Sphere destroyed cause it was out of range");
 
 			}
 			// force si la sphere s'éloigne trop
@@ -102,8 +107,7 @@ public class Ghyslain : MonoBehaviour {
 			}
 			//La sphere est trop proche. Donner une force négligeable pour ne pas qu'elle reste coincé au milieu
 			else {
-				sphereList[i].go.rigidbody.AddForce (Vector3.Cross(new Vector3(0,10,0),relDist));
-				Debug.Log ("IMPULSE!!!");
+				sphereList[i].go.rigidbody.AddForce (Vector3.Cross(new Vector3(0,10,0),relDist));	
 			}
 			// anti gravite
 			sphereList[i].go.rigidbody.AddForce (0, Mathf.Max (10, 100/( Mathf.Pow(relDist.magnitude,1)+0.1f)),0);
@@ -150,4 +154,11 @@ public class Ghyslain : MonoBehaviour {
 		Destroy(gameObject);
 
 	}
+	/*
+	public void AddThisSphere(GameObject uneSphere)  {
+		uneSphere.transform.rigidbody.isKinematic = false;
+		sphereList.Add (new gSphere(uneSphere,Random.Range (3,8),Random.Range (22,35)));
+
+	}
+	*/
 }
