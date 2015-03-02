@@ -84,12 +84,12 @@ public class TunnelWaver : MonoBehaviour {
 		case 1 :
 			cuton = 16;
 			cutoff = 128;
-			scale = 700f;
+			scale = 720f;
 			break;
 		case 2 :
 			cuton = 512;
 			cutoff = 1024;
-			scale = 15000f;
+			scale = 12000f;
 			break;
 		default :
 			amplitudes = new float[1];

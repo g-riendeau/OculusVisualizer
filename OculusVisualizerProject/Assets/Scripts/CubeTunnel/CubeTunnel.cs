@@ -51,7 +51,7 @@ public class CubeTunnel : MonoBehaviour {
 				cube.transform.parent = this.transform;
 				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
 				                                            jRadius * Mathf.Sin (i*dTheta),
-				                                            j + 0.5f  );
+				                                            j + 1f );
 
 				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
 				cube.renderer.material = FloorMat;
@@ -91,7 +91,7 @@ public class CubeTunnel : MonoBehaviour {
 				cube.transform.parent = this.transform;
 				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
 				                                            jRadius * Mathf.Sin (i*dTheta),
-				                                            -j - 0.5f );
+				                                            -j - 1f );
 				
 				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
 				cube.renderer.material = FloorMat;
