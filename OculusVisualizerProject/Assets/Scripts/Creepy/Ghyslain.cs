@@ -92,7 +92,7 @@ public class Ghyslain : MonoBehaviour {
 		transform.position = new Vector3 (transform.position.x+0.01f, transform.position.y, transform.position.z);
 
 
-		for (int i = 0; i<sphereList.Count; i++) {
+		for (int i = sphereList.Count - 1; i >= 0; i--) {
 			//Calcul de la distance relative de la sphere avec Ghyslain
 			relDist = transform.position - sphereList [i].go.transform.position;
 
@@ -174,15 +174,14 @@ public class Ghyslain : MonoBehaviour {
 	public void PullSphere(GameObject uneSphere)  {
 		uneSphere.transform.rigidbody.isKinematic = false;
 		sphereList.Add (new gSphere(uneSphere,Random.Range (3,8),Random.Range (22,35)));
-
+		sphereInRangeList.RemoveAt(pulledSphere);
 	}
 
 	// Add a new sphere. A soft pull will attrack some spheres in range
 	public void SphereInRange(GameObject uneSphere)  {
-		Debug.Log ("salut");
 		sphereInRangeList.Add (uneSphere);
-		timerOnAddSphere = 20 / sphereInRangeList.Count;
-		Debug.Log (sphereInRangeList.Count);
+		timerOnAddSphere = Mathf.Clamp(1,50 / Mathf.Pow (sphereInRangeList.Count,0.5f),20);
+		Debug.Log (timerOnAddSphere);
 		//Debug.Log (timerOnAddSphere);
 
 	}
