@@ -5,6 +5,7 @@ public class Lights : MonoBehaviour {
 
 	public GameObject DirLight1;
 	public GameObject PointLight1;
+	public Song song;
 
 	private GameObject[] PointLights;
 	private Vector3[] TargetPLPos;
@@ -36,7 +37,16 @@ public class Lights : MonoBehaviour {
 
 			// Check if light reached its destination. If so, set new target position
 			if (Vector3.Distance(TargetPLPos[i],light.transform.position) <=0.5f) {
-				TargetPLPos[i] = new Vector3(Random.Range (-3f,3f),0,Random.Range (-9.0f,18f));
+				float rangeXY = 0f;
+				if(Time.realtimeSinceStartup>song.debutLastStretch && Time.realtimeSinceStartup < song.finLastStretch){
+					rangeXY = Random.Range (-7.5f,7.5f); 
+				}
+				else
+				{
+					rangeXY = Random.Range (-2.5f,2.5f);
+				}
+
+				TargetPLPos[i] = new Vector3(rangeXY,rangeXY, Random.Range (-5.0f,20f));
 			}
 			i++;
 		}

@@ -10,20 +10,22 @@ public class TunnelWaver : MonoBehaviour {
 	private float hauteurBasses;
 	private float hauteurMoyennes;
 	private float cumul = 0f;
-	private const float cSongTime = 360f; //secondes
+	public Song song;
 
 	public AudioProcessor audioProcessor ;
 	public AudioProcessor micProcessor ;
 	public CubeTunnel tunnel;
-	private CubeInfo[,] _cubeConeArray;
-	private CubeInfo[,] _cubeCylinderArray;
+	private CubeInfo[,] _cubeCone1Array;
+	private CubeInfo[,] _cubeCone2Array;
+	//private CubeInfo[,] _cubeCylinderArray;
 	private CubeInfo[,] _cubeCenterArray;
 	
 	
 	// Use this for initialization
 	void Start () {
-		_cubeConeArray = tunnel.cubeConeArray;
-		_cubeCylinderArray = tunnel.cubeCylinderArray;
+		_cubeCone1Array = tunnel.cubeCone1Array;
+		_cubeCone2Array = tunnel.cubeCone2Array;
+		//_cubeCylinderArray = tunnel.cubeCylinderArray;
 		_cubeCenterArray = tunnel.cubeCenterArray;
 		micProcessor.enabled = false;
 	}
@@ -35,21 +37,23 @@ public class TunnelWaver : MonoBehaviour {
 		hauteurMoyennes = HauteurCube( 1 );
 		hauteurAigues = HauteurCube( 2 );
 
-		ApplyFirstRow(_cubeConeArray, hauteurBasses, hauteurMoyennes, hauteurAigues);
-		CopyFirstRow (_cubeConeArray, _cubeCylinderArray, 0, 1);
-		CopyFirstRow (_cubeConeArray, _cubeCenterArray, 0, _cubeCenterArray.GetLength(1));
+		ApplyFirstRow(_cubeCone1Array, hauteurBasses, hauteurMoyennes, hauteurAigues);
+		CopyFirstRow (_cubeCone1Array, _cubeCone2Array, 0, 1);
+		CopyFirstRow (_cubeCone1Array, _cubeCenterArray, 0, _cubeCenterArray.GetLength(1));
 
-		ApplyScaleWave(_cubeConeArray);
-		ApplyScaleWave(_cubeCylinderArray);
+		ApplyScaleWave(_cubeCone1Array);
+		ApplyScaleWave(_cubeCone2Array);
+		//ApplyScaleWave(_cubeCylinderArray);
 
-		ApplyColorWave (_cubeConeArray);
-		ApplyColorWave (_cubeCylinderArray);
+		ApplyColorWave (_cubeCone1Array);
+		ApplyColorWave (_cubeCone2Array);
+		//ApplyColorWave (_cubeCylinderArray);
 
 		//On overwrite audioProcessor et remplace par le micro
-		if(Time.realtimeSinceStartup > cSongTime)
+		if(Time.realtimeSinceStartup > song.songTime)
 		{
-			audioProcessor = micProcessor;
 			micProcessor.enabled = true;
+			audioProcessor = micProcessor;
 		}
 
 	}
@@ -85,7 +89,7 @@ public class TunnelWaver : MonoBehaviour {
 		case 2 :
 			cuton = 512;
 			cutoff = 1024;
-			scale = 10000f;
+			scale = 15000f;
 			break;
 		default :
 			amplitudes = new float[1];
@@ -245,10 +249,11 @@ public class TunnelWaver : MonoBehaviour {
 	void CopyFirstRow(CubeInfo[,] original, CubeInfo[,] copy, int z0, int nZ){
 		for (int i = 0; i<original.GetLength(0); i++) {
 			for (int j = z0; j<(z0+nZ); j++) {
-				copy[i,j].transform.localScale = original[i,0].transform.localScale;
 				copy[i,j].lastScale = original[i,0].lastScale;
-				copy[i,j].renderer.material.SetColor("_Color",original[i,0].renderer.material.GetColor("_Color"));
+				copy[i,j].transform.localScale = original[i,0].transform.localScale;
 				copy[i,j].lastColor = original[i,0].lastColor;
+				copy[i,j].renderer.material.SetColor("_Color",original[i,0].renderer.material.GetColor("_Color"));
+
 			}
 		}
 	}

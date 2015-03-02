@@ -16,10 +16,11 @@ public class CubeTunnel : MonoBehaviour {
 
 	// structures de cubes
 	private const float nZCone = 32f;				    // nb de cubes de profondeur
-	public CubeInfo[,] cubeConeArray = new CubeInfo[(int)nCubes,(int)nZCone];
-	private const float nZCylinder = 16f;				// nb de cubes de profondeur
-	public CubeInfo[,] cubeCylinderArray = new CubeInfo[(int)nCubes,(int)nZCylinder];
-	private const float nZCenter = 3f;
+	public CubeInfo[,] cubeCone1Array = new CubeInfo[(int)nCubes,(int)nZCone];
+	public CubeInfo[,] cubeCone2Array = new CubeInfo[(int)nCubes,(int)nZCone];
+	//private const float nZCylinder = 16f;				// nb de cubes de profondeur
+	//public CubeInfo[,] cubeCylinderArray = new CubeInfo[(int)nCubes,(int)nZCylinder];
+	private const float nZCenter = 1f;
 	public CubeInfo[,] cubeCenterArray = new CubeInfo[(int)nCubes, (int)nZCenter];
 
 	// variables
@@ -32,7 +33,7 @@ public class CubeTunnel : MonoBehaviour {
 	// Use this for initialization
 	void Start() 
 	{
-		// construction du cone --------------------------------------------------------------------
+		// construction du cone 1 --------------------------------------------------------------------
 		dAlpha = -180f*Mathf.Atan((1f - cHole) * cRadius / nZCone)/Mathf.PI;
 		
 		for (float j = 0f; j < nZCone; j++)
@@ -50,7 +51,7 @@ public class CubeTunnel : MonoBehaviour {
 				cube.transform.parent = this.transform;
 				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
 				                                            jRadius * Mathf.Sin (i*dTheta),
-				                                            j + 0.5f + nZCenter/2f );
+				                                            j + 0.5f  );
 
 				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
 				cube.renderer.material = FloorMat;
@@ -65,13 +66,54 @@ public class CubeTunnel : MonoBehaviour {
 
 				// ajout de CubeInfo
 				CubeInfo ci = cube.AddComponent<CubeInfo>();
-				cubeConeArray[(int)i,(int)j] = cube.GetComponent<CubeInfo>();
-				cubeConeArray[(int)i,(int)j].jRatio = jRatio;
-				cubeConeArray[(int)i,(int)j].jWidth = jWidth;
+				cubeCone1Array[(int)i,(int)j] = cube.GetComponent<CubeInfo>();
+				cubeCone1Array[(int)i,(int)j].jRatio = jRatio;
+				cubeCone1Array[(int)i,(int)j].jWidth = jWidth;
 
 			}
 		}
 
+		// construction du cone 2 --------------------------------------------------------------------
+		dAlpha = 180f*Mathf.Atan((1f - cHole) * cRadius / nZCone)/Mathf.PI;
+		
+		for (float j = 0f; j < nZCone; j++)
+		{	
+			// on assigne les valeurs pour la rangee
+			jRatio  = (j/(nZCone-1f))*(cHole-1f) + 1f;
+			jRadius = jRatio * cRadius;
+			jWidth  =  2f * jRadius * Mathf.Tan (dTheta/2f);
+			
+			for (float i = 0f; i < nCubes; i++)
+			{
+				
+				// on creer et place le cube
+				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+				cube.transform.parent = this.transform;
+				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
+				                                            jRadius * Mathf.Sin (i*dTheta),
+				                                            -j - 0.5f );
+				
+				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
+				cube.renderer.material = FloorMat;
+				
+				
+				// rotation du cube
+				Quaternion target = Quaternion.Euler(-dAlpha*Mathf.Sin (i*dTheta), dAlpha*Mathf.Cos (i*dTheta), i*360f/nCubes + 90f);
+				cube.transform.localRotation = target;
+				
+				// no collisions pour un plus faible temps de calcul
+				cube.collider.enabled = false;
+				
+				// ajout de CubeInfo
+				CubeInfo ci = cube.AddComponent<CubeInfo>();
+				cubeCone2Array[(int)i,(int)j] = cube.GetComponent<CubeInfo>();
+				cubeCone2Array[(int)i,(int)j].jRatio = jRatio;
+				cubeCone2Array[(int)i,(int)j].jWidth = jWidth;
+				
+			}
+		}
+
+		/*
 		// construction du cylindre ----------------------------------------------------------------
 		dAlpha = 0f;
 
@@ -111,6 +153,7 @@ public class CubeTunnel : MonoBehaviour {
 			}
 		}
 
+		*/
 		// construction du centre ----------------------------------------------------------------
 		dAlpha = 0f;
 		
@@ -129,7 +172,7 @@ public class CubeTunnel : MonoBehaviour {
 				cube.transform.parent = this.transform;
 				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
 				                                            jRadius * Mathf.Sin (i*dTheta),
-				                                            j + 0.5f - nZCenter/2f);
+				                                            j );
 				
 				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
 				cube.renderer.material = FloorMat;
