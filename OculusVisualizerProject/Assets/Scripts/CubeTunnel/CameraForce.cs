@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraForce : MonoBehaviour {
 
 	public Song song;
+	public Material black;
 	public Material sky1;
 	public Material sky2;
 	public Material sky3;
@@ -18,7 +19,9 @@ public class CameraForce : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		RenderSettings.skybox = sky1;
+		RenderSettings.skybox = black;
+		RenderSettings.skybox.SetColor("_Color", Color.black);
+
 
 		t1 = song.debutLastStretch + (song.finLastStretch - song.debutLastStretch)*0.25f;
 		t2 = song.debutLastStretch + (song.finLastStretch - song.debutLastStretch)*0.5f;
@@ -42,6 +45,11 @@ public class CameraForce : MonoBehaviour {
 				dist = -transform.position.z - 5f;
 				rigidbody.AddForce(0,0,dist);
 			}
+		}
+
+		if(Time.realtimeSinceStartup>song.debutLastStretch)
+		{
+			RenderSettings.skybox = sky1;
 		}
 
 		if(!switchFirst && Time.realtimeSinceStartup>t1)
