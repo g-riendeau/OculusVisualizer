@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &165336235
 GameObject:
@@ -231,6 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
+  black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
   sky1: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
   sky2: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
   sky3: {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
@@ -361,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
+  black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
   sky1: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
   sky2: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
   sky3: {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}

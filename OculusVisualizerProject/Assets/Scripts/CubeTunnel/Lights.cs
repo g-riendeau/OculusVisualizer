@@ -46,7 +46,7 @@ public class Lights : MonoBehaviour {
 					rangeXY = Random.Range (-2.5f,2.5f);
 				}
 
-				TargetPLPos[i] = new Vector3(rangeXY,rangeXY, Random.Range (-5.0f,20f));
+				TargetPLPos[i] = new Vector3(rangeXY,rangeXY, Random.Range (-10.0f + (5f * i), 5f * i));
 			}
 			i++;
 		}
