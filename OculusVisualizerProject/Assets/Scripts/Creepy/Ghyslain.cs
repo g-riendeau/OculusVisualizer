@@ -16,7 +16,7 @@ public class Ghyslain : MonoBehaviour {
 
 	// pour l'initialisation
 	private GameObject uneSphere;
-	private int iniSphereNb = 13;
+	private int iniSphereNb = 50;
 	private float iniSpherePos;
 	private float iniExcentricite;
 	private float iniAttractionForceXZ;
@@ -27,9 +27,9 @@ public class Ghyslain : MonoBehaviour {
 	
 	// parametres qui influencent la force
 	private Vector3 relDist;
-	private float forceChangeRate = 500f;
-	private float topSpeed = 10f;
-	private float cDrag = 0.5f;
+	private float forceChangeRate = 1000f;
+	private float topSpeed = 15f;
+	private float cDrag = 1f;
 
 	private float temps1 = 5;
 	
@@ -52,9 +52,9 @@ public class Ghyslain : MonoBehaviour {
 			uneSphere.gameObject.tag = "ActiveSphere";
 			
 			// On donne a la sphere une vitesse en z avec direction aléatoirement positive ou négative
-			iniExcentricite = Random.Range(0,1.5f);
+			iniExcentricite = Random.Range(0,1f);
 			iniAttractionForceXZ = Random.Range(1500f,2500f);
-			uneSphere.rigidbody.velocity = new Vector3(0,0, (0.5f+iniExcentricite) * Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
+			uneSphere.rigidbody.velocity = new Vector3(0,0, iniExcentricite * Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
 			sphereList.Add ( new gSphere(uneSphere, Random.Range(3f,8f), Random.Range(22f,35f), iniAttractionForceXZ ) );
 		}
 	}
@@ -89,12 +89,12 @@ public class Ghyslain : MonoBehaviour {
 			
 			// forece d'attraction
 			AddForceXZ ( relDist, sphereList[i] );
-			//AddDrag( sphereMat[i] );
+			AddForceY ( relDist, sphereList[i] );
+			AddDrag( sphereList[i] );
 			
 			
 			// anti gravite
 			//sphereList[i].go.rigidbody.AddForce (0, Mathf.Max (9, 100/(relDist.y + 0.5f) ),0);
-			sphereList[i].go.rigidbody.AddForce (0, 9.81f,0);
 		}
 
 		
@@ -127,25 +127,54 @@ public class Ghyslain : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	// calcul de la force radiale
+	// Calcul de la force radiale --------------------------------------------------------------
 	private void AddForceXZ( Vector3 relDist, gSphere sphere){
+		// variables
 		Vector2 relDistXZ = new Vector2 (relDist.x, relDist.z);
 		Vector2 forceXZ = new Vector2(0f,0f);
-		
+
+		// Pour eviter que la force explose
 		if (relDistXZ.magnitude < sphere.minDist) {
 			sphere.attractionForceXZ -= forceChangeRate * Time.deltaTime;
-			if (sphere.attractionForceXZ < 0f)
-				sphere.attractionForceXZ = 0f;
+			relDistXZ = sphere.minDist * relDistXZ / relDistXZ.magnitude;
 		}
+		// Augmentation de la force
 		else if (relDistXZ.magnitude > sphere.maxDist) {
 			sphere.attractionForceXZ += forceChangeRate * Time.deltaTime;
+			relDistXZ = sphere.maxDist * relDistXZ / relDistXZ.magnitude;
 		}
+
+		// Calcul et application de la force
 		forceXZ = sphere.attractionForceXZ / Mathf.Pow (relDistXZ.magnitude, 3f) * relDistXZ;
 		sphere.go.rigidbody.AddForce( new Vector3(forceXZ.x,0f,forceXZ.y) );
 	}
 
+	// Calcul de la force en y-----------------------------------------------------------------
+	private void AddForceY( Vector3 relDist, gSphere sphere){
+		// variables
+		float upForce = 5f;
+		float downForce = -5f;
+		float relDistMag = Mathf.Clamp(relDist.magnitude, sphere.minDist, sphere.maxDist) - sphere.minDist;
+		relDistMag /= sphere.maxDist - sphere.minDist;
+		float forceY = upForce * (1f - relDistMag) + downForce * relDistMag;
+		forceY += 9.81f * (1f + 1f / (Mathf.Pow(transform.position.y + relDist.y, 2f) + 0.1f) );
+
+		sphere.go.rigidbody.AddForce( new Vector3(0f, forceY, 0f) );
+	}
+
+	// Calcul du drag---------------------------------------------------------------------------
 	private void AddDrag( gSphere sphere){
-	
+		// Variables
+		Vector3 dragForce;
+
+		// Il n'y a de drag qu'au dessus d'une vitesse seuil
+		if (sphere.go.rigidbody.velocity.magnitude < topSpeed)
+			return;
+
+		// Drag en v carre
+		dragForce = - cDrag * sphere.go.rigidbody.velocity.magnitude / topSpeed *
+			sphere.go.rigidbody.velocity / topSpeed;
+		sphere.go.rigidbody.AddForce( dragForce );
 	}
 
 //	// routine pour supprimer les pheres perdues
