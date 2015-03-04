@@ -5,18 +5,15 @@ public class SphereAttractionStrong : MonoBehaviour {
 
 	
 	void OnTriggerEnter(Collider Enterer) {
-		if (Enterer.tag == "PassiveSphere") {
-			
+		if (Enterer.tag == "PassiveSphere") {			
 	
 			GetComponentInParent<Ghyslain> ().PullSphere(Enterer.gameObject);
-			Enterer.tag = "ActiveSphere";
-			
-			
-			
+			Enterer.tag = "ActiveSphere";		
 			
 		}
 		
 	}
+
 
 
 

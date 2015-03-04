@@ -26,7 +26,7 @@ public class Ghyslain : MonoBehaviour {
 	
 	// parametres qui influencent la force
 	private Vector3 relDist;
-	private float forceChangeRate = 1000f;
+	private float forceChangeRate = 100f;
 	private float topSpeed = 15f;
 	private float cDrag = 1f;
 
@@ -66,7 +66,6 @@ public class Ghyslain : MonoBehaviour {
 			timer += Time.deltaTime;
 			relDist = transform.position - sphereInRangeList[0].transform.position;
 			timerOnAddSphere = relDist.magnitude/5-5;
-			Debug.Log(timerOnAddSphere);
 
 			if (timer > timerOnAddSphere )	{
 				timer = 0;
@@ -203,4 +202,12 @@ public class Ghyslain : MonoBehaviour {
 	public void SphereInRange(GameObject uneSphere)  {
 		sphereInRangeList.Add (uneSphere);
 	}
+
+	/*
+	// Add a new sphere. A soft pull will attrack some spheres in range
+	public void SphereOutOfRange(GameObject uneSphere)  {
+		sphereInRangeList.Remove (uneSphere);
+	}
+	*/
 }
+
