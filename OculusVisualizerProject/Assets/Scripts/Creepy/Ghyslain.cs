@@ -10,13 +10,12 @@ public class Ghyslain : MonoBehaviour {
 	public GameObject evilLight;
 
 	private List<GameObject> sphereInRangeList  = new List<GameObject>();		//All spheres that are in range but not pulled in Ghyslain gravity
-	private float timerOnAddSphere = 2000;
+	private float timerOnAddSphere = 2;
 	private float timer = 0;
-	private int pulledSphere;
 
 	// pour l'initialisation
 	private GameObject uneSphere;
-	private int iniSphereNb = 50;
+	private int iniSphereNb = 13;
 	private float iniSpherePos;
 	private float iniExcentricite;
 	private float iniAttractionForceXZ;
@@ -63,13 +62,19 @@ public class Ghyslain : MonoBehaviour {
 	void FixedUpdate () {
 
 		// timerOnAddSphere varies with the number of spheres in the list sphereInRangeList
-		timer += Time.deltaTime;
-		if (timer > timerOnAddSphere)	{
-			timer = 0;
-			pulledSphere = Random.Range( 0, sphereInRangeList.Count );
-			PullSphere(sphereInRangeList[pulledSphere]);
-			sphereInRangeList.RemoveAt(pulledSphere);
+		if (sphereInRangeList.Count>0) {
+			timer += Time.deltaTime;
+			relDist = transform.position - sphereInRangeList[0].transform.position;
+			timerOnAddSphere = relDist.magnitude/5-5;
+			Debug.Log(timerOnAddSphere);
+
+			if (timer > timerOnAddSphere )	{
+				timer = 0;
+				PullSphere(sphereInRangeList[0]);
+				sphereInRangeList.RemoveAt(0);
+			}
 		}
+
 
 		// Mouvement simple de Ghyslain pour tester le ontriggerCollider
 		transform.position = new Vector3 (transform.position.x + 1f*Time.deltaTime, transform.position.y, transform.position.z);
@@ -108,10 +113,10 @@ public class Ghyslain : MonoBehaviour {
 				GameObject unEclair = (GameObject)Instantiate (Eclair);
 				LineRenderer elcairLR = unEclair.GetComponent<LineRenderer>();
 				
-				elcairLR.SetPosition( 0, new Vector3(0,-1,0));
+				elcairLR.SetPosition( 0, transform.position);
 				
 				for (int i = 1; i < 10; i++) {
-					elcairLR.SetPosition( i, new Vector3(Random.Range (-5,5),i*10-1,Random.Range (-5,5)));
+					elcairLR.SetPosition( i, new Vector3(transform.position.x + Random.Range (-5,5),i*10-1,transform.position.z + Random.Range (-5,5)));
 				}
 				StartCoroutine(WaitAndDestroy(0.1f,unEclair));
 			}
@@ -191,15 +196,11 @@ public class Ghyslain : MonoBehaviour {
 	public void PullSphere(GameObject uneSphere)  {
 		uneSphere.transform.rigidbody.isKinematic = false;
 		sphereList.Add (new gSphere(uneSphere,Random.Range (3,8),Random.Range (22,35), Random.Range (1500f,2500f)));
-		sphereInRangeList.RemoveAt(pulledSphere);
+
 	}
 
 	// Add a new sphere. A soft pull will attrack some spheres in range
 	public void SphereInRange(GameObject uneSphere)  {
 		sphereInRangeList.Add (uneSphere);
-		timerOnAddSphere = Mathf.Clamp(1,50 / Mathf.Pow (sphereInRangeList.Count,0.5f),20);
-		//Debug.Log (timerOnAddSphere);
-
 	}
-
 }
