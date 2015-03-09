@@ -101,29 +101,21 @@ public class Ghyslain : MonoBehaviour {
 			//sphereList[i].go.rigidbody.AddForce (0, Mathf.Max (9, 100/(relDist.y + 0.5f) ),0);
 		}
 
-		
+
+		// Constantly dim the lights
+		GameObject[] gos;
+		gos = GameObject.FindGameObjectsWithTag ("EvilLight");
+		foreach (GameObject eLight in gos) {
+			eLight.light.intensity = Mathf.Lerp ( eLight.light.intensity,0,Time.deltaTime*5);
+			eLight.light.range = Mathf.Lerp ( eLight.light.range,0,Time.deltaTime*5);	
+			
+		}
 		// Un éclair!
 		if (Time.realtimeSinceStartup > temps1)	{
 
-			evilLight.light.intensity = Mathf.Lerp (evilLight.light.intensity,8,Time.deltaTime*5);
-			evilLight.light.range = Mathf.Lerp (evilLight.light.range,200,Time.deltaTime*5);
-
-			for (int j = 0; j < Random.Range(1,4); j++) {
-				GameObject unEclair = (GameObject)Instantiate (Eclair);
-				LineRenderer elcairLR = unEclair.GetComponent<LineRenderer>();
-				
-				elcairLR.SetPosition( 0, transform.position);
-				
-				for (int i = 1; i < 10; i++) {
-					elcairLR.SetPosition( i, new Vector3(transform.position.x + Random.Range (-5,5),i*10-1,transform.position.z + Random.Range (-5,5)));
-				}
-				StartCoroutine(WaitAndDestroy(0.1f,unEclair));
-			}
+			CoupDeTonnerre();
 			temps1 = temps1+Random.Range (2,15);			
-			evilLight.light.intensity = Mathf.Lerp (evilLight.light.intensity,1,Time.deltaTime*50);
-			evilLight.light.range =  Mathf.Lerp (evilLight.light.range,20,Time.deltaTime*50);
-
-		}	
+		}
 	}
 
 	IEnumerator WaitAndDestroy(float waitTime,GameObject gameObject) {
@@ -131,6 +123,29 @@ public class Ghyslain : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
+	private void CoupDeTonnerre(){
+
+
+		GameObject[] gos;
+		gos = GameObject.FindGameObjectsWithTag ("EvilLight");
+		foreach (GameObject eLight in gos) {
+			eLight.light.intensity = 8;
+			eLight.light.range = 200;	
+			
+		}
+
+		for (int j = 0; j < Random.Range(1,4); j++) {
+			GameObject unEclair = (GameObject)Instantiate (Eclair);
+			LineRenderer elcairLR = unEclair.GetComponent<LineRenderer>();
+			
+			elcairLR.SetPosition( 0, transform.position);
+			
+			for (int i = 1; i < 10; i++) {
+				elcairLR.SetPosition( i, new Vector3(transform.position.x + Random.Range (-5,5),i*10-1,transform.position.z + Random.Range (-5,5)));
+			}
+			StartCoroutine(WaitAndDestroy(0.1f,unEclair));
+		}
+	}
 	// Calcul de la force radiale --------------------------------------------------------------
 	private void AddForceXZ( Vector3 relDist, gSphere sphere){
 		// variables
