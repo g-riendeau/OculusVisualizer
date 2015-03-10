@@ -17,7 +17,7 @@ public class Ghyslain : MonoBehaviour {
 	private GameObject uneSphere;
 	private int iniSphereNb = 13;
 	private float iniSpherePos;
-	private float iniExcentricite;
+	//private float iniExcentricite;
 	private float iniAttractionForceXZ;
 
 	// pour l'elimination
@@ -26,9 +26,9 @@ public class Ghyslain : MonoBehaviour {
 	
 	// parametres qui influencent la force
 	private Vector3 relDist;
-	private float forceChangeRate = 100f;
+	private float forceChangeRate = 250f;
 	private float topSpeed = 15f;
-	private float cDrag = 1f;
+	private float cDrag = 0.5f;
 
 	private float temps1 = 5;
 	
@@ -39,7 +39,7 @@ public class Ghyslain : MonoBehaviour {
 			//Création d'une sphere
 			uneSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 			uneSphere.renderer.material = sphereMat;
-			iniSpherePos = Random.Range(10f,20f);
+			iniSpherePos = Random.Range(10f,50f);
 			
 			//La position de la sphere est variante en x seulement (plus facile pour savoir quelle vitesse lui appliquer pour qu'elle entre en orbite
 			uneSphere.transform.position = new Vector3(transform.position.x+iniSpherePos, transform.position.y+i, transform.position.z);
@@ -51,10 +51,10 @@ public class Ghyslain : MonoBehaviour {
 			uneSphere.gameObject.tag = "ActiveSphere";
 			
 			// On donne a la sphere une vitesse en z avec direction aléatoirement positive ou négative
-			iniExcentricite = Random.Range(0,1f);
-			iniAttractionForceXZ = Random.Range(1500f,2500f);
-			uneSphere.rigidbody.velocity = new Vector3(0,0, iniExcentricite * Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
-			sphereList.Add ( new gSphere(uneSphere, Random.Range(3f,8f), Random.Range(22f,35f), iniAttractionForceXZ ) );
+//			iniExcentricite = Random.Range(0,1f);
+			iniAttractionForceXZ = Random.Range(500f,1000f);
+			uneSphere.rigidbody.velocity = new Vector3(0,0, Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
+			sphereList.Add ( new gSphere(uneSphere, Random.Range(5f,10f), Random.Range(50f,75f), iniAttractionForceXZ ) );
 		}
 	}
 
@@ -172,10 +172,23 @@ public class Ghyslain : MonoBehaviour {
 		// variables
 		float upForce = 5f;
 		float downForce = -5f;
+
+		// relDistMag vaut 0 si relDist < minDist et 1 si relDist > maxDist
 		float relDistMag = Mathf.Clamp(relDist.magnitude, sphere.minDist, sphere.maxDist) - sphere.minDist;
 		relDistMag /= sphere.maxDist - sphere.minDist;
+
+		// On applique une force verticale interpolee entre unForce et downForce
 		float forceY = upForce * (1f - relDistMag) + downForce * relDistMag;
-		forceY += 9.81f * (1f + 1f / (Mathf.Pow(transform.position.y + relDist.y, 2f) + 0.1f) );
+		// Terme anti gravite
+		forceY += 9.81f;
+		// Terme de rebond
+		if (relDist.y < 0)
+			forceY += 1f;
+		// Pour que les spheres tombent lentement
+		if (sphere.go.rigidbody.velocity.y < 0)
+			sphere.go.rigidbody.drag = 1;
+		else
+			sphere.go.rigidbody.drag = 0;
 
 		sphere.go.rigidbody.AddForce( new Vector3(0f, forceY, 0f) );
 	}
