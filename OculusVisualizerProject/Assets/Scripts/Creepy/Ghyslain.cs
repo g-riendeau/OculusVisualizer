@@ -17,7 +17,6 @@ public class Ghyslain : MonoBehaviour {
 	private GameObject uneSphere;
 	private int iniSphereNb = 13;
 	private float iniSpherePos;
-	//private float iniExcentricite;
 	private float iniAttractionForceXZ;
 
 	// pour l'elimination
@@ -25,12 +24,12 @@ public class Ghyslain : MonoBehaviour {
 //	private List<int> sphereToDeleteList = new List<int>();
 	
 	// parametres qui influencent la force
+	private Vector3 omega = new Vector3 (0f, 0.1f, 0f); 
 	private Vector3 relDist;
-	private float forceChangeRate = 250f;
 	private float topSpeed = 15f;
 	private float cDrag = 0.5f;
 
-	private float temps1 = 5;
+	private float tempsEclair = 5;
 	
 	// Use this for initialization
 	void Start () {
@@ -46,6 +45,7 @@ public class Ghyslain : MonoBehaviour {
 			uneSphere.transform.localRotation = Quaternion.identity;
 			uneSphere.transform.localScale = new Vector3(1f, 1f, 1f);
 			uneSphere.AddComponent<Rigidbody>();
+			uneSphere.rigidbody.drag = 0;
 			uneSphere.rigidbody.angularDrag = 0;
 			uneSphere.rigidbody.mass = 1;
 			uneSphere.gameObject.tag = "ActiveSphere";
@@ -53,8 +53,8 @@ public class Ghyslain : MonoBehaviour {
 			// On donne a la sphere une vitesse en z avec direction aléatoirement positive ou négative
 //			iniExcentricite = Random.Range(0,1f);
 			iniAttractionForceXZ = Random.Range(500f,1000f);
-			uneSphere.rigidbody.velocity = new Vector3(0,0, Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
-			sphereList.Add ( new gSphere(uneSphere, Random.Range(5f,10f), Random.Range(50f,75f), iniAttractionForceXZ ) );
+			uneSphere.rigidbody.velocity = new Vector3( 0, 0, -Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
+			sphereList.Add ( new gSphere(uneSphere, Random.Range(1f,10f), Random.Range(50f,75f), iniAttractionForceXZ ) );
 		}
 	}
 
@@ -91,14 +91,11 @@ public class Ghyslain : MonoBehaviour {
 			Debug.Log ("Sphere destroyed cause it was out of range");
 			}
 			
-			// forece d'attraction
+			// Forces
 			AddForceXZ ( relDist, sphereList[i] );
 			AddForceY ( relDist, sphereList[i] );
 			AddDrag( sphereList[i] );
-			
-			
-			// anti gravite
-			//sphereList[i].go.rigidbody.AddForce (0, Mathf.Max (9, 100/(relDist.y + 0.5f) ),0);
+
 		}
 
 
@@ -111,9 +108,9 @@ public class Ghyslain : MonoBehaviour {
 			
 		}
 		// Un éclair!
-		if (Time.realtimeSinceStartup > temps1)	{
+		if (Time.realtimeSinceStartup > tempsEclair)	{
 			CoupDeTonnerre();
-			temps1 = temps1+Random.Range (4,20);			
+			tempsEclair = tempsEclair+Random.Range (4,20);			
 		}
 	}
 
@@ -149,29 +146,34 @@ public class Ghyslain : MonoBehaviour {
 	private void AddForceXZ( Vector3 relDist, gSphere sphere){
 		// variables
 		Vector2 relDistXZ = new Vector2 (relDist.x, relDist.z);
-		Vector2 forceXZ = new Vector2(0f,0f);
+		Vector2 forceXZ;
 
-		// Pour eviter que la force explose
+		// Force tangentielle si r < r_min
 		if (relDistXZ.magnitude < sphere.minDist) {
-			sphere.attractionForceXZ -= forceChangeRate * Time.deltaTime;
-			relDistXZ = sphere.minDist * relDistXZ / relDistXZ.magnitude;
+			forceXZ = - omega.y * new Vector2 ( relDist.z , -relDist.x );
 		}
-		// Augmentation de la force
+		// Force axiale minimum lorsque r > r_max
 		else if (relDistXZ.magnitude > sphere.maxDist) {
-			sphere.attractionForceXZ += forceChangeRate * Time.deltaTime;
-			relDistXZ = sphere.maxDist * relDistXZ / relDistXZ.magnitude;
+			forceXZ = sphere.attractionForceXZ * relDistXZ / relDistXZ.magnitude / Mathf.Pow ( sphere.maxDist, 2f );
+		}
+		// Force axiale en 1/r
+		else {
+			forceXZ = sphere.attractionForceXZ * relDistXZ / Mathf.Pow (relDistXZ.magnitude, 3f );
 		}
 
-		// Calcul et application de la force
-		forceXZ = sphere.attractionForceXZ / Mathf.Pow (relDistXZ.magnitude, 3f) * relDistXZ;
+		// Application de la force axiale
 		sphere.go.rigidbody.AddForce( new Vector3(forceXZ.x,0f,forceXZ.y) );
+
+		// Force de Coriolis
+		sphere.go.rigidbody.AddForce( - Vector3.Cross (omega , sphere.go.rigidbody.velocity) );
+
 	}
 
 	// Calcul de la force en y-----------------------------------------------------------------
 	private void AddForceY( Vector3 relDist, gSphere sphere){
 		// variables
-		float upForce = 5f;
-		float downForce = -5f;
+		float upForce = 0.1f;
+		float downForce = -0.1f;
 
 		// relDistMag vaut 0 si relDist < minDist et 1 si relDist > maxDist
 		float relDistMag = Mathf.Clamp(relDist.magnitude, sphere.minDist, sphere.maxDist) - sphere.minDist;
@@ -179,16 +181,16 @@ public class Ghyslain : MonoBehaviour {
 
 		// On applique une force verticale interpolee entre unForce et downForce
 		float forceY = upForce * (1f - relDistMag) + downForce * relDistMag;
+
 		// Terme anti gravite
 		forceY += 9.81f;
+
 		// Terme de rebond
 		if (relDist.y < 0)
 			forceY += 1f;
-		// Pour que les spheres tombent lentement
-		if (sphere.go.rigidbody.velocity.y < 0)
-			sphere.go.rigidbody.drag = 1;
-		else
-			sphere.go.rigidbody.drag = 0;
+
+		// Terme de drag
+		forceY += - 1f * sphere.go.rigidbody.velocity.y;
 
 		sphere.go.rigidbody.AddForce( new Vector3(0f, forceY, 0f) );
 	}
@@ -202,26 +204,17 @@ public class Ghyslain : MonoBehaviour {
 		if (sphere.go.rigidbody.velocity.magnitude < topSpeed)
 			return;
 
-		// Drag en v carre
+		// Drag en v^2
 		dragForce = - cDrag * sphere.go.rigidbody.velocity.magnitude / topSpeed *
 			sphere.go.rigidbody.velocity / topSpeed;
 		sphere.go.rigidbody.AddForce( dragForce );
 	}
 
-//	// routine pour supprimer les pheres perdues
-//	private void DeleteSpheres(  List<gSphere> sphereList, List<int> sphereToDeleteList ){
-//		for (int i=0; i<sphereToDeleteList.Count; i++) {
-//			Destroy( sphereList[sphereToDeleteList[i]].go );
-//			sphereList.Remove( sphereList[sphereToDeleteList[i]] );
-//			Debug.Log ("Sphere destroyed cause it was out of range");
-//		}
-//		sphereToDeleteList = new List<int> ();
-//	}
 
 	// Add a new sphere to Gyslain gravitational pull
 	public void PullSphere(GameObject uneSphere)  {
 		uneSphere.transform.rigidbody.isKinematic = false;
-		sphereList.Add (new gSphere(uneSphere,Random.Range (3,8),Random.Range (22,35), Random.Range (1500f,2500f)));
+		sphereList.Add (new gSphere(uneSphere,Random.Range (1,10),Random.Range (50,75), Random.Range (500f,1000f)));
 
 	}
 
