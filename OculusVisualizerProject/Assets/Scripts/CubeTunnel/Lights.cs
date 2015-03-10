@@ -38,7 +38,7 @@ public class Lights : MonoBehaviour {
 			// Check if light reached its destination. If so, set new target position
 			if (Vector3.Distance(TargetPLPos[i],light.transform.position) <=0.5f) {
 				float rangeXY = 0f;
-				if(Time.realtimeSinceStartup>song.debutLastStretch && Time.realtimeSinceStartup < song.finLastStretch){
+				if(Time.time>song.debutLastStretch && Time.time < song.finLastStretch){
 					rangeXY = Random.Range (-7.5f,7.5f); 
 				}
 				else

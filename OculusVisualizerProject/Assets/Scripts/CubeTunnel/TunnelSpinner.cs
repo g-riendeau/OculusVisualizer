@@ -19,15 +19,15 @@ public class TunnelSpinner : MonoBehaviour {
 	void Update () {
 
 		//Spin le tunnel
-		if((Time.realtimeSinceStartup > song.debut2eTiers && Time.realtimeSinceStartup < song.fin2eTiers) || Time.realtimeSinceStartup > song.finLastStretch ){
+		if((Time.time > song.debut2eTiers && Time.time < song.fin2eTiers) || Time.time > song.finLastStretch ){
 			transform.Rotate(new Vector3(0f, 0f, 1f), zSpinSpeed*Time.deltaTime, Space.World);
 		}
 
-		if((Time.realtimeSinceStartup > song.debutLastStretch && Time.realtimeSinceStartup < song.finLastStretch )){
+		if((Time.time > song.debutLastStretch && Time.time < song.finLastStretch )){
 			transform.Rotate(new Vector3(1f, 0f, 1f), finalSpinSpeed*Time.deltaTime, Space.World);
 		}
-		
-		if(Time.realtimeSinceStartup > song.bassDrop){
+
+		if(Time.time > song.bassDrop){
 
 			//Spin les cubes!?
 			for (int i = 0 ; i<tunnel.cubeCone1Array.GetLength(0); i++)
