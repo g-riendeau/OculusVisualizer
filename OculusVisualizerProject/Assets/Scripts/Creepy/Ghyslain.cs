@@ -106,15 +106,14 @@ public class Ghyslain : MonoBehaviour {
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag ("EvilLight");
 		foreach (GameObject eLight in gos) {
-			eLight.light.intensity = Mathf.Lerp ( eLight.light.intensity,0,Time.deltaTime*5);
-			eLight.light.range = Mathf.Lerp ( eLight.light.range,0,Time.deltaTime*5);	
+			eLight.light.intensity = Mathf.Lerp ( eLight.light.intensity,0,Time.deltaTime*3);
+			eLight.light.range = Mathf.Lerp ( eLight.light.range,0,Time.deltaTime*3);	
 			
 		}
 		// Un éclair!
 		if (Time.realtimeSinceStartup > temps1)	{
-
 			CoupDeTonnerre();
-			temps1 = temps1+Random.Range (2,15);			
+			temps1 = temps1+Random.Range (4,20);			
 		}
 	}
 
@@ -129,8 +128,8 @@ public class Ghyslain : MonoBehaviour {
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag ("EvilLight");
 		foreach (GameObject eLight in gos) {
-			eLight.light.intensity = 8;
-			eLight.light.range = 200;	
+			eLight.light.intensity = 2;
+			eLight.light.range = 500;	
 			
 		}
 
