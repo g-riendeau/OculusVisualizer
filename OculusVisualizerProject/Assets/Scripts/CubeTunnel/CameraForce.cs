@@ -34,9 +34,9 @@ public class CameraForce : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Time.realtimeSinceStartup>song.debutLastStretch){
+		if(Time.time>song.debutLastStretch){
 			float dist = 0;
-			if(Time.realtimeSinceStartup > song.finLastStretch)
+			if(Time.time > song.finLastStretch)
 			{
 				dist = -transform.position.z;
 				rigidbody.AddForce(0,0,dist);
@@ -47,20 +47,20 @@ public class CameraForce : MonoBehaviour {
 			}
 		}
 
-		if(Time.realtimeSinceStartup>song.debutLastStretch)
+		if(Time.time>song.debutLastStretch)
 		{
 			RenderSettings.skybox = sky1;
 		}
 
-		if(!switchFirst && Time.realtimeSinceStartup>t1)
+		if(!switchFirst && Time.time>t1)
 		{
 			RenderSettings.skybox = sky2;
 		}
-		if(!switchSecond && Time.realtimeSinceStartup>t2)
+		if(!switchSecond && Time.time>t2)
 		{
 			RenderSettings.skybox = sky3;
 		}
-		if(!switchThird && Time.realtimeSinceStartup>t3)
+		if(!switchThird && Time.time>t3)
 		{
 			RenderSettings.skybox = sky4;
 		}

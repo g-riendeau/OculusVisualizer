@@ -50,7 +50,7 @@ public class TunnelWaver : MonoBehaviour {
 		//ApplyColorWave (_cubeCylinderArray);
 
 		//On overwrite audioProcessor et remplace par le micro
-		if(Time.realtimeSinceStartup > song.songTime)
+		if(Time.time > song.songTime)
 		{
 			micProcessor.enabled = true;
 			audioProcessor = micProcessor;
@@ -128,8 +128,8 @@ public class TunnelWaver : MonoBehaviour {
 		float g = 0f;
 		float r = 0f;
 		float b = 0f;	
-		float timeSin=Mathf.Sin(Time.realtimeSinceStartup/7f);
-		float fastTime=Mathf.Sin(Time.realtimeSinceStartup*2);
+		float timeSin=Mathf.Sin(Time.time/7f);
+		float fastTime=Mathf.Sin(Time.time*2);
 
 		///Valeurs connues:
 		/// MidsR:
