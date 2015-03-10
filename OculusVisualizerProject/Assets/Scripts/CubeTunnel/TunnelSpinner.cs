@@ -6,13 +6,26 @@ public class TunnelSpinner : MonoBehaviour {
 	public CubeTunnel tunnel;
 	private float zSpinSpeed;
 	private float finalSpinSpeed;
+	private Quaternion iniCamRotation;
+	private float timeSpentOut;
+	private float timeStopped;
+	private float timePerExit;
+	private int nbTimeOut;
+	private int TotNbTimeOut;
 	public Song song;
 
 	// Use this for initialization
 	void Start () {
 		zSpinSpeed = 360f/(song.fin2eTiers - song.debut2eTiers);
-		finalSpinSpeed = 360f/(song.finLastStretch - song.debutLastStretch)*4f;
+		nbTimeOut = 1;
+		TotNbTimeOut = 4;
+		timePerExit = (song.finLastStretch - song.debutLastStretch) / TotNbTimeOut;
+		timeStopped = 10;
+		timeSpentOut = timePerExit-timeStopped;
+		finalSpinSpeed = 360f/(song.finLastStretch - song.debutLastStretch-timeSpentOut*TotNbTimeOut/2)*TotNbTimeOut;
 		//finalSpinSpeed = 360f/(20f - 5f)*3;
+		iniCamRotation = transform.rotation;
+
 	}
 	
 	// Update is called once per frame
@@ -23,8 +36,20 @@ public class TunnelSpinner : MonoBehaviour {
 			transform.Rotate(new Vector3(0f, 0f, 1f), zSpinSpeed*Time.deltaTime, Space.World);
 		}
 
+		// Rotate pour faire sortir du tunnel
 		if((Time.time > song.debutLastStretch && Time.time < song.finLastStretch )){
-			transform.Rotate(new Vector3(1f, 0f, 1f), finalSpinSpeed*Time.deltaTime, Space.World);
+
+			if((Time.time > song.debutLastStretch+ timeSpentOut+(nbTimeOut-1)*(timePerExit))){
+				// Slowly get to the initial position and stay there a little while
+				transform.rotation = Quaternion.Lerp(transform.rotation, iniCamRotation, Time.deltaTime);
+				if (Time.time > song.debutLastStretch+ nbTimeOut*timePerExit){
+					nbTimeOut +=1;					
+				}
+			}
+			else {
+				transform.Rotate(new Vector3(1f, 0f, 1f), finalSpinSpeed*Time.deltaTime, Space.World);
+
+			}
 		}
 
 		if(Time.time > song.bassDrop){
