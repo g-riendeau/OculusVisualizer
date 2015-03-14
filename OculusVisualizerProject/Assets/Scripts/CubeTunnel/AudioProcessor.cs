@@ -20,8 +20,9 @@ public class AudioProcessor : MonoBehaviour {
 		audio.GetSpectrumData(amplitudes, 0, FFTWindow.BlackmanHarris);
 
 		// Pour fastForward la toune
-		if (Input.GetKey("f") && Time.timeScale < 50)		    {
-			audio.pitch = Time.timeScale *=  2f;
+		if (Input.GetKeyDown("f") && Time.timeScale < 30)		    {
+			Time.timeScale = Time.timeScale* 2f;
+			audio.pitch =Time.timeScale;
 			Debug.Log(Time.timeScale);
 
 			if (Time.timeScale > 2) {
@@ -33,8 +34,9 @@ public class AudioProcessor : MonoBehaviour {
 			}
 	}
 		// Pour Ralentir la toune
-		if (Input.GetKey("b") )		    {
-			audio.pitch = Time.timeScale /=2f;
+		if (Input.GetKeyDown("b") )		    {
+			Time.timeScale =  Time.timeScale/ 2f;
+			audio.pitch =  Time.timeScale;
 			Debug.Log(Time.timeScale);
 			if (Time.timeScale > 1) {
 				audio.mute=true;

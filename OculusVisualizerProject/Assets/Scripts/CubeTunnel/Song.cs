@@ -25,12 +25,14 @@ public class Song : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//Essai Simon
+		/*
 		debut2eTiers = 115f;
 		fin2eTiers = 179f;
 		bassDrop = 12.5f;
 		debutLastStretch = 224f;
-		finLastStretch = 326f;
-		songTime = 355f;	
+		finLastStretch = 326.5f;
+		songTime = 355f;
+		*/
 	}
 	
 	// Update is called once per frame

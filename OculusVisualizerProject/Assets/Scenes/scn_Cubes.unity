@@ -571,9 +571,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debut2eTiers: 115
   fin2eTiers: 179
-  bassDrop: 224
-  debutLastStretch: 275
-  finLastStretch: 326.5
+  bassDrop: 12.5
+  debutLastStretch: 223
+  finLastStretch: 325
   songTime: 355
 --- !u!4 &419488047
 Transform:
@@ -816,7 +816,7 @@ GameObject:
   - 4: {fileID: 942164277}
   - 114: {fileID: 942164276}
   m_Layer: 0
-  m_Name: Ligths
+  m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
