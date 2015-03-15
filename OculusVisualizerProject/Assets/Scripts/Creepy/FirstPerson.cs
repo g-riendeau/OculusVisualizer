@@ -50,6 +50,15 @@ public class FirstPerson : MonoBehaviour {
 
 		speed = transform.rotation * speed;
 
+
+		if (characterController.isGrounded) {
+			VertVelocity = 0;
+		}
+		else {
+			
+			VertVelocity += Physics.gravity.y * Time.deltaTime;
+		}
+
 		characterController.Move (speed * Time.deltaTime);
 
 	}

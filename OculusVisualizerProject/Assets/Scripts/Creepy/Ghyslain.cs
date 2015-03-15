@@ -54,7 +54,7 @@ public class Ghyslain : MonoBehaviour {
 //			iniExcentricite = Random.Range(0,1f);
 			iniAttractionForceXZ = Random.Range(500f,1000f);
 			uneSphere.rigidbody.velocity = new Vector3( 0, 0, -Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
-			sphereList.Add ( new gSphere(uneSphere, Random.Range(1f,10f), Random.Range(50f,75f), iniAttractionForceXZ ) );
+			sphereList.Add ( new gSphere(uneSphere, Random.Range(3f,8f), Random.Range(15f,35f), iniAttractionForceXZ, i) );
 		}
 	}
 
@@ -74,9 +74,8 @@ public class Ghyslain : MonoBehaviour {
 			}
 		}
 
-
 		// Mouvement simple de Ghyslain pour tester le ontriggerCollider
-		transform.position = new Vector3 (transform.position.x + 1f*Time.deltaTime, transform.position.y, transform.position.z);
+		transform.position = new Vector3 (transform.position.x + 1.5f*Time.deltaTime , transform.position.y, transform.position.z);
 		
 		
 		for (int i = sphereList.Count-1; i >= 0; i--) {
@@ -93,11 +92,9 @@ public class Ghyslain : MonoBehaviour {
 			
 			// Forces
 			AddForceXZ ( relDist, sphereList[i] );
-			AddForceY ( relDist, sphereList[i] );
+			AddForceY ( relDist, sphereList[i], sphereList.Count);
 			AddDrag( sphereList[i] );
-
 		}
-
 
 		// Constantly dim the lights
 		GameObject[] gos;
@@ -170,8 +167,9 @@ public class Ghyslain : MonoBehaviour {
 	}
 
 	// Calcul de la force en y-----------------------------------------------------------------
-	private void AddForceY( Vector3 relDist, gSphere sphere){
+	private void AddForceY( Vector3 relDist, gSphere sphere, int sphereNb){
 		// variables
+		/*
 		float upForce = 0.1f;
 		float downForce = -0.1f;
 
@@ -189,8 +187,21 @@ public class Ghyslain : MonoBehaviour {
 		if (relDist.y < 0)
 			forceY += 1f;
 
+
+*/
+		float forceY = 0;
+		if (sphere.id >= Mathf.Ceil(sphereNb/2)){
+			forceY = relDist.y/2;
+		}
+		else  {
+			forceY = sphere.id+relDist.y;
+		}
+
 		// Terme de drag
-		forceY += - 1f * sphere.go.rigidbody.velocity.y;
+		//forceY += - 1f * sphere.go.rigidbody.velocity.y;
+
+		// Terme anti gravite
+		forceY += 9.81f;
 
 		sphere.go.rigidbody.AddForce( new Vector3(0f, forceY, 0f) );
 	}
@@ -214,8 +225,7 @@ public class Ghyslain : MonoBehaviour {
 	// Add a new sphere to Gyslain gravitational pull
 	public void PullSphere(GameObject uneSphere)  {
 		uneSphere.transform.rigidbody.isKinematic = false;
-		sphereList.Add (new gSphere(uneSphere,Random.Range (1,10),Random.Range (50,75), Random.Range (500f,1000f)));
-
+		sphereList.Add ( new gSphere(uneSphere, Random.Range(3f,8f), Random.Range(15f,35f), iniAttractionForceXZ, sphereList.Count+1) );
 	}
 
 	// Add a new sphere. A soft pull will attrack some spheres in range
