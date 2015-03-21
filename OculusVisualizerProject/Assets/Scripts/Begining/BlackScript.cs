@@ -7,10 +7,12 @@ public class BlackScript : MonoBehaviour {
 	private LineRenderer blackLine; 
 	private float tailSpeed;
 	private float headSpeed;
+	private float zSpeed;
+	private float zStart;
 	private Vector3 headTo;
 	private Vector3 p0; //Line positions
 	private Vector3 p1;
-	private  const float cSpikeTimeInterval = 1f; // secondes
+	private  float spikeTimeInterval; // secondes
 	private  float timeSinceLastSpike; // secondes
 
 	// Use this for initialization
@@ -18,39 +20,38 @@ public class BlackScript : MonoBehaviour {
 	
 		//Initialize line positions
 		blackLine = GetComponent<LineRenderer>();
-		p0 = new Vector3(0f,0f,0f);
-		p1 = new Vector3(0.5f,0f,0f);
-		headTo = new Vector3(0f, 0f, 0f);
+		zStart = 100f;
+		p0 = new Vector3(0f,0f,zStart);
+		p1 = new Vector3(0.5f,0f,zStart);
+		headTo = new Vector3(0f, 0f, zStart);
 		blackLine.SetPosition(0, p0);
 		blackLine.SetPosition(1, p1);
 		blackLine.SetColors(Color.blue, Color.red);
-		//blackLine.material = new Material(Shader.Find("Particles/Additive"));
-		//blackLine.material.SetColor("_Color", Color.red);
-
-		tailSpeed = 1f;
-		headSpeed = 30f;
+		zSpeed = 2f;
+		blackLine.material = new Material(Shader.Find("Particles/Alpha Blended"));
+		blackLine.SetColors(Color.black, Color.white);
+		tailSpeed = 8f;
+		headSpeed = 25f;
 		timeSinceLastSpike = 0f;
-
+		spikeTimeInterval = 0.1f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		timeSinceLastSpike += Time.deltaTime;
-		if(timeSinceLastSpike > cSpikeTimeInterval)
+		if(timeSinceLastSpike > spikeTimeInterval)
 		{
-			Vector3 spike = new Vector3(0f,0f,0f);
-			while( Mathf.Abs(spike.x) < 1.5f || Mathf.Abs(spike.y) < 1.5f )
-			{
-				spike = new Vector3(Random.Range (-5f,5f), Random.Range (-5f,5f), 0); 
-			}
-			headTo = p0 + spike;
+			//Vector3 spike = new Vector3(0f,0f,0f);
+			Vector3 spike = new Vector3(Random.Range (-7f,7f), Random.Range (-7f,7f), Mathf.Max (zStart - zSpeed*Time.time, 0f)); 	
+			headTo = spike;
 			timeSinceLastSpike = 0f;
+			spikeTimeInterval = Random.Range (0.05f,0.7f);
+
 		}
 
 
 		blackLine.SetPosition(0, p0);
-		blackLine.SetColors(Color.black, Color.white);
 		seek (Time.deltaTime, headTo);
 		follow (Time.deltaTime);
 	}
