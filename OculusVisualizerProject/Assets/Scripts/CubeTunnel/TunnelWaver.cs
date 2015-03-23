@@ -21,6 +21,7 @@ public class TunnelWaver : MonoBehaviour {
 
 	private float[] flexion_t;
 	private bool[] flexionDone;
+	private bool[] firstFlexFrame;
 	private float[] ampFlexion;
 	private float[] freqFactorY;
 
@@ -35,11 +36,13 @@ public class TunnelWaver : MonoBehaviour {
 		micProcessor.enabled = false;
 
 		flexionDone = new bool[song.flexion_t.Length];
+		firstFlexFrame= new bool[song.flexion_t.Length];
 		ampFlexion = new float[song.flexion_t.Length];
 		freqFactorY = new float[song.flexion_t.Length];
 
 		for (int i = 0; i<song.flexion_t.Length; i++){
 			flexionDone[i] = false;
+			firstFlexFrame[i] = true;
 			freqFactorY[i] = UnityEngine.Random.Range(0.2f, 2f);
 		}
 
@@ -87,7 +90,8 @@ public class TunnelWaver : MonoBehaviour {
 					Debug.Log("A song.flexion_length is too short. It is ignored");
 				}
 				else {
-				TunnelSpinner.startFlexion();
+
+				
 				flexionDone[i] = flexTunnel(_cubeCone1Array,_cubeCone2Array,Mathf.Sin ((Time.time-song.flexion_t[i])*1.0f)/100,	
 				                            Mathf.Sin ((Time.time-song.flexion_t[i])*freqFactorY[i])/100, i);
 				}
@@ -321,11 +325,16 @@ public class TunnelWaver : MonoBehaviour {
 	} 
 
 	private bool flexTunnel(CubeInfo[,] cubes1,CubeInfo[,] cubes2, float sinOffsetX, float sinOffsetY, int flexionID)  {	
+
 		bool flexionDone = false;
 		float amp =1000;
 
+		// Si c'est la premiere frame de cette flexion, avertir TunnelSpinner pour qu'il cesse d'enregistrer la position
+		if (firstFlexFrame[flexionID]==true) {
+			firstFlexFrame[flexionID] = false;
+			TunnelSpinner.startFlexion();
+		}
 
-		
 		if ((Time.time - song.flexion_t[flexionID])<Mathf.Min (2,song.flexion_length[flexionID]/3)) {
 			// La force d'amplication du sinus commence a 0 et augmente jusqu'a 4 
 			amp = (Time.time-song.flexion_t[flexionID])/2;
@@ -360,11 +369,12 @@ public class TunnelWaver : MonoBehaviour {
 	}
 	
 
-	void ApplyDefaultPosition(CubeInfo[,] cubes)  {		
+	void ApplyDefaultPosition(CubeInfo[,] cubes)  {	
+		TunnelSpinner.endFlexion();
 		for(int i = 0; i<cubes.GetLength(0); i++){
 			for(int j = 1; j<cubes.GetLength(1); j++){
 				cubes[i,j].transform.position = cubes[i,j].posSansFlexion;
-				TunnelSpinner.endFlexion();
+
 			}
 		}
 	}

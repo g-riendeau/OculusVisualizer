@@ -22,7 +22,7 @@ public class TunnelSpinner : MonoBehaviour {
 	void Start () {
 		// On set le speed que devrait avoir la rotation pour faire un tour complet
 		zSpinTime = song.fin2eTiers - song.debut2eTiers;
-		for (int i=0;i<4;i++)
+		for (int i=0;i<song.flexion_length.Length;i++)
 		{
 			zSpinTime -= song.flexion_length[i];
 			
@@ -52,20 +52,7 @@ public class TunnelSpinner : MonoBehaviour {
 			else {
 				transform.Rotate(new Vector3(0f, 0f, 1f), zSpinSpeed*Time.deltaTime, Space.World);
 				// Give this new position to posSansFlexion
-				for (int i = 0 ; i<tunnel.cubeCone1Array.GetLength(0); i++)
-				{
-					for (int j = 0 ; j<tunnel.cubeCone1Array.GetLength(1); j++)
-					{
-						tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.position;
-					}
-				}
-				for (int i = 0 ; i<tunnel.cubeCone2Array.GetLength(0); i++)
-				{
-					for (int j = 0 ; j<tunnel.cubeCone2Array.GetLength(1); j++)
-					{
-						tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.position;
-					}
-				}
+
 			}
 		}
 
@@ -125,9 +112,38 @@ public class TunnelSpinner : MonoBehaviour {
 
 	public void startFlexion(){
 		flexion = true;
+		for (int i = 0 ; i<tunnel.cubeCone1Array.GetLength(0); i++)
+		{
+			for (int j = 0 ; j<tunnel.cubeCone1Array.GetLength(1); j++)
+			{
+				tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.position;
+			}
+		}
+		for (int i = 0 ; i<tunnel.cubeCone2Array.GetLength(0); i++)
+		{
+			for (int j = 0 ; j<tunnel.cubeCone2Array.GetLength(1); j++)
+			{
+				tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.position;
+			}
+		}
 	}
 	
 	public void endFlexion(){
+
 		flexion = false;
+		for (int i = 0 ; i<tunnel.cubeCone1Array.GetLength(0); i++)
+		{
+			for (int j = 0 ; j<tunnel.cubeCone1Array.GetLength(1); j++)
+			{
+				tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.position;
+			}
+		}
+		for (int i = 0 ; i<tunnel.cubeCone2Array.GetLength(0); i++)
+		{
+			for (int j = 0 ; j<tunnel.cubeCone2Array.GetLength(1); j++)
+			{
+				tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.position;
+			}
+		}
 	}
 }
