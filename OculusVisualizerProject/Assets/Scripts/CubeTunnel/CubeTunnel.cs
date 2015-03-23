@@ -49,7 +49,7 @@ public class CubeTunnel : MonoBehaviour {
 				// on creer et place le cube
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.parent = this.transform;
-				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
+				cube.transform.position = new Vector3( jRadius * Mathf.Cos (i*dTheta),
 				                                            jRadius * Mathf.Sin (i*dTheta),
 				                                            j + 1f );
 
@@ -69,6 +69,7 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCone1Array[(int)i,(int)j] = cube.GetComponent<CubeInfo>();
 				cubeCone1Array[(int)i,(int)j].jRatio = jRatio;
 				cubeCone1Array[(int)i,(int)j].jWidth = jWidth;
+				cubeCone1Array[(int)i,(int)j].posSansFlexion = cube.transform.position;
 
 			}
 		}
@@ -89,7 +90,7 @@ public class CubeTunnel : MonoBehaviour {
 				// on creer et place le cube
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.parent = this.transform;
-				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
+				cube.transform.position = new Vector3( jRadius * Mathf.Cos (i*dTheta),
 				                                            jRadius * Mathf.Sin (i*dTheta),
 				                                            -j - 1f );
 				
@@ -109,6 +110,7 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCone2Array[(int)i,(int)j] = cube.GetComponent<CubeInfo>();
 				cubeCone2Array[(int)i,(int)j].jRatio = jRatio;
 				cubeCone2Array[(int)i,(int)j].jWidth = jWidth;
+				cubeCone2Array[(int)i,(int)j].posSansFlexion = cube.transform.position ;
 				
 			}
 		}
@@ -170,7 +172,7 @@ public class CubeTunnel : MonoBehaviour {
 				// on creer et place le cube
 				GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				cube.transform.parent = this.transform;
-				cube.transform.localPosition = new Vector3( jRadius * Mathf.Cos (i*dTheta),
+				cube.transform.position = new Vector3( jRadius * Mathf.Cos (i*dTheta),
 				                                            jRadius * Mathf.Sin (i*dTheta),
 				                                            j );
 				
@@ -189,6 +191,7 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCenterArray[(int)i,(int)j] = cube.GetComponent<CubeInfo>();
 				cubeCenterArray[(int)i,(int)j].jRatio = jRatio;
 				cubeCenterArray[(int)i,(int)j].jWidth = jWidth;
+				cubeCenterArray[(int)i,(int)j].posSansFlexion = cube.transform.position;
 				
 			}
 		}

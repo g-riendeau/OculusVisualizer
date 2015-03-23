@@ -4,8 +4,7 @@ using System;
 using System.Linq;
 
 public class TunnelWaver : MonoBehaviour {
-	//private float _posX;
-	//private float _posY;
+	
 	private float hauteurAigues;
 	private float hauteurBasses;
 	private float hauteurMoyennes;
@@ -19,7 +18,13 @@ public class TunnelWaver : MonoBehaviour {
 	private CubeInfo[,] _cubeCone2Array;
 	//private CubeInfo[,] _cubeCylinderArray;
 	private CubeInfo[,] _cubeCenterArray;
-	
+
+	private float[] flexion_t;
+	private bool[] flexionDone;
+	private float[] ampFlexion;
+	private float[] freqFactorY;
+
+	public TunnelSpinner TunnelSpinner;
 	
 	// Use this for initialization
 	void Start () {
@@ -28,6 +33,17 @@ public class TunnelWaver : MonoBehaviour {
 		//_cubeCylinderArray = tunnel.cubeCylinderArray;
 		_cubeCenterArray = tunnel.cubeCenterArray;
 		micProcessor.enabled = false;
+
+		flexionDone = new bool[4];
+		ampFlexion = new float[4];
+		freqFactorY = new float[4];
+
+		for (int i = 0; i<song.flexion_t.Length; i++){
+			flexionDone[i] = false;
+			freqFactorY[i] = UnityEngine.Random.Range(0.2f, 2f);
+		}
+
+
 	}
 	
 	// Update is called once per frame
@@ -37,17 +53,44 @@ public class TunnelWaver : MonoBehaviour {
 		hauteurMoyennes = HauteurCube( 1 );
 		hauteurAigues = HauteurCube( 2 );
 
+
+		// On applique les trucs a la premiere rangée
 		ApplyFirstRow(_cubeCone1Array, hauteurBasses, hauteurMoyennes, hauteurAigues);
 		CopyFirstRow (_cubeCone1Array, _cubeCone2Array, 0, 1);
 		CopyFirstRow (_cubeCone1Array, _cubeCenterArray, 0, _cubeCenterArray.GetLength(1));
 
+
+		// --------------------------- S C A L E !  ----------------------------------
+		// On transmet le scale de rangée en rangée
 		ApplyScaleWave(_cubeCone1Array);
 		ApplyScaleWave(_cubeCone2Array);
-		//ApplyScaleWave(_cubeCylinderArray);
+		
+		// --------------------------------***************---------------------------------
+		// --------------------------------------------------------------------------------
 
+
+		// --------------------------- C O U L E U R ----------------------------------
+		// On transmet la couleur de rangée en rangée
 		ApplyColorWave (_cubeCone1Array);
 		ApplyColorWave (_cubeCone2Array);
-		//ApplyColorWave (_cubeCylinderArray);
+		
+		// --------------------------------***************---------------------------------
+		// --------------------------------------------------------------------------------
+
+
+		// ------------------------F L E X I O N   T U N N E L ------------------------------
+		// Make the tunnel bend after the specified time
+		for (int i=0; i<flexionDone.Length;i++){
+			if (Time.time >song.flexion_t[i] && !flexionDone[i]) {
+				TunnelSpinner.startFlexion();
+				flexionDone[i] = flexTunnel(_cubeCone1Array,_cubeCone2Array,Mathf.Sin ((Time.time-song.flexion_t[i])*1.0f)/100,	
+				                            Mathf.Sin ((Time.time-song.flexion_t[i])*freqFactorY[i])/100, i);
+			}
+		}
+
+		// --------------------------------***************---------------------------------
+		// --------------------------------------------------------------------------------
+		// 
 
 		//On overwrite audioProcessor et remplace par le micro
 		if(Time.time > song.songTime)
@@ -205,6 +248,7 @@ public class TunnelWaver : MonoBehaviour {
 			scale = (prop1*hauteurAigues) + (prop2*hauteurMoyennes);
 			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
 
+
 			r = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").r;
 			g = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").g;
 			b = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").b;
@@ -261,12 +305,65 @@ public class TunnelWaver : MonoBehaviour {
 	void ApplyScaleWave(CubeInfo[,] cubes){
 
 		for(int i = 0; i<cubes.GetLength(0); i++){
-			for(int j = 1; j<cubes.GetLength(1); j++){
+			for(int j = 1; j<cubes.GetLength(1); j++)	{
+				//Le jratio sert a prendre en compte l'effet conique. Si on ne divisait pas par jratio, 
+				//on aurait l'impression que les scale augmente avec la profondeur
 				cubes[i,j].lastScale = cubes[i,j].transform.localScale.y / cubes[i,j].jRatio;
 				cubes[i,j].transform.localScale = new Vector3( cubes[i,j].jWidth, cubes[i,j].jRatio * cubes[i,j-1].lastScale, 1f) ;
 			}
 		}
 	} 
+
+	private bool flexTunnel(CubeInfo[,] cubes1,CubeInfo[,] cubes2, float sinOffsetX, float sinOffsetY, int flexionID)  {	
+		bool flexionDone = false;
+		float amp =1000;
+
+		if (song.flexion_length[flexionID] < 4) {
+			Debug.LogError("A song.flexion_length is too short");
+		}
+		
+		if ((Time.time - song.flexion_t[flexionID])<Mathf.Min (2,song.flexion_length[flexionID]/3)) {
+			// La force d'amplication du sinus commence a 0 et augmente jusqu'a 4 
+			amp = (Time.time-song.flexion_t[flexionID])/2;
+
+		}
+		else if ((Time.time - song.flexion_t[flexionID])<(song.flexion_length[flexionID]-4))  {
+			
+			amp =1;
+		}
+		else {
+			// La force d'amplication du sinus diminue jusqu'a 0 (parabole inversée)
+			amp = Mathf.Max ((song.flexion_length[flexionID]-(Time.time-song.flexion_t[flexionID]))/4,0);
+		}
+
+		for(int i = 0; i<cubes1.GetLength(0); i++){
+			for(int j = 1; j<cubes1.GetLength(1); j++){
+				cubes1[i,j].transform.position = new Vector3 ((cubes1[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes1[i,j].posSansFlexion.y + amp*Mathf.Pow(j,2)*sinOffsetY,cubes1[i,j].transform.position.z);
+			}
+		}
+		for(int i = 0; i<cubes2.GetLength(0); i++){
+			for(int j = 1; j<cubes2.GetLength(1); j++){
+				cubes2[i,j].transform.position = new Vector3 ((cubes2[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes2[i,j].posSansFlexion.y+ amp*Mathf.Pow(j,2)*sinOffsetY,cubes2[i,j].transform.position.z);
+			}
+		}
+		// Stop the flexion script when amp and the offset are small
+		if (amp < 0.0001f){	
+			flexionDone = true;
+			ApplyDefaultPosition(_cubeCone1Array);
+			ApplyDefaultPosition(_cubeCone2Array);
+		}
+		return flexionDone;
+	}
+	
+
+	void ApplyDefaultPosition(CubeInfo[,] cubes)  {		
+		for(int i = 0; i<cubes.GetLength(0); i++){
+			for(int j = 1; j<cubes.GetLength(1); j++){
+				cubes[i,j].transform.position = cubes[i,j].posSansFlexion;
+				TunnelSpinner.endFlexion();
+			}
+		}
+	}
 
 	void ApplyColorWave(CubeInfo[,] cubes){
 		for(int i = 0; i<cubes.GetLength(0); i++){

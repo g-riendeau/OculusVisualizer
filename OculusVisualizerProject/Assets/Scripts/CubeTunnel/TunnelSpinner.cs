@@ -5,6 +5,7 @@ public class TunnelSpinner : MonoBehaviour {
 
 	public CubeTunnel tunnel;
 	private float zSpinSpeed;
+	private float zSpinTime;
 	private float finalSpinSpeed;
 	private Quaternion iniCamRotation;
 	private float timeSpentOut;
@@ -12,28 +13,53 @@ public class TunnelSpinner : MonoBehaviour {
 	private float timePerExit;
 	private int nbTimeOut;
 	private int TotNbTimeOut;
+	private CubeInfo[,] _cubeCone1Array;
+	private CubeInfo[,] _cubeCone2Array;
 	public Song song;
+	private bool flexion = false;
 
 	// Use this for initialization
 	void Start () {
-		zSpinSpeed = 360f/(song.fin2eTiers - song.debut2eTiers);
+		// On set le speed que devrait avoir la rotation pour faire un tour complet
+		zSpinTime = song.fin2eTiers - song.debut2eTiers;
+		for (int i=0;i<song.flexion_length.Length;i++)
+		{
+			zSpinTime -= song.flexion_length[i];
+			
+		}
+
+		zSpinSpeed = 360f/(zSpinTime);
+
+
 		nbTimeOut = 1;
 		TotNbTimeOut = 4;
 		timePerExit = (song.finLastStretch - song.debutLastStretch) / TotNbTimeOut;
 		timeStopped = 10;
 		timeSpentOut = timePerExit-timeStopped;
 		finalSpinSpeed = 360f/(song.finLastStretch - song.debutLastStretch-timeSpentOut*TotNbTimeOut/2)*TotNbTimeOut;
-		//finalSpinSpeed = 360f/(20f - 5f)*3;
 		iniCamRotation = transform.rotation;
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
 		//Spin le tunnel
 		if((Time.time > song.debut2eTiers && Time.time < song.fin2eTiers) || Time.time > song.finLastStretch ){
-			transform.Rotate(new Vector3(0f, 0f, 1f), zSpinSpeed*Time.deltaTime, Space.World);
+
+			if (flexion) {
+				// Don't rotate while in flexion
+			}
+			else {
+				transform.Rotate(new Vector3(0f, 0f, 1f), zSpinSpeed*Time.deltaTime, Space.World);
+				// Give this new position to posSansFlexion
+				for (int i = 0 ; i<tunnel.cubeCone1Array.GetLength(0); i++)
+				{
+					for (int j = 0 ; j<tunnel.cubeCone1Array.GetLength(1); j++)
+					{
+						tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.position;
+					}
+				}
+			}
 		}
 
 		// Rotate pour faire sortir du tunnel
@@ -86,8 +112,15 @@ public class TunnelSpinner : MonoBehaviour {
 					tunnel.cubeCenterArray[i,j].transform.Rotate(new Vector3(0f, 0f, 1f), 20f*Time.deltaTime, Space.World);
 				}
 			}
-
-
 		}
+
+	}
+
+	public void startFlexion(){
+		flexion = true;
+	}
+	
+	public void endFlexion(){
+		flexion = false;
 	}
 }

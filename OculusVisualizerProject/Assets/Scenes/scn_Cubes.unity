@@ -569,12 +569,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc80fd0bbbaa0e4b86a26b995dbfab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debut2eTiers: 115
+  debut2eTiers: 63
   fin2eTiers: 179
-  bassDrop: 12.5
+  bassDrop: 113.5
   debutLastStretch: 223
   finLastStretch: 325
   songTime: 355
+  flexion_t:
+  - 62
+  - 74.5
+  - 89
+  - 100000
+  flexion_length:
+  - 7
+  - 7
+  - 25
+  - 64
 --- !u!4 &419488047
 Transform:
   m_ObjectHideFlags: 0

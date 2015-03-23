@@ -6,6 +6,9 @@ public class CubeInfo: MonoBehaviour {
 	public Color lastColor;
 	public float jRatio;
 	public float jWidth;
+	public Vector3 posSansFlexion;
+
+
 	// Use this for initialization
 	void Start () {
 		lastScale = 0.1f;
