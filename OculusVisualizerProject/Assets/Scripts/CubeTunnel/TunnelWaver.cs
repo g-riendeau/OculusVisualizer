@@ -34,9 +34,9 @@ public class TunnelWaver : MonoBehaviour {
 		_cubeCenterArray = tunnel.cubeCenterArray;
 		micProcessor.enabled = false;
 
-		flexionDone = new bool[4];
-		ampFlexion = new float[4];
-		freqFactorY = new float[4];
+		flexionDone = new bool[song.flexion_t.Length];
+		ampFlexion = new float[song.flexion_t.Length];
+		freqFactorY = new float[song.flexion_t.Length];
 
 		for (int i = 0; i<song.flexion_t.Length; i++){
 			flexionDone[i] = false;
@@ -82,9 +82,15 @@ public class TunnelWaver : MonoBehaviour {
 		// Make the tunnel bend after the specified time
 		for (int i=0; i<flexionDone.Length;i++){
 			if (Time.time >song.flexion_t[i] && !flexionDone[i]) {
+
+				if (song.flexion_length[i] < 4) {
+					Debug.Log("A song.flexion_length is too short. It is ignored");
+				}
+				else {
 				TunnelSpinner.startFlexion();
 				flexionDone[i] = flexTunnel(_cubeCone1Array,_cubeCone2Array,Mathf.Sin ((Time.time-song.flexion_t[i])*1.0f)/100,	
 				                            Mathf.Sin ((Time.time-song.flexion_t[i])*freqFactorY[i])/100, i);
+				}
 			}
 		}
 
@@ -318,9 +324,7 @@ public class TunnelWaver : MonoBehaviour {
 		bool flexionDone = false;
 		float amp =1000;
 
-		if (song.flexion_length[flexionID] < 4) {
-			Debug.LogError("A song.flexion_length is too short");
-		}
+
 		
 		if ((Time.time - song.flexion_t[flexionID])<Mathf.Min (2,song.flexion_length[flexionID]/3)) {
 			// La force d'amplication du sinus commence a 0 et augmente jusqu'a 4 
