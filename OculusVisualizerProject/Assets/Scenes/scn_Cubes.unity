@@ -569,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc80fd0bbbaa0e4b86a26b995dbfab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debut2eTiers: 0
+  debut2eTiers: 63
   fin2eTiers: 179
   bassDrop: 113.5
   debutLastStretch: 223
