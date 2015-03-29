@@ -30,9 +30,15 @@ public class Ghyslain : MonoBehaviour {
 	private float cDrag = 0.5f;
 
 	private float tempsEclair = 5;
-	
+
+	private bool reachedDestination;
+	private GameObject destination;
+
 	// Use this for initialization
 	void Start () {
+		reachedDestination = true;
+		destination = null;
+
 
 		for (int i=0; i<iniSphereNb; i++) {
 			//Création d'une sphere
@@ -48,7 +54,7 @@ public class Ghyslain : MonoBehaviour {
 			uneSphere.rigidbody.drag = 0;
 			uneSphere.rigidbody.angularDrag = 0;
 			uneSphere.rigidbody.mass = 1;
-			uneSphere.gameObject.tag = "ActiveSphere";
+			uneSphere.gameObject.tag = "ActiveObject";
 			
 			// On donne a la sphere une vitesse en z avec direction aléatoirement positive ou négative
 //			iniExcentricite = Random.Range(0,1f);
@@ -60,6 +66,16 @@ public class Ghyslain : MonoBehaviour {
 
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		// Ghyslain mouvement code
+		if (reachedDestination)  {
+			destination = getNextDestination (transform.position);
+			reachedDestination= false;			
+
+		}
+		else if (!reachedDestination && destination != null) {			
+			reachedDestination= Move (destination.transform.position, 2.0f);
+	}
 
 		// timerOnAddSphere varies with the number of spheres in the list sphereInRangeList
 		if (sphereInRangeList.Count>0) {
@@ -73,10 +89,6 @@ public class Ghyslain : MonoBehaviour {
 				sphereInRangeList.RemoveAt(0);
 			}
 		}
-
-		// Mouvement simple de Ghyslain pour tester le ontriggerCollider
-		transform.position = new Vector3 (transform.position.x + 1.5f*Time.deltaTime , transform.position.y, transform.position.z);
-		
 		
 		for (int i = sphereList.Count-1; i >= 0; i--) {
 
@@ -137,6 +149,36 @@ public class Ghyslain : MonoBehaviour {
 				elcairLR.SetPosition( i, new Vector3(transform.position.x + Random.Range (-5,5),i*10-1,transform.position.z + Random.Range (-5,5)));
 			}
 			StartCoroutine(WaitAndDestroy(0.1f,unEclair));
+		}
+	}
+
+	private GameObject getNextDestination (Vector3 pos)	{
+		GameObject nextDestination = null;
+		GameObject[] Checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+		float distance = 500f;
+		if (destination !=null){
+			
+			destination.SetActive(false);
+		}
+
+		foreach (GameObject cp in Checkpoints) {
+
+			if ((cp.transform.position -pos).magnitude < distance) {
+				distance = (cp.transform.position -pos).magnitude;
+				nextDestination = cp;
+
+			}
+		}
+		return nextDestination;
+	}
+
+	private bool Move(Vector3 Destination, float speed){
+		if ((Destination-transform.position).magnitude  >1){
+			transform.position = transform.position +speed*(Destination-transform.position).normalized*Time.deltaTime;
+			return reachedDestination =false;
+		}
+		else {
+			return reachedDestination =true;
 		}
 	}
 	// Calcul de la force radiale --------------------------------------------------------------

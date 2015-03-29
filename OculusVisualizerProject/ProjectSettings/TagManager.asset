@@ -4,9 +4,11 @@
 TagManager:
   tags:
   - PointLight
-  - PassiveSphere
-  - ActiveSphere
+  - PassiveObject
+  - ActiveObject
   - EvilLight
+  - Checkpoint
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
