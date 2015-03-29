@@ -4,19 +4,23 @@ using System.Collections.Generic;
 
 public class Ghyslain : MonoBehaviour {
 
-	public List<gSphere> sphereList = new List<gSphere>();
+	public List<activeObjet> objetList = new List<activeObjet>();
 	public Material sphereMat;
 	public GameObject Eclair;
 	public GameObject evilLight;
 
-	private List<GameObject> sphereInRangeList  = new List<GameObject>();		//All spheres that are in range but not pulled in Ghyslain gravity
-	private float timerOnAddSphere = 2;
+	private List<passiveObjet> objetInRangeList  = new List<passiveObjet>();		//All spheres that are in range but not pulled in Ghyslain gravity
+	private float timerOnAddObjet = 2;
 	private float timer = 0;
+	private float minEnergy = 1000000;
+	private int minEnergyId;
+
+
 
 	// pour l'initialisation
-	private GameObject uneSphere;
-	private int iniSphereNb = 13;
-	private float iniSpherePos;
+	private GameObject unObjet;
+	private int iniObjetNb = 13;
+	private float iniObjetPos;
 	private float iniAttractionForceXZ;
 
 	// pour l'elimination
@@ -24,7 +28,7 @@ public class Ghyslain : MonoBehaviour {
 //	private List<int> sphereToDeleteList = new List<int>();
 	
 	// parametres qui influencent la force
-	private Vector3 omega = new Vector3 (0f, 0.1f, 0f); 
+	private Vector3 yVector = new Vector3 (0f, 1f, 0f); 
 	private Vector3 relDist;
 	private float topSpeed = 15f;
 	private float cDrag = 0.5f;
@@ -38,74 +42,94 @@ public class Ghyslain : MonoBehaviour {
 	void Start () {
 		reachedDestination = true;
 		destination = null;
+		/*
 
-
-		for (int i=0; i<iniSphereNb; i++) {
+		for (int i=0; i<iniObjetNb; i++) {
 			//Création d'une sphere
-			uneSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			uneSphere.renderer.material = sphereMat;
-			iniSpherePos = Random.Range(10f,50f);
+			unObjet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+			unObjet.renderer.material = sphereMat;
+			iniObjetPos = Random.Range(10f,50f);
 			
 			//La position de la sphere est variante en x seulement (plus facile pour savoir quelle vitesse lui appliquer pour qu'elle entre en orbite
-			uneSphere.transform.position = new Vector3(transform.position.x+iniSpherePos, transform.position.y+i, transform.position.z);
-			uneSphere.transform.localRotation = Quaternion.identity;
-			uneSphere.transform.localScale = new Vector3(1f, 1f, 1f);
-			uneSphere.AddComponent<Rigidbody>();
-			uneSphere.rigidbody.drag = 0;
-			uneSphere.rigidbody.angularDrag = 0;
-			uneSphere.rigidbody.mass = 1;
-			uneSphere.gameObject.tag = "ActiveObject";
+			unObjet.transform.position = new Vector3(transform.position.x+iniObjetPos, transform.position.y+i, transform.position.z);
+			unObjet.transform.localRotation = Quaternion.identity;
+			unObjet.transform.localScale = new Vector3(1f, 1f, 1f);
+			unObjet.AddComponent<Rigidbody>();
+			unObjet.rigidbody.drag = 0;
+			unObjet.rigidbody.angularDrag = 0;
+			unObjet.rigidbody.mass = 1;
+			unObjet.gameObject.tag = "ActiveObject";
 			
 			// On donne a la sphere une vitesse en z avec direction aléatoirement positive ou négative
 //			iniExcentricite = Random.Range(0,1f);
 			iniAttractionForceXZ = Random.Range(500f,1000f);
-			uneSphere.rigidbody.velocity = new Vector3( 0, 0, -Mathf.Sqrt(iniAttractionForceXZ/iniSpherePos));
-			sphereList.Add ( new gSphere(uneSphere, Random.Range(3f,8f), Random.Range(15f,35f), iniAttractionForceXZ, i) );
-		}
+			unObjet.rigidbody.velocity = new Vector3( 0, 0, -Mathf.Sqrt(iniAttractionForceXZ/iniObjetPos));
+			objetList.Add ( new activeObjet(unObjet, Random.Range(3f,8f), Random.Range(15f,35f), iniAttractionForceXZ, i) );
+
+}
+*/
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-
-		// Ghyslain mouvement code
+// --------------------------------------------------------------------------
+// ----------------------Ghyslain mouvement code-----------------------------
+// --------------------------------------------------------------------------
 		if (reachedDestination)  {
+			// Trouve la prochaine destination
 			destination = getNextDestination (transform.position);
 			reachedDestination= false;			
 
 		}
-		else if (!reachedDestination && destination != null) {			
-			reachedDestination= Move (destination.transform.position, 2.0f);
-	}
+		else if (!reachedDestination && destination != null) {		
+			// Se dirige vers la prochaine destination
+			reachedDestination= Move (destination.transform.position, 2f);
+		}
+// --------------------------------------------------------------------------
 
-		// timerOnAddSphere varies with the number of spheres in the list sphereInRangeList
-		if (sphereInRangeList.Count>0) {
+
+// --------------------------------------------------------------------------
+// --------------Ajout d'objets dans l'attraction de Ghyslain--------------
+// --------------------------------------------------------------------------
+		if (objetInRangeList.Count>0) {
 			timer += Time.deltaTime;
-			relDist = transform.position - sphereInRangeList[0].transform.position;
-			timerOnAddSphere = relDist.magnitude/5-5;
+			minEnergy = 100000;
+			for (int i = objetInRangeList.Count-1; i >= 0; i--) {
+				objetInRangeList[i].relDist = (transform.position - objetInRangeList[i].go.transform.position).magnitude;
 
-			if (timer > timerOnAddSphere )	{
+				if (objetInRangeList[i].relDist *objetInRangeList[i].mass <  minEnergy){
+					minEnergy = objetInRangeList[i].relDist *objetInRangeList[i].mass;
+					minEnergyId = i;
+				}
+			}
+
+			timerOnAddObjet = objetInRangeList[minEnergyId].relDist/5-5;
+			if (timer > timerOnAddObjet )	{
 				timer = 0;
-				PullSphere(sphereInRangeList[0]);
-				sphereInRangeList.RemoveAt(0);
+				PullObjet(objetInRangeList[minEnergyId]);
+				objetInRangeList.RemoveAt(minEnergyId);
 			}
 		}
-		
-		for (int i = sphereList.Count-1; i >= 0; i--) {
 
-			//Calcul de la distance relative de la sphere avec Ghyslain
-			relDist = transform.position - sphereList [i].go.transform.position;
+// --------------------------------------------------------------------------
+// ----------------------------Forces sur les objets-------------------------
+// --------------------------------------------------------------------------
+		// Forces agissant sur les objets qui tournent autour de Ghyslain
+		for (int i = objetList.Count-1; i >= 0; i--) {
 
+			//Calcul de la distance relative de l'objet avec Ghyslain
+			relDist = transform.position - objetList [i].go.transform.position;
 
 			if (relDist.magnitude > criticalDist ){
-			Destroy( sphereList[i].go );
-			sphereList.Remove( sphereList[i] );
-			Debug.Log ("Sphere destroyed cause it was out of range");
+				Destroy( objetList[i].go );
+				objetList.Remove( objetList[i] );
+			Debug.Log ("Objet destroyed cause it was out of range");
 			}
 			
 			// Forces
-			AddForceXZ ( relDist, sphereList[i] );
-			AddForceY ( relDist, sphereList[i], sphereList.Count);
-			AddDrag( sphereList[i] );
+			AddForceXZ ( relDist, objetList[i] );
+			AddForceY ( relDist, objetList[i], objetList.Count);
+			AddDrag( objetList[i] );
 		}
 
 		// Constantly dim the lights
@@ -182,34 +206,37 @@ public class Ghyslain : MonoBehaviour {
 		}
 	}
 	// Calcul de la force radiale --------------------------------------------------------------
-	private void AddForceXZ( Vector3 relDist, gSphere sphere){
+	private void AddForceXZ( Vector3 relDist, activeObjet objet){
 		// variables
 		Vector2 relDistXZ = new Vector2 (relDist.x, relDist.z);
 		Vector2 forceXZ;
 
 		// Force tangentielle si r < r_min
-		if (relDistXZ.magnitude < sphere.minDist) {
-			forceXZ = - omega.y * new Vector2 ( relDist.z , -relDist.x );
-		}
+		if (relDistXZ.magnitude < objet.minDist) {
+			forceXZ = - yVector.y * new Vector2 ( relDist.z , -relDist.x )/10;
+			}
 		// Force axiale minimum lorsque r > r_max
-		else if (relDistXZ.magnitude > sphere.maxDist) {
-			forceXZ = sphere.attractionForceXZ * relDistXZ / relDistXZ.magnitude / Mathf.Pow ( sphere.maxDist, 2f );
+		else if (relDistXZ.magnitude > objet.maxDist) {
+			forceXZ =objet.attractionForceXZ * relDistXZ / relDistXZ.magnitude / Mathf.Pow ( objet.maxDist, 2f );
+			//forceXZ = (relDistXZ.magnitude-objet.maxDist)*objet.attractionForceXZ * relDistXZ / Mathf.Pow (relDistXZ.magnitude, 3f );
 		}
 		// Force axiale en 1/r
 		else {
-			forceXZ = sphere.attractionForceXZ * relDistXZ / Mathf.Pow (relDistXZ.magnitude, 3f );
+			forceXZ =objet.attractionForceXZ * relDistXZ / Mathf.Pow (relDistXZ.magnitude, 3f );
 		}
 
 		// Application de la force axiale
-		sphere.go.rigidbody.AddForce( new Vector3(forceXZ.x,0f,forceXZ.y) );
+		objet.go.rigidbody.AddForce( new Vector3(forceXZ.x,0f,forceXZ.y) );
 
 		// Force de Coriolis
-		sphere.go.rigidbody.AddForce( - Vector3.Cross (omega , sphere.go.rigidbody.velocity) );
+		if( Vector3.Cross((objet.go.transform.position-transform.position),- Vector3.Cross (yVector , objet.go.rigidbody.velocity)).y  > 0) {
+			objet.go.rigidbody.AddForce( - Vector3.Cross (yVector , objet.go.rigidbody.velocity)/2);
+		}
 
 	}
 
 	// Calcul de la force en y-----------------------------------------------------------------
-	private void AddForceY( Vector3 relDist, gSphere sphere, int sphereNb){
+	private void AddForceY( Vector3 relDist, activeObjet objet, int objetNb){
 		// variables
 		/*
 		float upForce = 0.1f;
@@ -232,53 +259,65 @@ public class Ghyslain : MonoBehaviour {
 
 */
 		float forceY = 0;
-		if (sphere.id >= Mathf.Ceil(sphereNb/2)){
+		if (objet.id >= Mathf.Ceil(objetNb/2)){
 			forceY = relDist.y/2;
 		}
 		else  {
-			forceY = sphere.id+relDist.y;
+			forceY = objet.id+relDist.y;
 		}
 
 		// Terme de drag
-		//forceY += - 1f * sphere.go.rigidbody.velocity.y;
+		//forceY += - 1f * objet.go.rigidbody.velocity.y;
 
 		// Terme anti gravite
 		forceY += 9.81f;
 
-		sphere.go.rigidbody.AddForce( new Vector3(0f, forceY, 0f) );
+		objet.go.rigidbody.AddForce( new Vector3(0f, forceY, 0f) );
 	}
 
 	// Calcul du drag---------------------------------------------------------------------------
-	private void AddDrag( gSphere sphere){
+	private void AddDrag( activeObjet objet){
 		// Variables
 		Vector3 dragForce;
-
 		// Il n'y a de drag qu'au dessus d'une vitesse seuil
-		if (sphere.go.rigidbody.velocity.magnitude < topSpeed)
+		if (objet.go.rigidbody.velocity.magnitude < topSpeed){
 			return;
+		}
+			// Drag en v^2
+			dragForce = - cDrag * objet.go.rigidbody.velocity.magnitude / topSpeed *
+				objet.go.rigidbody.velocity / topSpeed;
 
-		// Drag en v^2
-		dragForce = - cDrag * sphere.go.rigidbody.velocity.magnitude / topSpeed *
-			sphere.go.rigidbody.velocity / topSpeed;
-		sphere.go.rigidbody.AddForce( dragForce );
+		objet.go.rigidbody.AddForce( dragForce );
 	}
 
 
-	// Add a new sphere to Gyslain gravitational pull
-	public void PullSphere(GameObject uneSphere)  {
-		uneSphere.transform.rigidbody.isKinematic = false;
-		sphereList.Add ( new gSphere(uneSphere, Random.Range(3f,8f), Random.Range(15f,35f), iniAttractionForceXZ, sphereList.Count+1) );
+	// Add a new objet to Gyslain gravitational pull
+	public void PullObjet(passiveObjet unObjet)  {
+		unObjet.go.transform.rigidbody.isKinematic = false;
+		if (unObjet.go.rigidbody.mass >=5) {
+			objetList.Add ( new activeObjet(unObjet.go, Random.Range(60f,70f), Random.Range(75f,100f), Random.Range(5000f,10000f), objetList.Count));
+		}
+		else if (unObjet.go.rigidbody.mass >=2) {
+			objetList.Add ( new activeObjet(unObjet.go, Random.Range(7f,20f), Random.Range(20f,60f), Random.Range(500f,5000f), objetList.Count));
+		}
+		else {
+			objetList.Add ( new activeObjet(unObjet.go, Random.Range(3f,10f), Random.Range(15f,35f), Random.Range(300f,1500f), objetList.Count));
+
+		}
+		// Set la masse de tout les objets a 1.
+		unObjet.go.rigidbody.mass = 1;
 	}
 
-	// Add a new sphere. A soft pull will attrack some spheres in range
-	public void SphereInRange(GameObject uneSphere)  {
-		sphereInRangeList.Add (uneSphere);
+	// Add a new objet. A soft pull will attrack some objets in range
+	public void ObjetInRange(GameObject unObjet)  {
+
+		objetInRangeList.Add (new passiveObjet(unObjet,objetInRangeList.Count,(transform.position-unObjet.transform.position).magnitude, unObjet.rigidbody.mass));
 	}
 
 	/*
-	// Add a new sphere. A soft pull will attrack some spheres in range
+	// Add a new objet. A soft pull will attrack some objets in range
 	public void SphereOutOfRange(GameObject uneSphere)  {
-		sphereInRangeList.Remove (uneSphere);
+		objetInRangeList.Remove (uneSphere);
 	}
 	*/
 }

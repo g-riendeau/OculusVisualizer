@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class gSphere 
+public class activeObjet
 {
 
 	public GameObject go;
@@ -10,7 +10,7 @@ public class gSphere
 	public float attractionForceXZ;
 	public int id;
 	
-	public gSphere(GameObject newgo, float newminDist, float newmaxDist, float newAttractionForceXZ, int newid)
+	public activeObjet(GameObject newgo, float newminDist, float newmaxDist, float newAttractionForceXZ, int newid)
 	{			
 		go = newgo;
 		attractionForceXZ = newAttractionForceXZ;
