@@ -155,7 +155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &286638753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,10 +232,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
   black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
-  sky1: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
-  sky2: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
-  sky3: {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
-  sky4: {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
 --- !u!1 &302059065
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &302059066
 AudioListener:
   m_ObjectHideFlags: 0
@@ -363,10 +359,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
   black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
-  sky1: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
-  sky2: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
-  sky3: {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
-  sky4: {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
 --- !u!54 &302059074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -411,6 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amplitudes: []
+  song: {fileID: 419488046}
 --- !u!4 &332611557
 Transform:
   m_ObjectHideFlags: 0
@@ -432,7 +425,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 03e05c39317a3f54f97b7a506c989232, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: .75
   m_Pitch: 1
   Loop: 0
@@ -569,24 +562,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc80fd0bbbaa0e4b86a26b995dbfab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  songProcessor: {fileID: 332611556}
+  songPlaying: 0
+  startSong: 10
+  colorItUp: 12.8999996
   debut2eTiers: 63
   fin2eTiers: 179
   bassDrop: 113.5
   debutLastStretch: 223
   finLastStretch: 325
   songTime: 355
-  flexion_t:
-  - 62
-  - 74.5
-  - 89
-  - 153
-  - 1e+08
-  flexion_length:
-  - 7
-  - 7
-  - 25
-  - 25
-  - 1
+  flexionTime:
+  - 0
+  - 179
+  flexionLength:
+  - 13
+  - 44
+  zSpinTime1: 0
+  zSpinLength1: 0
+  zSpinTime2: 0
+  zSpinLength2: 0
+  skyboxTime:
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!4 &419488047
 Transform:
   m_ObjectHideFlags: 0
@@ -692,6 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amplitudes: []
+  song: {fileID: 419488046}
 --- !u!82 &668380185
 AudioSource:
   m_ObjectHideFlags: 0
@@ -966,10 +967,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
-  audioProcessor: {fileID: 332611556}
+  songProcessor: {fileID: 332611556}
   micProcessor: {fileID: 668380184}
   tunnel: {fileID: 2070038662}
-  TunnelSpinner: {fileID: 705617114}
 --- !u!1001 &1411618548
 Prefab:
   m_ObjectHideFlags: 0
@@ -1011,7 +1011,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}

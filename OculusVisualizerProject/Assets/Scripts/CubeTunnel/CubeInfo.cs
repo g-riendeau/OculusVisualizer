@@ -8,15 +8,4 @@ public class CubeInfo: MonoBehaviour {
 	public float jWidth;
 	public Vector3 posSansFlexion;
 
-
-	// Use this for initialization
-	void Start () {
-		lastScale = 0.1f;
-		lastColor = new Color(1.0f, 1.0f, 1.0f);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
