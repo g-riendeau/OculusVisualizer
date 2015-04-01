@@ -6,18 +6,21 @@ public class TunnelMover : MonoBehaviour {
 	public CubeTunnel tunnel;
 	public Song song;
 
-	private bool flexion = false;
-	private bool[] flexionDone;
-	private bool[] firstFlexFrame;
-	private float[] ampFlexion;
-	private float[] freqFactorY;
 
-	private float zSpinSpeed1;
-	private float zSpinSpeed2;
-	private float rock1sec;
+
+
+
+
+
+
+
 
 	// Use this for initialization
 	void Start () {
+
+
+		// ------------------- D E P L A C E M M E N T  G L O B A L -------------------------
+
 
 		// ------------------------F L E X I O N   T U N N E L ------------------------------
 		flexionDone = new bool[song.flexionTime.Length];
@@ -31,17 +34,18 @@ public class TunnelMover : MonoBehaviour {
 			freqFactorY[i] = UnityEngine.Random.Range(0.2f, 2f);
 		}
 
-		// ------------------------S P I N   T U N N E L ------------------------------
+		// ------------------------S P I N   T U N N E L ------------------------------------
 		zSpinSpeed1 = 360f / song.zSpinLength1;
 		zSpinSpeed2 = 360f / song.zSpinLength2;
 		rock1sec = song.zSpinTime1 + song.zSpinLength1;
 
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
 
-		Debug.Log (song.time ());
+		//Debug.Log (song.time ());
 		// ------------------------F L E X I O N   T U N N E L ------------------------------
 		// Make the tunnel bend after the specified time
 //		for (int i=0; i<song.flexionTime.Length;i++){
@@ -57,7 +61,13 @@ public class TunnelMover : MonoBehaviour {
 //				}
 //			}
 //		}
+
+
+//		GoToPosition( new Vector3 (0f, 0f, -25f), 20f,  5f );
+
+
 		if (estDans (song.flexionTime [0], song.flexionLength [0])) {
+
 			flexionDone [0] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
 			                            Mathf.Sin (4f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f,	
 			                            Mathf.Sin (2f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f, 0);
@@ -72,15 +82,45 @@ public class TunnelMover : MonoBehaviour {
 		}
 	}
 
-
+	// EST DANS L'INTERVALLE [startTime,startTime+length] ? -----------------------------------------------------------------------
 	private bool estDans( float startTime, float length ){
 		return (song.time () >= startTime) && (song.time () < startTime + length);
 	}
-	
 
-	// ROTATION DU TUNNEL AUTOUR DE L'AXE Z + SPIN DES CUBES SUR EUX-MEMES
+	// BOUGE LE TUNNEL POUR DONNER L'IMPRESSION QUE LA CAMERA BOUGE ---------------------------------------------------------------
+	// posTarget  : position ou l'on desire bouger la camera
+	// startTime  : debut du deplacement
+	// timeLength : duree du deplacement 
+	private Vector3 x0;
+	private Vector3 dx;
+	private float dt;
+	private float jerk;
+	private float acceleration;
+
+	private void GoToPosition( Vector3 posTarget, float startTime, float timeLength ){
+		dt = song.time () - startTime;
+		if ( (dt > - Time.deltaTime) && (dt < Time.deltaTime) ) {
+			x0 = transform.position;
+			dx = -posTarget - x0;
+			jerk = -12f * dx.magnitude / Mathf.Pow (timeLength, 3f);
+			acceleration = 6 * dx.magnitude / Mathf.Pow (timeLength, 2f);
+		}
+		else if( (dt > timeLength-Time.deltaTime) && (dt < timeLength+Time.deltaTime) ){
+			transform.position = -posTarget;
+		}
+		else if( (dt > 0 ) && (dt < timeLength) ){
+			transform.position = x0 + dx / dx.magnitude * dt * dt * (acceleration/2f + jerk/6f * dt);
+		}
+
+	}
+
+	// ROTATION DU TUNNEL AUTOUR DE L'AXE Z + SPIN DES CUBES SUR EUX-MEMES --------------------------------------------------------
 	// rotationSpeed en degres/seconde
 	// spinAngle en degres
+	private float zSpinSpeed1;
+	private float zSpinSpeed2;
+	private float rock1sec;
+
 	private void doubleSpin( float rotationSpeedZ, float spinAngle ){
 
 		float Theta_i;
@@ -118,7 +158,7 @@ public class TunnelMover : MonoBehaviour {
 					Pos_ij.x*RotMat[0,0] + Pos_ij.y*RotMat[0,1], Pos_ij.x*RotMat[1,0] + Pos_ij.y*RotMat[1,1], Pos_ij.z );
 			}
 		}
-		
+
 		for (int i = 0 ; i<tunnel.cubeCenterArray.GetLength(0); i++)
 		{
 			Theta_i = Mathf.Atan2(tunnel.cubeCone2Array[i,0].transform.localPosition.y , tunnel.cubeCone2Array[i,0].transform.localPosition.x);
@@ -134,8 +174,12 @@ public class TunnelMover : MonoBehaviour {
 	
 	}
 
-
-
+	// FLEX THAT SHIT MON AMI ! ---------------------------------------------------------------------------------------------------
+	private bool flexion = false;
+	private bool[] flexionDone;
+	private bool[] firstFlexFrame;
+	private float[] ampFlexion;
+	private float[] freqFactorY;
 	private bool flexTunnel(CubeInfo[,] cubes1,CubeInfo[,] cubes2, float sinOffsetX, float sinOffsetY, int flexionID)  {	
 		
 		bool flexionDone = false;
@@ -163,12 +207,12 @@ public class TunnelMover : MonoBehaviour {
 		
 		for(int i = 0; i<cubes1.GetLength(0); i++){
 			for(int j = 1; j<cubes1.GetLength(1); j++){
-				cubes1[i,j].transform.position = new Vector3 ((cubes1[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes1[i,j].posSansFlexion.y + amp*Mathf.Pow(j,2)*sinOffsetY,cubes1[i,j].transform.position.z);
+				cubes1[i,j].transform.localPosition = new Vector3 ((cubes1[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes1[i,j].posSansFlexion.y + amp*Mathf.Pow(j,2)*sinOffsetY,cubes1[i,j].transform.localPosition.z);
 			}
 		}
 		for(int i = 0; i<cubes2.GetLength(0); i++){
 			for(int j = 1; j<cubes2.GetLength(1); j++){
-				cubes2[i,j].transform.position = new Vector3 ((cubes2[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes2[i,j].posSansFlexion.y+ amp*Mathf.Pow(j,2)*sinOffsetY,cubes2[i,j].transform.position.z);
+				cubes2[i,j].transform.localPosition = new Vector3 ((cubes2[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes2[i,j].posSansFlexion.y+ amp*Mathf.Pow(j,2)*sinOffsetY,cubes2[i,j].transform.localPosition.z);
 			}
 		}
 		// Stop the flexion script when amp and the offset are small
@@ -184,8 +228,7 @@ public class TunnelMover : MonoBehaviour {
 		endFlexion();
 		for(int i = 0; i<cubes.GetLength(0); i++){
 			for(int j = 1; j<cubes.GetLength(1); j++){
-				cubes[i,j].transform.position = cubes[i,j].posSansFlexion;
-				
+				cubes[i,j].transform.localPosition = cubes[i,j].posSansFlexion;
 			}
 		}
 	}
@@ -196,14 +239,14 @@ public class TunnelMover : MonoBehaviour {
 		{
 			for (int j = 0 ; j<tunnel.cubeCone1Array.GetLength(1); j++)
 			{
-				tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.position;
+				tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.localPosition;
 			}
 		}
 		for (int i = 0 ; i<tunnel.cubeCone2Array.GetLength(0); i++)
 		{
 			for (int j = 0 ; j<tunnel.cubeCone2Array.GetLength(1); j++)
 			{
-				tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.position;
+				tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.localPosition;
 			}
 		}
 	}
@@ -215,14 +258,14 @@ public class TunnelMover : MonoBehaviour {
 		{
 			for (int j = 0 ; j<tunnel.cubeCone1Array.GetLength(1); j++)
 			{
-				tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.position;
+				tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.localPosition;
 			}
 		}
 		for (int i = 0 ; i<tunnel.cubeCone2Array.GetLength(0); i++)
 		{
 			for (int j = 0 ; j<tunnel.cubeCone2Array.GetLength(1); j++)
 			{
-				tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.position;
+				tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.localPosition;
 			}
 		}
 	}

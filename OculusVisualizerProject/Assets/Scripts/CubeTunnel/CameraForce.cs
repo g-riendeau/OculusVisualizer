@@ -6,9 +6,7 @@ public class CameraForce : MonoBehaviour {
 	public Song song;
 	public Material black;
 	//public Material[] sky = new Material[song.skyboxTime.Length];
-
-	private float vitesse;
-	private bool posAtteinte;
+	
 	private bool switchFirst;
 	private bool switchSecond;
 	private bool switchThird;
@@ -28,7 +26,6 @@ public class CameraForce : MonoBehaviour {
 		switchSecond = false;
 		switchThird = false;
 
-		posAtteinte = false;
 	}
 	
 	// Update is called once per frame
@@ -67,22 +64,7 @@ public class CameraForce : MonoBehaviour {
 //			RenderSettings.skybox = sky4;
 //		}
 	}
-
-	private bool GoToPosition( Vector3 target, float acceleration ){
-		Vector3 dist = target - transform.position;
-		vitesse += acceleration * Time.deltaTime;
-		Vector3 dPos = dist/dist.magnitude * vitesse * Time.deltaTime;
-		if (dPos.magnitude >= dist.magnitude) {
-			transform.position = target;
-			return true;
-		}
-		else{
-			transform.position += dPos;
-			return false;
-		}
-
-	}
-
+	
 //	private bool StopAtPosition( Vector3 target, float time ){
 //		Vector3 dist = target - transform.position;
 //		vitesse += acceleration * Time.deltaTime;
