@@ -30,8 +30,6 @@ public class CameraForce : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-//		if( !posAtteinte )
-//			posAtteinte = GoToPosition (new Vector3 (0f, 0f, 10f), 1f);
 
 //		if(Time.time>song.debutLastStretch){
 //			float dist = 0;
@@ -64,17 +62,5 @@ public class CameraForce : MonoBehaviour {
 //			RenderSettings.skybox = sky4;
 //		}
 	}
-	
-//	private bool StopAtPosition( Vector3 target, float time ){
-//		Vector3 dist = target - transform.position;
-//		vitesse += acceleration * Time.deltaTime;
-//		Vector3 dPos = dist / dist.magnitude * vitesse * Time.deltaTime;
-//		if (dPos.magnitude >= dist.magnitude) {
-//			transform.position = target;
-//			return true;
-//		} else {
-//			transform.position += dPos;
-//			return false;
-//		}
-//	}
+
 }

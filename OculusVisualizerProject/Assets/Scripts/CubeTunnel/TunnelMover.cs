@@ -5,22 +5,11 @@ public class TunnelMover : MonoBehaviour {
 
 	public CubeTunnel tunnel;
 	public Song song;
-
-
-
-
-
-
-
-
+	public GameObject camera;
 
 
 	// Use this for initialization
 	void Start () {
-
-
-		// ------------------- D E P L A C E M M E N T  G L O B A L -------------------------
-
 
 		// ------------------------F L E X I O N   T U N N E L ------------------------------
 		flexionDone = new bool[song.flexionTime.Length];
@@ -35,9 +24,9 @@ public class TunnelMover : MonoBehaviour {
 		}
 
 		// ------------------------S P I N   T U N N E L ------------------------------------
-		zSpinSpeed1 = 360f / song.zSpinLength1;
+		zSpinSpeed1 = 2160f / (song.zSpinLength1*song.zSpinLength1);
 		zSpinSpeed2 = 360f / song.zSpinLength2;
-		rock1sec = song.zSpinTime1 + song.zSpinLength1;
+		rockTime1 = song.zSpinTime1 + song.zSpinLength1;
 
 	}
 	
@@ -46,39 +35,27 @@ public class TunnelMover : MonoBehaviour {
 	void Update () {
 
 		//Debug.Log (song.time ());
-		// ------------------------F L E X I O N   T U N N E L ------------------------------
-		// Make the tunnel bend after the specified time
-//		for (int i=0; i<song.flexionTime.Length;i++){
-//			if (song.time() >song.flexionTime[i] && !flexionDone[i]) {
-//				
-//				if (song.flexionLength[i] < 4f) {
-//					Debug.Log("A song.flexion_length is too short. It is ignored");
-//				}
-//				else {
-//					flexionDone[i] = flexTunnel(tunnel.cubeCone1Array,tunnel.cubeCone2Array,
-//					                            Mathf.Sin (8f*(song.time()-song.flexionTime[i])/song.flexionLength[i])/100f,	
-//					                            Mathf.Sin (2f*(song.time()-song.flexionTime[i])/song.flexionLength[i])/100f, i);
-//				}
-//			}
-//		}
+		//Debug.Log ("x:" + transform.position.x + ", y:" + transform.position.y+ ", z:" + transform.position.z);
 
+		GoToPosition (new Vector3 (10f, -11f, 5f), -8f, 8f);
+		GoToAngle( 134f, 249f, true, -8f,  8f );
+		//Debug.Log ("x:" + camera.transform.position.x + ", y:" + camera.transform.position.y+ ", z:" + camera.transform.position.z);
 
-//		GoToPosition( new Vector3 (0f, 0f, -25f), 20f,  5f );
 
 
 		if (estDans (song.flexionTime [0], song.flexionLength [0])) {
-
-			flexionDone [0] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
-			                            Mathf.Sin (4f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f,	
-			                            Mathf.Sin (2f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f, 0);
+//			flexionDone [0] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
+//			                  Mathf.Sin (4f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f,	
+//			                  Mathf.Sin (2f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f, 0);
 		} else if (estDans (song.zSpinTime1, song.zSpinLength1)) {
-			doubleSpin (zSpinSpeed1, 0f);
+			float t1 = song.time () -song.zSpinTime1;
+			doubleSpin (zSpinSpeed1*t1*(1f-t1/song.zSpinLength1) , 0f);
 		}
-		else if (estDans (rock1sec, 1f)) {
-			doubleSpin ( 0f , 45f * Mathf.Sin (1f*Mathf.PI*(song.time () - rock1sec)) );
+		else if (estDans (rockTime1, 1.5f)) {
+			doubleSpin ( 0f , 45f * Mathf.Sin (1f*Mathf.PI*(song.time () - rockTime1)/1.5f) );
 		}
 		else if ( estDans (song.zSpinTime2 , song.zSpinLength2) ){
-			doubleSpin (-2f*song.zSpinLength2/Mathf.PI*Mathf.Sin(2f*Mathf.PI*(song.time ()-song.zSpinTime2)/song.zSpinLength2), 0f );
+			doubleSpin (-2f*Mathf.PI*zSpinSpeed2*Mathf.Sin(2f*Mathf.PI*(song.time ()-song.zSpinTime2)/song.zSpinLength2), 0f );
 		}
 	}
 
@@ -87,39 +64,78 @@ public class TunnelMover : MonoBehaviour {
 		return (song.time () >= startTime) && (song.time () < startTime + length);
 	}
 
-	// BOUGE LE TUNNEL POUR DONNER L'IMPRESSION QUE LA CAMERA BOUGE ---------------------------------------------------------------
+	// BOUGE LA POSITION DU TUNNEL POUR DONNER L'IMPRESSION QUE LA CAMERA BOUGE ---------------------------------------------------
 	// posTarget  : position ou l'on desire bouger la camera
 	// startTime  : debut du deplacement
 	// timeLength : duree du deplacement 
-	private Vector3 x0;
-	private Vector3 dx;
-	private float dt;
-	private float jerk;
-	private float acceleration;
+	private float posDt;
+	private Vector3 pos0;
+	private Vector3 dPos;
+	private float posJerk;
+	private float posAcc;
 
 	private void GoToPosition( Vector3 posTarget, float startTime, float timeLength ){
-		dt = song.time () - startTime;
-		if ( (dt > - Time.deltaTime) && (dt < Time.deltaTime) ) {
-			x0 = transform.position;
-			dx = -posTarget - x0;
-			jerk = -12f * dx.magnitude / Mathf.Pow (timeLength, 3f);
-			acceleration = 6 * dx.magnitude / Mathf.Pow (timeLength, 2f);
+		posDt = song.time () - startTime;
+		if ( (posDt > - 1.5*Time.deltaTime) && (posDt < 0f) ) {
+			pos0 = transform.position;
+			dPos = -posTarget - pos0;
+			posJerk = -12f * dPos.magnitude / Mathf.Pow (timeLength, 3f);
+			posAcc  = 6 * dPos.magnitude / Mathf.Pow (timeLength, 2f);
 		}
-		else if( (dt > timeLength-Time.deltaTime) && (dt < timeLength+Time.deltaTime) ){
+		else if( (posDt >= timeLength-0.5f*Time.deltaTime) && (posDt <= 0.5f*timeLength+Time.deltaTime) ){
 			transform.position = -posTarget;
 		}
-		else if( (dt > 0 ) && (dt < timeLength) ){
-			transform.position = x0 + dx / dx.magnitude * dt * dt * (acceleration/2f + jerk/6f * dt);
+		else if( (posDt > 0 ) && (posDt < timeLength) ){
+			transform.position = pos0 + dPos / dPos.magnitude * posDt * posDt * (posAcc/2f + posJerk/6f * posDt);
 		}
-
 	}
+
+	// BOUGE L'ANGLE DU TUNNEL POUR DONNER L'IMPRESSION QUE LA CAMERA BOUGE -------------------------------------------------------
+	// phiTarget   : angle dans le plan xz en degrees
+	// thetaTarget : angle dans le plan yz en degrees
+	// moveCam     : true pour rester dans le tunnel
+	// startTime   : debut du deplacement
+	// timeLength  : duree du deplacement 
+	private float angDt;
+	private Quaternion ang0;
+	private float[] dEuler = new float[2];
+	private float[] eulerAcc = new float[2];
+	private float[] eulerJerk = new float[2];
+	
+	private void GoToAngle( float phiTarget, float thetaTarget, bool moveCam, float startTime, float timeLength ){
+		angDt = song.time () - startTime;
+		if ( (angDt > - 1.5f*Time.deltaTime) && (angDt < 0) ) {
+			ang0 = transform.rotation;
+			dEuler[0] = thetaTarget - ang0.eulerAngles.x;
+			dEuler[1] = phiTarget - ang0.eulerAngles.y;
+			for(int i = 0; i<2; i++){
+				eulerJerk[i] = -12f * dEuler[i] / Mathf.Pow (timeLength, 3f);
+				eulerAcc[i]  = 6f * dEuler[i] / Mathf.Pow (timeLength, 2f);
+			}
+		}
+		else if( (angDt >= timeLength-0.5f*Time.deltaTime) && (angDt <= timeLength+0.5f*Time.deltaTime) ){
+			transform.rotation = Quaternion.Euler( thetaTarget, phiTarget, 0f );
+		}
+		else if( (angDt > 0 ) && (angDt < timeLength) ){
+			transform.rotation = Quaternion.Euler (
+				ang0.eulerAngles.x + angDt * angDt * (eulerAcc[0]/2f + eulerJerk[0]/6f * angDt),
+				ang0.eulerAngles.y + angDt * angDt * (eulerAcc[1]/2f + eulerJerk[1]/6f * angDt), 0f );
+		}
+		if (moveCam) {
+			camera.transform.position = transform.position - new Vector3(
+				transform.position.z*Mathf.Cos (Mathf.PI*transform.rotation.eulerAngles.x/180f)*Mathf.Sin (Mathf.PI*transform.rotation.eulerAngles.y/180f),
+			   -transform.position.z*Mathf.Sin (Mathf.PI*transform.rotation.eulerAngles.x/180f),
+				transform.position.z*Mathf.Cos (Mathf.PI*transform.rotation.eulerAngles.x/180f)*Mathf.Cos (Mathf.PI*transform.rotation.eulerAngles.y/180f) );
+		}
+	}
+
 
 	// ROTATION DU TUNNEL AUTOUR DE L'AXE Z + SPIN DES CUBES SUR EUX-MEMES --------------------------------------------------------
 	// rotationSpeed en degres/seconde
 	// spinAngle en degres
 	private float zSpinSpeed1;
 	private float zSpinSpeed2;
-	private float rock1sec;
+	private float rockTime1;
 
 	private void doubleSpin( float rotationSpeedZ, float spinAngle ){
 
@@ -269,5 +285,21 @@ public class TunnelMover : MonoBehaviour {
 			}
 		}
 	}
+
+	// ------------------------F L E X I O N   T U N N E L ------------------------------
+	// Make the tunnel bend after the specified time
+	//		for (int i=0; i<song.flexionTime.Length;i++){
+	//			if (song.time() >song.flexionTime[i] && !flexionDone[i]) {
+	//				
+	//				if (song.flexionLength[i] < 4f) {
+	//					Debug.Log("A song.flexion_length is too short. It is ignored");
+	//				}
+	//				else {
+	//					flexionDone[i] = flexTunnel(tunnel.cubeCone1Array,tunnel.cubeCone2Array,
+	//					                            Mathf.Sin (8f*(song.time()-song.flexionTime[i])/song.flexionLength[i])/100f,	
+	//					                            Mathf.Sin (2f*(song.time()-song.flexionTime[i])/song.flexionLength[i])/100f, i);
+	//				}
+	//			}
+	//		}
 
 }
