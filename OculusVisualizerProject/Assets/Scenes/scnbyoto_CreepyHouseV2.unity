@@ -273,7 +273,7 @@ GameObject:
   - 23: {fileID: 141276775}
   - 54: {fileID: 141276774}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Sphere_lourde
   m_TagString: PassiveObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,7 +286,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 141276773}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 6
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
@@ -2606,7 +2606,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1059371560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 335.899994, y: 77.3000031, z: 547.099976}
+  m_LocalPosition: {x: 250.699997, y: 77.3000031, z: 547.099976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3336,7 +3336,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1449230731
 Light:
   m_ObjectHideFlags: 0
