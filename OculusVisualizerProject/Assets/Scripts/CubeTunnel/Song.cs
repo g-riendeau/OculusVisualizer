@@ -28,11 +28,12 @@ public class Song : MonoBehaviour {
 	public float startSong;
 	public float colorItUp;
 
-	public float debut2eTiers = 115f;
-	public float fin2eTiers;
-	public float bassDrop;
-	public float debutLastStretch;
-	public float finLastStretch;
+	public float debut2eTiers;
+	public float length2eTiers;
+
+	public float debut3eTiers;
+	public float length3eTiers;
+	
 	public float songTime;
 
 	// Truc relatif a la flexion du tunnel
@@ -51,11 +52,15 @@ public class Song : MonoBehaviour {
 	void Start(){
 		startSong = 10f;
 		colorItUp = 12.8f;
+		debut2eTiers = 115f;
+		length2eTiers = 64f;
+		debut3eTiers = 223.7f;
+		length3eTiers = 102.3f;
 
 		flexionTime[0] = 0f;
-		flexionTime[1] = 179f;
+		flexionTime[1] = 115f;
 		flexionLength[0] = 13f;
-		flexionLength[1] = 44f;
+		flexionLength[1] = 64f;
 
 		zSpinTime1 = 25.5f;
 		zSpinLength1 = 24.5f;

@@ -7,6 +7,8 @@ public class TunnelMover : MonoBehaviour {
 	public Song song;
 	public GameObject camera;
 
+	private float t;
+
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +27,13 @@ public class TunnelMover : MonoBehaviour {
 
 		// ------------------------S P I N   T U N N E L ------------------------------------
 		zSpinSpeed1 = 2160f / (song.zSpinLength1*song.zSpinLength1);
-		zSpinSpeed2 = 360f / song.zSpinLength2;
+		zSpinSpeed2 = 720f*Mathf.PI / song.zSpinLength2;
 		rockTime1 = song.zSpinTime1 + song.zSpinLength1;
+		omega2eTiers1 = 10f * Mathf.PI/ song.length2eTiers;
+		omega2eTiers2 = 11f * Mathf.PI /song.length2eTiers ;
+		zSpinSpeed3 = 8f * 360f / song.length3eTiers;
+		omega3eTiers = 8f * Mathf.PI / song.length3eTiers;
+		rockTime2 = 215.5f;
 
 	}
 	
@@ -37,25 +44,39 @@ public class TunnelMover : MonoBehaviour {
 		//Debug.Log (song.time ());
 		//Debug.Log ("x:" + transform.position.x + ", y:" + transform.position.y+ ", z:" + transform.position.z);
 
-		GoToPosition (new Vector3 (10f, -11f, 5f), -8f, 8f);
-		GoToAngle( 134f, 249f, true, -8f,  8f );
-		//Debug.Log ("x:" + camera.transform.position.x + ", y:" + camera.transform.position.y+ ", z:" + camera.transform.position.z);
+		GoToPosition (new Vector3 (0f, 0f, 5f), 70f, 10f);
+		GoToAngle( 180f, 360f, true, 50f,  39f );
 
+		GoToPosition (new Vector3 (0f, 0f,-10f), 140f, 12.5f);
+		GoToPosition (new Vector3 (0f, 0f, 10f), 153f, 12.5f);
+		GoToPosition (new Vector3 (0f, 0f,  5f), 166f, 12.5f);
+		GoToPosition (new Vector3 (0f, 0f, 12f), 202f, 12f);
+		GoToPosition (new Vector3 (0f, 0f, 0f), rockTime2, 2f);
 
 
 		if (estDans (song.flexionTime [0], song.flexionLength [0])) {
-//			flexionDone [0] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
-//			                  Mathf.Sin (4f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f,	
-//			                  Mathf.Sin (2f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f, 0);
+			flexionDone [0] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
+			                  Mathf.Sin (4f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f,	
+			                  Mathf.Sin (2f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f, 0);
 		} else if (estDans (song.zSpinTime1, song.zSpinLength1)) {
-			float t1 = song.time () -song.zSpinTime1;
-			doubleSpin (zSpinSpeed1*t1*(1f-t1/song.zSpinLength1) , 0f);
+			t = song.time () - song.zSpinTime1;
+			doubleSpin (zSpinSpeed1 * t * (1f - t / song.zSpinLength1), 0f);
+		} else if (estDans (rockTime1, 1.2f)) {
+			doubleSpin (0f, 45f * Mathf.Sin (1f * Mathf.PI * (song.time () - rockTime1) / 1.2f));
+		} else if (estDans (song.zSpinTime2, song.zSpinLength2)) {
+			doubleSpin (zSpinSpeed2 * Mathf.Sin (2f * Mathf.PI * (song.time () - song.zSpinTime2) / song.zSpinLength2), 0f);
+		} else if (estDans (song.debut2eTiers, song.length2eTiers)) {
+			t = song.time () - song.debut2eTiers;
+			flexionDone [1] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
+			                              Mathf.Sin (omega2eTiers1 * Mathf.Sin (2f * Mathf.PI * t / song.length2eTiers) * t) / 100f,	
+			                              Mathf.Cos (omega2eTiers1 * Mathf.Sin (2f * Mathf.PI * t / song.length2eTiers) * t) / 100f, 1);
+			doubleSpin (0f, 90f * Mathf.Sin (omega2eTiers1 * t) * Mathf.Sin (omega2eTiers2 * t));
+		} else if (estDans (rockTime2, 2f)) {
+			t = song.time () - rockTime2;
+			doubleSpin (540f * t * (1f - t / 2f), 0f);
 		}
-		else if (estDans (rockTime1, 1.5f)) {
-			doubleSpin ( 0f , 45f * Mathf.Sin (1f*Mathf.PI*(song.time () - rockTime1)/1.5f) );
-		}
-		else if ( estDans (song.zSpinTime2 , song.zSpinLength2) ){
-			doubleSpin (-2f*Mathf.PI*zSpinSpeed2*Mathf.Sin(2f*Mathf.PI*(song.time ()-song.zSpinTime2)/song.zSpinLength2), 0f );
+		else if (estDans(song.debut3eTiers, song.length3eTiers)){
+			doubleSpin( zSpinSpeed3, 45f+25f*Mathf.Sin (omega3eTiers*(song.time()-song.debut3eTiers)) );
 		}
 	}
 
@@ -135,7 +156,12 @@ public class TunnelMover : MonoBehaviour {
 	// spinAngle en degres
 	private float zSpinSpeed1;
 	private float zSpinSpeed2;
+	private float zSpinSpeed3;
 	private float rockTime1;
+	private float rockTime2;
+	private float omega2eTiers1;
+	private float omega2eTiers2;
+	private float omega3eTiers;
 
 	private void doubleSpin( float rotationSpeedZ, float spinAngle ){
 
