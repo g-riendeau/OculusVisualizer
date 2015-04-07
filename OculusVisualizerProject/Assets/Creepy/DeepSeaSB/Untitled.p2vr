@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Pano2VR project file  -->
+<pano2vrconfig>
+  <panorama>
+    <input>
+      <patch/>
+      <filename>/Users/Maxime/OculusVisualizer/ScaryGhyslains/DeepSeaSB/DeepSeaSB.psd</filename>
+      <type>cylindrical</type>
+      <hfov>360</hfov>
+    </input>
+    <viewingparameter>
+      <pan/>
+      <tilt/>
+      <fov/>
+    </viewingparameter>
+    <userdata>
+      <datetime>2015:03:17 20:57:14</datetime>
+    </userdata>
+    <hotspots/>
+    <output>
+      <thumb>
+        <html>
+          <enabled>0</enabled>
+          <filename>output/DeepSeaSB.html</filename>
+          <template>normal.ggt</template>
+          <values>
+            <value id="bgcolor">#ffffff</value>
+            <value id="showuserdata">true</value>
+            <value id="tablebgcolor">#dddddd</value>
+            <value id="tablebordercolor">#777777</value>
+            <value id="tabletextcolor">#000000</value>
+            <value id="textcolor">#000000</value>
+          </values>
+        </html>
+        <facequality/>
+        <filename>output/DeepSeaSB_out.png</filename>
+        <backgroundColor>#000000,0</backgroundColor>
+        <nooversampling>0</nooversampling>
+        <type>cubeface</type>
+        <quality>90</quality>
+        <progressivejpeg>0</progressivejpeg>
+        <width>2048</width>
+        <height>2048</height>
+        <defaultview>1</defaultview>
+        <pan>0</pan>
+        <tilt>0</tilt>
+        <roll>0</roll>
+        <fov>70</fov>
+        <cubefacenaming>down</cubefacenaming>
+      </thumb>
+    </output>
+    <sounds/>
+  </panorama>
+</pano2vrconfig>

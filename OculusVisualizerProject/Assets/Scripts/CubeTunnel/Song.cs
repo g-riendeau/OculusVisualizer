@@ -13,30 +13,73 @@ public class Song : MonoBehaviour {
 	public float finLastStretch = 326f;
 	public float songTime = 355f;
 */
-
 	//Essai Simon
-	public float debut2eTiers;
-	public float fin2eTiers;
-	public float bassDrop;
-	public float debutLastStretch;
-	public float finLastStretch;
-	public float songTime;
-
-	// Use this for initialization
-	void Start () {
-		//Essai Simon
-		/*
+	/*
 		debut2eTiers = 115f;
 		fin2eTiers = 179f;
 		bassDrop = 12.5f;
 		debutLastStretch = 224f;
 		finLastStretch = 326.5f;
 		songTime = 355f;
-		*/
-	}
+		*/ 
+	public AudioProcessor songProcessor;
+	public bool songPlaying = false;
+
+	public float startSong;
+	public float colorItUp;
+
+	public float debut2eTiers;
+	public float length2eTiers;
+
+	public float debut3eTiers;
+	public float length3eTiers;
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public float songTime;
+
+	// Truc relatif a la flexion du tunnel
+	public float[] flexionTime = new float[2];
+	public float[] flexionLength = new float[2];
+
+
+	// Trucs rlatifs aux rotations
+	public float zSpinTime1;
+	public float zSpinLength1;
+	public float zSpinTime2;
+	public float zSpinLength2;
+
+	public float[] skyboxTime;
+
+	void Start(){
+		startSong = 10f;
+		colorItUp = 12.8f;
+		debut2eTiers = 115f;
+		length2eTiers = 64f;
+		debut3eTiers = 223.7f;
+		length3eTiers = 102.3f;
+
+		flexionTime[0] = 0f;
+		flexionTime[1] = 115f;
+		flexionLength[0] = 13f;
+		flexionLength[1] = 64f;
+
+		zSpinTime1 = 25.5f;
+		zSpinLength1 = 24.5f;
+		zSpinTime2 = 51f;
+		zSpinLength2 = 39f;
 	}
+
+	void Update() {
+		if (time () >= 0 && !songPlaying) {
+			songProcessor.startPlaying();
+			songPlaying = true;
+		}
+	}
+
+
+	// Temps depuis le debut de la chanson
+	public float time(){
+		return Time.time - startSong;
+	}
+
+	
 }
