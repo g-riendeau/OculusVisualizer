@@ -15,9 +15,9 @@ public class FadeIn : MonoBehaviour {
 		t += Time.deltaTime;
 		if (t < 3f) {
 			alphaValue = 1f - t / 3f;
-			Color color = gameObject.renderer.material.color;
+			Color color = gameObject.GetComponent<Renderer>().material.color;
 			color.a = alphaValue;
-			gameObject.renderer.material.color = color;
+			gameObject.GetComponent<Renderer>().material.color = color;
 		}
 		else{
 			Destroy(gameObject);

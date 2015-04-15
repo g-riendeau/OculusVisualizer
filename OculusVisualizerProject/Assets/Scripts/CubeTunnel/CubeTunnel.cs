@@ -54,8 +54,8 @@ public class CubeTunnel : MonoBehaviour {
 				                                            j + 1f );
 
 				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
-				cube.renderer.material = FloorMat;
-				cube.renderer.material.SetColor("_Color", new Color(1f,1f,1f));
+				cube.GetComponent<Renderer>().material = FloorMat;
+				cube.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f,1f,1f));
 
 
 				// rotation du cube
@@ -63,7 +63,7 @@ public class CubeTunnel : MonoBehaviour {
 				cube.transform.localRotation = target;
 
 				// no collisions pour un plus faible temps de calcul
-				cube.collider.enabled = false;
+				cube.GetComponent<Collider>().enabled = false;
 
 				// ajout de CubeInfo
 				cube.AddComponent<CubeInfo>();
@@ -72,7 +72,7 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCone1Array[(int)i,(int)j].jWidth = jWidth;
 				cubeCone1Array[(int)i,(int)j].posSansFlexion = cube.transform.localPosition;
 				cubeCone1Array[(int)i,(int)j].lastScale = 0.1f;
-				cubeCone1Array[(int)i,(int)j].lastColor = cube.renderer.material.color;
+				cubeCone1Array[(int)i,(int)j].lastColor = cube.GetComponent<Renderer>().material.color;
 
 			}
 		}
@@ -96,8 +96,8 @@ public class CubeTunnel : MonoBehaviour {
 				                                            -j - 1f );
 				
 				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
-				cube.renderer.material = FloorMat;
-				cube.renderer.material.SetColor("_Color", new Color(1f,1f,1f));
+				cube.GetComponent<Renderer>().material = FloorMat;
+				cube.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f,1f,1f));
 				
 				
 				// rotation du cube
@@ -105,7 +105,7 @@ public class CubeTunnel : MonoBehaviour {
 				cube.transform.localRotation = target;
 				
 				// no collisions pour un plus faible temps de calcul
-				cube.collider.enabled = false;
+				cube.GetComponent<Collider>().enabled = false;
 				
 				// ajout de CubeInfo
 				CubeInfo ci = cube.AddComponent<CubeInfo>();
@@ -114,7 +114,7 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCone2Array[(int)i,(int)j].jWidth = jWidth;
 				cubeCone2Array[(int)i,(int)j].posSansFlexion = cube.transform.localPosition ;
 				cubeCone2Array[(int)i,(int)j].lastScale = 0.1f;
-				cubeCone2Array[(int)i,(int)j].lastColor = cube.renderer.material.color;
+				cubeCone2Array[(int)i,(int)j].lastColor = cube.GetComponent<Renderer>().material.color;
 				
 			}
 		}
@@ -138,15 +138,15 @@ public class CubeTunnel : MonoBehaviour {
 				                                      j );
 				
 				cube.transform.localScale = new Vector3(jWidth, 0.1f, 1f);
-				cube.renderer.material = FloorMat;
-				cube.renderer.material.SetColor("_Color", new Color(1f,1f,1f));
+				cube.GetComponent<Renderer>().material = FloorMat;
+				cube.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f,1f,1f));
 				
 				// rotation du cube
 				Quaternion target = Quaternion.Euler(0f, 0f, i*360f/nCubes + 90f);
 				cube.transform.localRotation = target;
 				
 				// no collisions pour un plus faible temps de calcul
-				cube.collider.enabled = false;
+				cube.GetComponent<Collider>().enabled = false;
 				
 				// ajout de CubeInfo
 				CubeInfo ci = cube.AddComponent<CubeInfo>();
@@ -155,7 +155,7 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCenterArray[(int)i,(int)j].jWidth = jWidth;
 				cubeCenterArray[(int)i,(int)j].posSansFlexion = cube.transform.localPosition;
 				cubeCenterArray[(int)i,(int)j].lastScale = 0.1f;
-				cubeCenterArray[(int)i,(int)j].lastColor = cube.renderer.material.color;
+				cubeCenterArray[(int)i,(int)j].lastColor = cube.GetComponent<Renderer>().material.color;
 				
 			}
 		}

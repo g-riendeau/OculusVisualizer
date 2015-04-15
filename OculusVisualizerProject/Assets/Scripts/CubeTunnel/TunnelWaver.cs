@@ -83,36 +83,36 @@ public class TunnelWaver : MonoBehaviour {
 
 		///Valeurs connues:
 		/// MidsR:
-		cubes[idxMidRight,0].lastColor = cubes[idxMidRight,0].renderer.material.GetColor("_Color");
+		cubes[idxMidRight,0].lastColor = cubes[idxMidRight,0].GetComponent<Renderer>().material.GetColor("_Color");
 		ampli = cubes[idxMidRight,0].transform.localScale.y;
 		g =  ((timeSin*0.7f) * (ampli/6f))-0.4f;
 		r = (ampli/6f) - (g);
 		b = 0.8f - (ampli/3);	
-		cubes[idxMidRight,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+		cubes[idxMidRight,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 
 		//MidsL
-		cubes[idxMidLeft,0].lastColor = cubes[idxMidLeft,0].renderer.material.GetColor("_Color");
+		cubes[idxMidLeft,0].lastColor = cubes[idxMidLeft,0].GetComponent<Renderer>().material.GetColor("_Color");
 		ampli = cubes[idxMidLeft,0].transform.localScale.y;
 		g = ((timeSin*0.7f) * (ampli/6f))-0.4f;
 		r = (ampli/6f) - (0.8f*g);
 		b = 0.8f - (ampli/3);	
-		cubes[idxMidLeft,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+		cubes[idxMidLeft,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 
 		// Graves:
-		cubes[idxGraves,0].lastColor = cubes[idxGraves,0].renderer.material.GetColor("_Color");
+		cubes[idxGraves,0].lastColor = cubes[idxGraves,0].GetComponent<Renderer>().material.GetColor("_Color");
 		ampli = cubes[idxGraves,0].transform.localScale.y;
 		g = ((0.8f - ((timeSin*0.7f) * (ampli/6)))-0.2f);
 		r = (ampli/4f) - (0.8f*g);
 		b = 0.8f - (ampli/3);	
-		cubes[idxGraves,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+		cubes[idxGraves,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 
 		// Aigues:
-		cubes[idxAigues,0].lastColor = cubes[idxAigues,0].renderer.material.GetColor("_Color");
+		cubes[idxAigues,0].lastColor = cubes[idxAigues,0].GetComponent<Renderer>().material.GetColor("_Color");
 		ampli = cubes[idxAigues,0].transform.localScale.y;
 		g = (ampli/4f);
 		r = 0.4f*fastTime - (ampli/6);
 		b = 0.5f - (ampli/6);	
-		cubes[idxAigues,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+		cubes[idxAigues,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 
 		float prop1 = 0f;
 		float prop2 = 0f;
@@ -124,11 +124,11 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxMidRight)/dist);
 			prop2 = 1f-prop1;
 
-			r = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxMidRight,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxAigues,0].renderer.material.GetColor("_Color").b;
-			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+			r = prop1*cubes[idxMidRight,0].GetComponent<Renderer>().material.GetColor("_Color").r + prop2*cubes[idxAigues,0].GetComponent<Renderer>().material.GetColor("_Color").r;
+			g = prop1*cubes[idxMidRight,0].GetComponent<Renderer>().material.GetColor("_Color").g + prop2*cubes[idxAigues,0].GetComponent<Renderer>().material.GetColor("_Color").g;
+			b = prop1*cubes[idxMidRight,0].GetComponent<Renderer>().material.GetColor("_Color").b + prop2*cubes[idxAigues,0].GetComponent<Renderer>().material.GetColor("_Color").b;
+			cubes[i,0].lastColor = cubes[i,0].GetComponent<Renderer>().material.GetColor("_Color");
+			cubes[i,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 		}
 
 		dist = idxMidLeft - idxAigues;
@@ -137,11 +137,11 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxAigues)/dist);
 			prop2 = 1f-prop1;
 
-			r = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxAigues,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").b;
-			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+			r = prop1*cubes[idxAigues,0].GetComponent<Renderer>().material.GetColor("_Color").r + prop2*cubes[idxMidLeft,0].GetComponent<Renderer>().material.GetColor("_Color").r;
+			g = prop1*cubes[idxAigues,0].GetComponent<Renderer>().material.GetColor("_Color").g + prop2*cubes[idxMidLeft,0].GetComponent<Renderer>().material.GetColor("_Color").g;
+			b = prop1*cubes[idxAigues,0].GetComponent<Renderer>().material.GetColor("_Color").b + prop2*cubes[idxMidLeft,0].GetComponent<Renderer>().material.GetColor("_Color").b;
+			cubes[i,0].lastColor = cubes[i,0].GetComponent<Renderer>().material.GetColor("_Color");
+			cubes[i,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 		}
 
 		dist = idxGraves - idxMidLeft;
@@ -150,11 +150,11 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxMidLeft)/dist);
 			prop2 = 1f-prop1;
 
-			r = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxMidLeft,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxGraves,0].renderer.material.GetColor("_Color").b;
-			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+			r = prop1*cubes[idxMidLeft,0].GetComponent<Renderer>().material.GetColor("_Color").r + prop2*cubes[idxGraves,0].GetComponent<Renderer>().material.GetColor("_Color").r;
+			g = prop1*cubes[idxMidLeft,0].GetComponent<Renderer>().material.GetColor("_Color").g + prop2*cubes[idxGraves,0].GetComponent<Renderer>().material.GetColor("_Color").g;
+			b = prop1*cubes[idxMidLeft,0].GetComponent<Renderer>().material.GetColor("_Color").b + prop2*cubes[idxGraves,0].GetComponent<Renderer>().material.GetColor("_Color").b;
+			cubes[i,0].lastColor = cubes[i,0].GetComponent<Renderer>().material.GetColor("_Color");
+			cubes[i,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 		}
 
 		dist = largeur - idxGraves;
@@ -163,11 +163,11 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxGraves)/dist);
 			prop2 = 1f-prop1;
 
-			r = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").r + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").r;
-			g = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").g + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").g;
-			b = prop1*cubes[idxGraves,0].renderer.material.GetColor("_Color").b + prop2*cubes[idxMidRight,0].renderer.material.GetColor("_Color").b;
-			cubes[i,0].lastColor = cubes[i,0].renderer.material.GetColor("_Color");
-			cubes[i,0].renderer.material.SetColor("_Color", new Color(r,g,b));
+			r = prop1*cubes[idxGraves,0].GetComponent<Renderer>().material.GetColor("_Color").r + prop2*cubes[idxMidRight,0].GetComponent<Renderer>().material.GetColor("_Color").r;
+			g = prop1*cubes[idxGraves,0].GetComponent<Renderer>().material.GetColor("_Color").g + prop2*cubes[idxMidRight,0].GetComponent<Renderer>().material.GetColor("_Color").g;
+			b = prop1*cubes[idxGraves,0].GetComponent<Renderer>().material.GetColor("_Color").b + prop2*cubes[idxMidRight,0].GetComponent<Renderer>().material.GetColor("_Color").b;
+			cubes[i,0].lastColor = cubes[i,0].GetComponent<Renderer>().material.GetColor("_Color");
+			cubes[i,0].GetComponent<Renderer>().material.SetColor("_Color", new Color(r,g,b));
 		}
 
 	}
@@ -253,7 +253,7 @@ public class TunnelWaver : MonoBehaviour {
 				copy[i,j].lastScale = original[i,0].lastScale;
 				copy[i,j].transform.localScale = original[i,0].transform.localScale;
 				copy[i,j].lastColor = original[i,0].lastColor;
-				copy[i,j].renderer.material.SetColor("_Color",original[i,0].renderer.material.GetColor("_Color"));
+				copy[i,j].GetComponent<Renderer>().material.SetColor("_Color",original[i,0].GetComponent<Renderer>().material.GetColor("_Color"));
 
 			}
 		}
@@ -331,8 +331,8 @@ public class TunnelWaver : MonoBehaviour {
 	void ApplyColorWave(CubeInfo[,] cubes){
 		for(int i = 0; i<cubes.GetLength(0); i++){
 			for(int j = 1; j<cubes.GetLength(1); j++){
-				cubes[i,j].lastColor = cubes[i,j].renderer.material.GetColor("_Color");
-				cubes[i,j].renderer.material.SetColor("_Color", cubes[i,j-1].lastColor);
+				cubes[i,j].lastColor = cubes[i,j].GetComponent<Renderer>().material.GetColor("_Color");
+				cubes[i,j].GetComponent<Renderer>().material.SetColor("_Color", cubes[i,j-1].lastColor);
 			}
 		}
 	}

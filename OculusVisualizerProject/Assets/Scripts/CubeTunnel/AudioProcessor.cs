@@ -19,39 +19,39 @@ public class AudioProcessor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-			audio.GetSpectrumData (amplitudes, 0, FFTWindow.BlackmanHarris);
+			GetComponent<AudioSource>().GetSpectrumData (amplitudes, 0, FFTWindow.BlackmanHarris);
 
 		// Pour fastForward la toune
 		if (Input.GetKeyDown("f") && Time.timeScale < 30)		    {
 			Time.timeScale = Time.timeScale* 2f;
-			audio.pitch =Time.timeScale;
+			GetComponent<AudioSource>().pitch =Time.timeScale;
 			Debug.Log(Time.timeScale);
 
 			if (Time.timeScale > 2) {
-				audio.mute=true;
+				GetComponent<AudioSource>().mute=true;
 			}
 			else if (Time.timeScale <=2) {
-				audio.mute=false;		
+				GetComponent<AudioSource>().mute=false;		
 				
 			}
 	}
 		// Pour Ralentir la toune
 		if (Input.GetKeyDown("b") )		    {
 			Time.timeScale =  Time.timeScale/ 2f;
-			audio.pitch =  Time.timeScale;
+			GetComponent<AudioSource>().pitch =  Time.timeScale;
 			Debug.Log(Time.timeScale);
 			if (Time.timeScale > 1) {
-				audio.mute=true;
+				GetComponent<AudioSource>().mute=true;
 			}
 			else if (Time.timeScale <=1) {
-				audio.mute=false;						
+				GetComponent<AudioSource>().mute=false;						
 			}
 
 		}
 	}
 
 	public void startPlaying(){
-		audio.Play ();
+		GetComponent<AudioSource>().Play ();
 	}
 
 }
