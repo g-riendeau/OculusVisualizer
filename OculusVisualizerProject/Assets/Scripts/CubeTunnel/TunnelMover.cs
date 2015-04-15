@@ -39,21 +39,42 @@ public class TunnelMover : MonoBehaviour {
 	
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		//Debug.Log (song.time ());
 		//Debug.Log ("x:" + transform.position.x + ", y:" + transform.position.y+ ", z:" + transform.position.z);
 
-		GoToPosition (new Vector3 (0f, 0f, 5f), 70f, 10f);
-		GoToAngle( 180f, 360f, true, 50f,  39f );
 
-		GoToPosition (new Vector3 (0f, 0f,-10f), 140f, 12.5f);
-		GoToPosition (new Vector3 (0f, 0f, 10f), 153f, 12.5f);
-		GoToPosition (new Vector3 (0f, 0f,  5f), 166f, 12.5f);
-		GoToPosition (new Vector3 (0f, 0f, 12f), 202f, 12f);
-		GoToPosition (new Vector3 (0f, 0f, 0f), rockTime2, 2f);
+		// 1er Tier
+		if (song.time () < song.debut2eTiers) {
+			GoToPosition (new Vector3 (0f, 0f, 5f), 70f, 10f);
+			GoToAngle (180f, 360f, true, 50f, 39f);
+		}
+
+		// 2e Tier
+		if ( estDans( song.debut2eTiers, song.debut3eTiers-song.debut2eTiers) ){
+			GoToPosition (new Vector3 (0f, 0f, -10f), 140f, 12.5f);
+			GoToPosition (new Vector3 (0f, 0f, 10f), 153f, 12.5f);
+			GoToPosition (new Vector3 (0f, 0f, 5f), 166f, 12.5f);
+
+		// Fin 2e Tier
+			GoToPosition (new Vector3 (0f, 0f,  0f), 204f, 5f);
+			GoToAngle (1440f, 0f, true, 204f, 10f);
+			GoToPosition (new Vector3 (0f, 0f, -5f), rockTime2, 2f);
+		}
+
+		// 3e Tier
+		if (estDans (song.debut3eTiers-Time.fixedDeltaTime, song.descenteAuxEnfers - song.debut3eTiers)) {
+			GoToPosition (new Vector3 (0f, 0f, -10f), song.debut3eTiers, 8f);
+			GoToAngle (720f, 360f, false, song.debut3eTiers, 44f);
+			GoToPosition (new Vector3 (0f, 0f, -40f), song.descenteAuxEnfers-10f, 10f);
+		}
+		if ( song.time() >= song.descenteAuxEnfers - Time.fixedDeltaTime){
+			descenteAuxEnfers( 25f, 10f, song.descenteAuxEnfers, 35f );
+		}
 
 
+		// Spins et flexions
 		if (estDans (song.flexionTime [0], song.flexionLength [0])) {
 			flexionDone [0] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
 			                  Mathf.Sin (4f * Mathf.PI * (song.time () - song.flexionTime [0]) / song.flexionLength [0]) / 100f,	
@@ -70,13 +91,13 @@ public class TunnelMover : MonoBehaviour {
 			flexionDone [1] = flexTunnel (tunnel.cubeCone1Array, tunnel.cubeCone2Array,
 			                              Mathf.Sin (omega2eTiers1 * Mathf.Sin (2f * Mathf.PI * t / song.length2eTiers) * t) / 100f,	
 			                              Mathf.Cos (omega2eTiers1 * Mathf.Sin (2f * Mathf.PI * t / song.length2eTiers) * t) / 100f, 1);
-			doubleSpin (0f, 90f * Mathf.Sin (omega2eTiers1 * t) * Mathf.Sin (omega2eTiers2 * t));
+			doubleSpin (0f, 50f * Mathf.Sin (omega2eTiers1 * t) );
 		} else if (estDans (rockTime2, 2f)) {
 			t = song.time () - rockTime2;
 			doubleSpin (540f * t * (1f - t / 2f), 0f);
 		}
 		else if (estDans(song.debut3eTiers, song.length3eTiers)){
-			doubleSpin( zSpinSpeed3, 45f+25f*Mathf.Sin (omega3eTiers*(song.time()-song.debut3eTiers)) );
+			doubleSpin( zSpinSpeed3, 50f*Mathf.Sin (omega3eTiers*(song.time()-song.debut3eTiers)) );
 		}
 	}
 
@@ -89,25 +110,24 @@ public class TunnelMover : MonoBehaviour {
 	// posTarget  : position ou l'on desire bouger la camera
 	// startTime  : debut du deplacement
 	// timeLength : duree du deplacement 
-	private float posDt;
 	private Vector3 pos0;
 	private Vector3 dPos;
 	private float posJerk;
 	private float posAcc;
 
 	private void GoToPosition( Vector3 posTarget, float startTime, float timeLength ){
-		posDt = song.time () - startTime;
-		if ( (posDt > - 1.5*Time.deltaTime) && (posDt < 0f) ) {
+		float t = song.time () - startTime;
+		if ( (t > - 1.1*Time.fixedDeltaTime) && (t < 0f) ) {
 			pos0 = transform.position;
 			dPos = -posTarget - pos0;
 			posJerk = -12f * dPos.magnitude / Mathf.Pow (timeLength, 3f);
 			posAcc  = 6 * dPos.magnitude / Mathf.Pow (timeLength, 2f);
 		}
-		else if( (posDt >= timeLength-0.5f*Time.deltaTime) && (posDt <= 0.5f*timeLength+Time.deltaTime) ){
+		else if( (t >= timeLength-0.55f*Time.fixedDeltaTime) && (t <= 0.55f*timeLength+Time.fixedDeltaTime) ){
 			transform.position = -posTarget;
 		}
-		else if( (posDt > 0 ) && (posDt < timeLength) ){
-			transform.position = pos0 + dPos / dPos.magnitude * posDt * posDt * (posAcc/2f + posJerk/6f * posDt);
+		else if( (t > 0 ) && (t < timeLength) ){
+			transform.position = pos0 + dPos / dPos.magnitude * t * t * (posAcc/2f + posJerk/6f * t);
 		}
 	}
 
@@ -117,15 +137,14 @@ public class TunnelMover : MonoBehaviour {
 	// moveCam     : true pour rester dans le tunnel
 	// startTime   : debut du deplacement
 	// timeLength  : duree du deplacement 
-	private float angDt;
 	private Quaternion ang0;
 	private float[] dEuler = new float[2];
 	private float[] eulerAcc = new float[2];
 	private float[] eulerJerk = new float[2];
 	
 	private void GoToAngle( float phiTarget, float thetaTarget, bool moveCam, float startTime, float timeLength ){
-		angDt = song.time () - startTime;
-		if ( (angDt > - 1.5f*Time.deltaTime) && (angDt < 0) ) {
+		float t = song.time () - startTime;
+		if ( (t > - 1.1f*Time.fixedDeltaTime) && (t < 0) ) {
 			ang0 = transform.rotation;
 			dEuler[0] = thetaTarget - ang0.eulerAngles.x;
 			dEuler[1] = phiTarget - ang0.eulerAngles.y;
@@ -134,14 +153,15 @@ public class TunnelMover : MonoBehaviour {
 				eulerAcc[i]  = 6f * dEuler[i] / Mathf.Pow (timeLength, 2f);
 			}
 		}
-		else if( (angDt >= timeLength-0.5f*Time.deltaTime) && (angDt <= timeLength+0.5f*Time.deltaTime) ){
+		else if( (t >= timeLength-0.5f*Time.fixedDeltaTime) && (t <= timeLength+0.5f*Time.fixedDeltaTime) ){
 			transform.rotation = Quaternion.Euler( thetaTarget, phiTarget, 0f );
 		}
-		else if( (angDt > 0 ) && (angDt < timeLength) ){
+		else if( (t > 0 ) && (t < timeLength) ){
 			transform.rotation = Quaternion.Euler (
-				ang0.eulerAngles.x + angDt * angDt * (eulerAcc[0]/2f + eulerJerk[0]/6f * angDt),
-				ang0.eulerAngles.y + angDt * angDt * (eulerAcc[1]/2f + eulerJerk[1]/6f * angDt), 0f );
+				ang0.eulerAngles.x + t * t * (eulerAcc[0]/2f + eulerJerk[0]/6f * t),
+				ang0.eulerAngles.y + t * t * (eulerAcc[1]/2f + eulerJerk[1]/6f * t), 0f );
 		}
+
 		if (moveCam) {
 			camera.transform.position = transform.position - new Vector3(
 				transform.position.z*Mathf.Cos (Mathf.PI*transform.rotation.eulerAngles.x/180f)*Mathf.Sin (Mathf.PI*transform.rotation.eulerAngles.y/180f),
@@ -166,7 +186,7 @@ public class TunnelMover : MonoBehaviour {
 	private void doubleSpin( float rotationSpeedZ, float spinAngle ){
 
 		float Theta_i;
-		float dTheta = rotationSpeedZ * Time.deltaTime * Mathf.PI / 180f;;
+		float dTheta = rotationSpeedZ * Time.fixedDeltaTime * Mathf.PI / 180f;;
 		Quaternion Quat_i;
 		Vector3 Pos_ij;
 		float[,] RotMat = new float[2,2];
@@ -228,7 +248,7 @@ public class TunnelMover : MonoBehaviour {
 		float amp = 1000f;
 		
 		// Si c'est la premiere frame de cette flexion, avertir TunnelSpinner pour qu'il cesse d'enregistrer la position
-		if (firstFlexFrame[flexionID]==true) {
+		if ( firstFlexFrame[flexionID]==true ) {
 			firstFlexFrame[flexionID] = false;
 			startFlexion();
 		}
@@ -260,21 +280,11 @@ public class TunnelMover : MonoBehaviour {
 		// Stop the flexion script when amp and the offset are small
 		if (amp < 0.0001f){	
 			flexionDone = true;
-			ApplyDefaultPosition(cubes1);
-			ApplyDefaultPosition(cubes2);
+			endFlexion();
 		}
 		return flexionDone;
 	}
-
-	void ApplyDefaultPosition(CubeInfo[,] cubes)  {	
-		endFlexion();
-		for(int i = 0; i<cubes.GetLength(0); i++){
-			for(int j = 1; j<cubes.GetLength(1); j++){
-				cubes[i,j].transform.localPosition = cubes[i,j].posSansFlexion;
-			}
-		}
-	}
-
+	
 	private void startFlexion(){
 		flexion = true;
 		for (int i = 0 ; i<tunnel.cubeCone1Array.GetLength(0); i++)
@@ -294,38 +304,78 @@ public class TunnelMover : MonoBehaviour {
 	}
 	
 	private void endFlexion(){
-		
 		flexion = false;
 		for (int i = 0 ; i<tunnel.cubeCone1Array.GetLength(0); i++)
 		{
 			for (int j = 0 ; j<tunnel.cubeCone1Array.GetLength(1); j++)
 			{
-				tunnel.cubeCone1Array[i,j].posSansFlexion = tunnel.cubeCone1Array[i,j].transform.localPosition;
+				tunnel.cubeCone1Array[i,j].transform.localPosition = tunnel.cubeCone1Array[i,j].posSansFlexion;
 			}
 		}
 		for (int i = 0 ; i<tunnel.cubeCone2Array.GetLength(0); i++)
 		{
 			for (int j = 0 ; j<tunnel.cubeCone2Array.GetLength(1); j++)
 			{
-				tunnel.cubeCone2Array[i,j].posSansFlexion = tunnel.cubeCone2Array[i,j].transform.localPosition;
+				tunnel.cubeCone2Array[i,j].transform.localPosition = tunnel.cubeCone2Array[i,j].posSansFlexion;
 			}
 		}
 	}
 
-	// ------------------------F L E X I O N   T U N N E L ------------------------------
-	// Make the tunnel bend after the specified time
-	//		for (int i=0; i<song.flexionTime.Length;i++){
-	//			if (song.time() >song.flexionTime[i] && !flexionDone[i]) {
-	//				
-	//				if (song.flexionLength[i] < 4f) {
-	//					Debug.Log("A song.flexion_length is too short. It is ignored");
-	//				}
-	//				else {
-	//					flexionDone[i] = flexTunnel(tunnel.cubeCone1Array,tunnel.cubeCone2Array,
-	//					                            Mathf.Sin (8f*(song.time()-song.flexionTime[i])/song.flexionLength[i])/100f,	
-	//					                            Mathf.Sin (2f*(song.time()-song.flexionTime[i])/song.flexionLength[i])/100f, i);
-	//				}
-	//			}
-	//		}
+
+	// LA DESCENTE AUX ENFERS ! ---------------------------------------------------------------------------------------------------
+	private float speedDae;
+	private float accelDae;
+	private float resetDistDae = 200f;
+	private bool separation = false;
+
+	private void descenteAuxEnfers( float topSpeed, float accelTime, float startTime, float topSpeedtimeLength ){
+		float t = song.time () - startTime;
+
+		// initialisation
+		if ((t > - 1.5 * Time.fixedDeltaTime) && (t < 0f)) {
+			transform.position = new Vector3 (0f,0f,transform.position.z);
+			// Il faut que la camera soit en (0,0,0)
+			camera.transform.position = new Vector3 (0f, 0f, 0f);
+			transform.rotation = Quaternion.Euler( 0f, 0f, 0f );
+			speedDae = 0f;
+			accelDae = topSpeed / accelTime;
+		
+			// deplacement
+		} else if ((t >= 0f) && (t < accelTime)) {
+			transform.position -= new Vector3( 0f, 0f, Time.fixedDeltaTime * (speedDae + 0.5f * accelDae * Time.fixedDeltaTime) );
+			speedDae += accelDae * Time.fixedDeltaTime; 
+
+		} else if ((t >= accelTime) && (t < accelTime + topSpeedtimeLength)) {
+			transform.position -= new Vector3( 0f, 0f, topSpeed * Time.fixedDeltaTime );
+
+		} else if ((t >= accelTime + topSpeedtimeLength) && (t < 2f * accelTime + topSpeedtimeLength)) {
+			if (speedDae > 0f) {
+				transform.position -= new Vector3( 0f, 0f, Time.fixedDeltaTime * (speedDae + 0.5f * -accelDae * Time.fixedDeltaTime) );
+				speedDae -= accelDae * Time.fixedDeltaTime; 
+			}
+		}
+
+		// offset et separation
+		if (transform.position.z <= -32.5f){
+			for (int i = 0; i<tunnel.cubeCone1Array.GetLength(0); i++) {
+				for (int j = 0; j<tunnel.cubeCone1Array.GetLength(1); j++) {
+					tunnel.cubeCone1Array[i,j].transform.localPosition -= new Vector3( 0f, 0f, resetDistDae + 32.5f );
+				}
+			}
+			separation = true;
+			transform.position = new Vector3( 0f, 0f, resetDistDae );
+		}
+
+		// recombinaison
+		if (separation && transform.position.z <= 32.5f) {
+			for (int i = 0; i<tunnel.cubeCone1Array.GetLength(0); i++) {
+				for (int j = 0; j<tunnel.cubeCone1Array.GetLength(1); j++) {
+					tunnel.cubeCone1Array [i, j].transform.localPosition += new Vector3( 0f, 0f, resetDistDae + 32.5f );
+				}
+			}
+			separation = false;
+		}
+	
+	}
 
 }
