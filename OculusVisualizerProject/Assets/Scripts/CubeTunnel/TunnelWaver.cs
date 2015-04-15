@@ -19,10 +19,11 @@ public class TunnelWaver : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		micProcessor.enabled = true;
+		Time.fixedDeltaTime = 1f/18f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 		hauteurBasses   = HauteurCube( songProcessor, 0 );
 		hauteurMoyennes = HauteurCube( songProcessor, 1 );

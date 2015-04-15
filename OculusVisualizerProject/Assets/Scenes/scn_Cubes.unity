@@ -203,7 +203,7 @@ Transform:
   - {fileID: 1906906590}
   - {fileID: 344234768}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!54 &286638756
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -227,11 +227,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 286638752}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f74b69ff1ef2ad45a0f03c02802398f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fdec72cc4103490b9ab4ce5a48752d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
   black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
+  sky:
+  - {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
+  - {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
+  - {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
+  - {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
+  sky1: {fileID: 0}
 --- !u!1 &302059065
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +250,6 @@ GameObject:
   - 92: {fileID: 302059068}
   - 124: {fileID: 302059067}
   - 81: {fileID: 302059066}
-  - 45: {fileID: 302059071}
   - 114: {fileID: 302059072}
   - 54: {fileID: 302059074}
   - 114: {fileID: 302059073}
@@ -284,7 +289,7 @@ Camera:
   m_GameObject: {fileID: 302059065}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -297,7 +302,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -320,14 +325,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!45 &302059071
-Skybox:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 302059065}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: 966766f4829d6ad419eaaf7cf0712f85, type: 2}
 --- !u!114 &302059072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,11 +351,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 302059065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f74b69ff1ef2ad45a0f03c02802398f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fdec72cc4103490b9ab4ce5a48752d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
   black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
+  sky:
+  - {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
+  - {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
+  - {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
+  - {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
+  sky1: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
 --- !u!54 &302059074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -567,10 +570,10 @@ MonoBehaviour:
   startSong: 10
   colorItUp: 12.8999996
   debut2eTiers: 63
-  fin2eTiers: 179
-  bassDrop: 113.5
-  debutLastStretch: 223
-  finLastStretch: 325
+  length2eTiers: 0
+  debut3eTiers: 0
+  length3eTiers: 0
+  descenteAuxEnfers: 0
   songTime: 355
   flexionTime:
   - 0
@@ -582,11 +585,7 @@ MonoBehaviour:
   zSpinLength1: 0
   zSpinTime2: 0
   zSpinLength2: 0
-  skyboxTime:
-  - 0
-  - 0
-  - 0
-  - 0
+  skyboxTime: []
 --- !u!4 &419488047
 Transform:
   m_ObjectHideFlags: 0
@@ -598,7 +597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
 --- !u!1 &457946705
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,7 +1007,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_IsActive
@@ -1221,45 +1220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FloorMat: {fileID: 2100000, guid: 4eb2e162ef4df1f419d2f34671472b0d, type: 2}
---- !u!1 &2075110313
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2075110314}
-  - 114: {fileID: 2075110315}
-  m_Layer: 0
-  m_Name: UniverseHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2075110314
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2075110313}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
---- !u!114 &2075110315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2075110313}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ed2f10317a167b409f6eab418eb5ce6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2088102743
 GameObject:
   m_ObjectHideFlags: 0
