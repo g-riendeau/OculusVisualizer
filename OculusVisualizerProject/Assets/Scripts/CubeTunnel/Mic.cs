@@ -14,8 +14,8 @@ public class Mic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		audio.loop = true; // Set the AudioClip to loop
-		audio.mute = true; // Mute the sound, we don't want the player to hear it
+		GetComponent<AudioSource>().loop = true; // Set the AudioClip to loop
+		GetComponent<AudioSource>().mute = true; // Mute the sound, we don't want the player to hear it
 		selectedDevice = Microphone.devices[0].ToString();
 		micSelected = true;
 
@@ -24,7 +24,7 @@ public class Mic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		audio.volume = (sourceVolume/100);
+		GetComponent<AudioSource>().volume = (sourceVolume/100);
 		loudness = 1000 * GetAveragedVolume() * sensitivity * (sourceVolume/10);
 
 		if (!Microphone.IsRecording(selectedDevice)) 
@@ -32,9 +32,9 @@ public class Mic : MonoBehaviour {
 	}
 	
 	public void StartMicrophone () {
-		audio.clip = Microphone.Start(selectedDevice, true, 10, maxFreq);//Starts recording
+		GetComponent<AudioSource>().clip = Microphone.Start(selectedDevice, true, 10, maxFreq);//Starts recording
 		while (!(Microphone.GetPosition(selectedDevice) > 0)){} // Wait until the recording has started
-		audio.Play(); // Play the audio source!
+		GetComponent<AudioSource>().Play(); // Play the audio source!
 	}
 
 	public void GetMicCaps () {
@@ -46,7 +46,7 @@ public class Mic : MonoBehaviour {
 	float GetAveragedVolume() {
 		float[] data = new float[amountSamples];
 		float a = 0;
-		audio.GetOutputData(data,0);
+		GetComponent<AudioSource>().GetOutputData(data,0);
 		foreach(float s in data) {
 			a += Mathf.Abs(s);
 		}

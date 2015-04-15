@@ -70,7 +70,7 @@ public class TunnelMover : MonoBehaviour {
 			GoToPosition (new Vector3 (0f, 0f, -40f), song.descenteAuxEnfers-10f, 10f);
 		}
 		if ( song.time() >= song.descenteAuxEnfers - Time.fixedDeltaTime){
-			descenteAuxEnfers( 25f, 10f, song.descenteAuxEnfers, 35f );
+			descenteAuxEnfers( 20f, 10f, song.descenteAuxEnfers, 35f );
 		}
 
 
