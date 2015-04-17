@@ -10,6 +10,7 @@ public class TunnelWaver : MonoBehaviour {
 	public AudioProcessor songProcessor ;
 	public AudioProcessor micProcessor ;
 	public CubeTunnel tunnel;
+	public PlanetSystem planets;
 
 	private float hauteurAigues;
 	private float hauteurBasses;
@@ -47,6 +48,8 @@ public class TunnelWaver : MonoBehaviour {
 			ApplyColorFirstRow(tunnel.cubeCone1Array, hauteurBasses, hauteurMoyennes, hauteurAigues);
 		CopyFirstRow (tunnel.cubeCone1Array, tunnel.cubeCone2Array, 0, 1);
 		CopyFirstRow (tunnel.cubeCone1Array, tunnel.cubeCenterArray, 0, tunnel.cubeCenterArray.GetLength(1));
+		if( planets.supernovae )
+			CopyFirstRow (tunnel.cubeCone1Array, planets.cubePlanets, 0, planets.cubePlanets.GetLength (1));
 
 
 		// --------------------------- S C A L E !  -----------------------------------

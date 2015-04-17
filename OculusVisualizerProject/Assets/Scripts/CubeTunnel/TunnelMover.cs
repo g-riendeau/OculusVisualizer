@@ -64,13 +64,13 @@ public class TunnelMover : MonoBehaviour {
 		}
 
 		// 3e Tier
-		if (estDans (song.debut3eTiers-Time.fixedDeltaTime, song.descenteAuxEnfers - song.debut3eTiers)) {
+		if (estDans (song.debut3eTiers-1.5f*Time.fixedDeltaTime, song.descenteAuxEnfers - song.debut3eTiers)) {
 			GoToPosition (new Vector3 (0f, 0f, -10f), song.debut3eTiers, 8f);
-			GoToAngle (720f, 360f, false, song.debut3eTiers, 44f);
-			GoToPosition (new Vector3 (0f, 0f, -40f), song.descenteAuxEnfers-10f, 10f);
+			GoToAngle (720f, 360f, false, song.debut3eTiers+2f, 45f);
+			GoToPosition (new Vector3 (0f, 0f, -40.5f), song.descenteAuxEnfers-18f, 15f);
 		}
-		if ( song.time() >= song.descenteAuxEnfers - Time.fixedDeltaTime){
-			descenteAuxEnfers( 20f, 10f, song.descenteAuxEnfers, 35f );
+		if ( song.time() >= song.descenteAuxEnfers-1.5f*Time.fixedDeltaTime){
+			descenteAuxEnfers( 15f, 15f, song.descenteAuxEnfers, 32.5f );
 		}
 
 
@@ -325,8 +325,9 @@ public class TunnelMover : MonoBehaviour {
 	// LA DESCENTE AUX ENFERS ! ---------------------------------------------------------------------------------------------------
 	private float speedDae;
 	private float accelDae;
-	private float resetDistDae = 200f;
+	private float[] resetDistDae;
 	private bool separation = false;
+	private int iDae = 0;
 
 	private void descenteAuxEnfers( float topSpeed, float accelTime, float startTime, float topSpeedtimeLength ){
 		float t = song.time () - startTime;
@@ -339,6 +340,7 @@ public class TunnelMover : MonoBehaviour {
 			transform.rotation = Quaternion.Euler( 0f, 0f, 0f );
 			speedDae = 0f;
 			accelDae = topSpeed / accelTime;
+			resetDistDae = new float[2] {134.5f,543f};
 		
 			// deplacement
 		} else if ((t >= 0f) && (t < accelTime)) {
@@ -356,24 +358,25 @@ public class TunnelMover : MonoBehaviour {
 		}
 
 		// offset et separation
-		if (transform.position.z <= -32.5f){
+		if (transform.position.z <= -31f){
 			for (int i = 0; i<tunnel.cubeCone1Array.GetLength(0); i++) {
 				for (int j = 0; j<tunnel.cubeCone1Array.GetLength(1); j++) {
-					tunnel.cubeCone1Array[i,j].transform.localPosition -= new Vector3( 0f, 0f, resetDistDae + 32.5f );
+					tunnel.cubeCone1Array[i,j].transform.localPosition -= new Vector3( 0f, 0f, resetDistDae[iDae] );
 				}
 			}
 			separation = true;
-			transform.position = new Vector3( 0f, 0f, resetDistDae );
+			transform.position += new Vector3( 0f, 0f, resetDistDae[iDae] );
 		}
 
 		// recombinaison
-		if (separation && transform.position.z <= 32.5f) {
+		if (separation && transform.position.z <= 31f) {
 			for (int i = 0; i<tunnel.cubeCone1Array.GetLength(0); i++) {
 				for (int j = 0; j<tunnel.cubeCone1Array.GetLength(1); j++) {
-					tunnel.cubeCone1Array [i, j].transform.localPosition += new Vector3( 0f, 0f, resetDistDae + 32.5f );
+					tunnel.cubeCone1Array [i,j].transform.localPosition += new Vector3( 0f, 0f, resetDistDae[iDae] );
 				}
 			}
 			separation = false;
+			iDae++;
 		}
 	
 	}

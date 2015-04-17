@@ -155,7 +155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &286638753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,12 +232,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
   black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
-  sky:
-  - {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
-  - {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
-  - {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
-  - {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
-  sky1: {fileID: 0}
+  sky0: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
+  sky1: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
+  sky2: {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
+  sky3: {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
 --- !u!1 &302059065
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +248,6 @@ GameObject:
   - 92: {fileID: 302059068}
   - 124: {fileID: 302059067}
   - 81: {fileID: 302059066}
-  - 114: {fileID: 302059072}
   - 54: {fileID: 302059074}
   - 114: {fileID: 302059073}
   m_Layer: 0
@@ -259,7 +256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &302059066
 AudioListener:
   m_ObjectHideFlags: 0
@@ -325,24 +322,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &302059072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 302059065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68ec2fe99d1108b9d0006a298d76c639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axes: 0
-  sensitivityX: 15
-  sensitivityY: 15
-  minimumX: -360
-  maximumX: 360
-  minimumY: -60
-  maximumY: 60
 --- !u!114 &302059073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,12 +335,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   song: {fileID: 419488046}
   black: {fileID: 2100000, guid: e0624d0dfc54478439b2cc0edf2b0e84, type: 2}
-  sky:
-  - {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
-  - {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
-  - {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
-  - {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
+  sky0: {fileID: 2100000, guid: e980bc7fbb00dc34b86b95ac842d1920, type: 2}
   sky1: {fileID: 2100000, guid: b8f20d5ca50d16143afc11f5e4af6fc1, type: 2}
+  sky2: {fileID: 2100000, guid: 5b21c6a8ce40f9641bd1204324b90b2c, type: 2}
+  sky3: {fileID: 2100000, guid: 19e2485c6f92d6944ad20466ac77b04c, type: 2}
 --- !u!54 &302059074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -574,6 +551,7 @@ MonoBehaviour:
   debut3eTiers: 0
   length3eTiers: 0
   descenteAuxEnfers: 0
+  supernovae: 0
   songTime: 355
   flexionTime:
   - 0
@@ -661,6 +639,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 942164277}
   m_RootOrder: 2
+--- !u!1 &650590382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 650590384}
+  - 114: {fileID: 650590383}
+  m_Layer: 0
+  m_Name: CubePlanets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &650590383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650590382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cbe354c48f44946839e4a6ee942148, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  song: {fileID: 419488046}
+  FloorMat: {fileID: 2100000, guid: 4eb2e162ef4df1f419d2f34671472b0d, type: 2}
+  supernovae: 0
+--- !u!4 &650590384
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650590382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1 &668380183
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tunnel: {fileID: 2070038662}
   song: {fileID: 419488046}
-  camera: {fileID: 302059065}
+  camera: {fileID: 286638752}
 --- !u!1 &942164275
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,6 +990,7 @@ MonoBehaviour:
   songProcessor: {fileID: 332611556}
   micProcessor: {fileID: 668380184}
   tunnel: {fileID: 2070038662}
+  planets: {fileID: 650590383}
 --- !u!1001 &1411618548
 Prefab:
   m_ObjectHideFlags: 0
@@ -1011,7 +1032,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
