@@ -4,6 +4,7 @@ using System.Collections;
 public class FirstPerson : MonoBehaviour {
 
 	public Camera FirstPersonCamera;
+	public bool gravityUnabled;
 
 	private float MouseSensitivity;
 	private float MouvSpeed;
@@ -51,7 +52,7 @@ public class FirstPerson : MonoBehaviour {
 		speed = transform.rotation * speed;
 
 
-		if (characterController.isGrounded) {
+		if (characterController.isGrounded || !gravityUnabled) {
 			VertVelocity = 0;
 		}
 		else {

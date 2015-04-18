@@ -15,7 +15,7 @@ public class PlanetSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -59,7 +59,7 @@ public class PlanetSystem : MonoBehaviour {
 				// initialisation des positions
 				radius = Random.Range (10f,30f);
 				phi = Random.Range (0f,2f) * Mathf.PI;
-				theta = Random.Range (1f,2f) *Mathf.PI/3f;
+				theta = Random.Range (0.2f,0.8f) *Mathf.PI;
 				cube.transform.localPosition = new Vector3( radius * Mathf.Sin (theta) * Mathf.Cos (phi),
 				                                            radius * Mathf.Sin (theta) * Mathf.Sin (phi),
 				                                            radius * Mathf.Cos (theta) );

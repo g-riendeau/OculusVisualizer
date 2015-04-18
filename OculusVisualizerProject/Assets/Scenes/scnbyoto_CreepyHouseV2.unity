@@ -2718,6 +2718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FirstPersonCamera: {fileID: 936604796}
+  gravityUnabled: 1
 --- !u!1 &1420173353
 GameObject:
   m_ObjectHideFlags: 0
