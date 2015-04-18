@@ -1,0 +1,929 @@
+Initialize engine version: 5.0.1f1 (5a2e8fe35a68)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [igdumdim32.dll 10.18.14.4029]
+    Renderer: Intel(R) HD Graphics 4600
+    Vendor:   Intel
+    VRAM:     1792 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 NULL=1 RESZ=1 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.209 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1280x800 59Hz; virtual: 5120x2160 at 0,0
+<RI> Initialized touch support.
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityScript.Lang.dll (this message is harmless)
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Boo.Lang.dll (this message is harmless)
+Initialize engine version: 5.0.1f1 (5a2e8fe35a68)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [igdumdim32.dll 10.18.14.4029]
+    Renderer: Intel(R) HD Graphics 4600
+    Vendor:   Intel
+    VRAM:     1792 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=1 INTZ=1 NULL=1 RESZ=1 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.260 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1280x800 59Hz; virtual: 5120x2160 at 0,0
+<RI> Initialized touch support.
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityScript.Lang.dll (this message is harmless)
+Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Boo.Lang.dll (this message is harmless)
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: still lost
+Skipped frame because GfxDevice is in invalid state (device lost)
+ 
+(Filename: C:/buildslave/unity/build/Runtime/Misc/Player.cpp Line: 1583)
+
+HandleD3DDeviceLost
+  HandleD3DDeviceLost: needs reset, doing it
+FullResetD3DDevice
+ResetD3DDevice
+dev->Reset
+D3Dwindow device not lost anymore
+Crash!!!
+SymInit: Symbol-SearchPath: '.;C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject;C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject;C:\windows;C:\windows\system32;SRV*C:\websymbols*http://msdl.microsoft.com/download/symbols;', symOptions: 530, UserName: 'Simon'
+OS-Version: 6.2.9200 () 0x300-0x1
+C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy.exe:TestCreepy.exe (00C60000), size: 18104320 (result: 0), SymType: 'PDB', PDB: '.\player_win_development_x86.pdb', fileVersion: 5.0.1.11919
+C:\windows\SYSTEM32\ntdll.dll:ntdll.dll (770F0000), size: 1499136 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\ntdll.dll', fileVersion: 6.3.9600.17736
+C:\windows\SYSTEM32\KERNEL32.DLL:KERNEL32.DLL (74E70000), size: 1310720 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\KERNEL32.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\KERNELBASE.dll:KERNELBASE.dll (74A40000), size: 880640 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\KERNELBASE.dll', fileVersion: 6.3.9600.17415
+C:\windows\system32\apphelp.dll:apphelp.dll (726C0000), size: 655360 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\apphelp.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\HID.DLL:HID.DLL (6E8C0000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\HID.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\WS2_32.dll:WS2_32.dll (75870000), size: 327680 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\WS2_32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\USER32.dll:USER32.dll (753A0000), size: 1388544 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\USER32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\VERSION.dll:VERSION.dll (73FB0000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\VERSION.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\ole32.dll:ole32.dll (755F0000), size: 1212416 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\ole32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\SHLWAPI.dll:SHLWAPI.dll (74950000), size: 282624 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\SHLWAPI.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\PSAPI.DLL:PSAPI.DLL (75A80000), size: 24576 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\PSAPI.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\ADVAPI32.dll:ADVAPI32.dll (74D10000), size: 507904 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\ADVAPI32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\GDI32.dll:GDI32.dll (75290000), size: 1105920 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\GDI32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\SHELL32.dll:SHELL32.dll (75C80000), size: 19578880 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\SHELL32.dll', fileVersion: 6.3.9600.17680
+C:\windows\SYSTEM32\OPENGL32.dll:OPENGL32.dll (69B90000), size: 909312 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\OPENGL32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\WINMM.dll:WINMM.dll (6FE60000), size: 143360 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\WINMM.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\OLEAUT32.dll:OLEAUT32.dll (74DD0000), size: 610304 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\OLEAUT32.dll', fileVersion: 6.3.9600.17560
+C:\windows\SYSTEM32\MSACM32.dll:MSACM32.dll (6E020000), size: 94208 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\MSACM32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\IMM32.dll:IMM32.dll (755C0000), size: 159744 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\IMM32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\DNSAPI.dll:DNSAPI.dll (6F360000), size: 516096 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\DNSAPI.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\IPHLPAPI.DLL:IPHLPAPI.DLL (733C0000), size: 131072 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\IPHLPAPI.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\WINHTTP.dll:WINHTTP.dll (728F0000), size: 651264 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\WINHTTP.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\msvcrt.dll:msvcrt.dll (76F50000), size: 798720 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\msvcrt.dll', fileVersion: 7.0.9600.17415
+C:\windows\SYSTEM32\NSI.dll:NSI.dll (75AF0000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\NSI.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\RPCRT4.dll:RPCRT4.dll (75500000), size: 761856 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\RPCRT4.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\combase.dll:combase.dll (75B00000), size: 1560576 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\combase.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\sechost.dll:sechost.dll (74FB0000), size: 266240 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\sechost.dll', fileVersion: 6.3.9600.17734
+C:\windows\SYSTEM32\GLU32.dll:GLU32.dll (69B60000), size: 151552 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\GLU32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\DDRAW.dll:DDRAW.dll (69A70000), size: 966656 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\DDRAW.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\WINMMBASE.dll:WINMMBASE.dll (6FDF0000), size: 143360 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\WINMMBASE.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\MSCTF.dll:MSCTF.dll (75170000), size: 1122304 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\MSCTF.dll', fileVersion: 6.3.9600.17706
+C:\windows\SYSTEM32\WINNSI.DLL:WINNSI.DLL (733B0000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\WINNSI.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\SspiCli.dll:SspiCli.dll (748F0000), size: 122880 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\SspiCli.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\DCIMAN32.dll:DCIMAN32.dll (69A60000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\DCIMAN32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\cfgmgr32.dll:cfgmgr32.dll (74910000), size: 245760 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\cfgmgr32.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\DEVOBJ.dll:DEVOBJ.dll (6FDC0000), size: 135168 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\DEVOBJ.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\CRYPTBASE.dll:CRYPTBASE.dll (748E0000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\CRYPTBASE.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\bcryptPrimitives.dll:bcryptPrimitives.dll (74880000), size: 344064 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\bcryptPrimitives.dll', fileVersion: 6.3.9600.17415
+C:\Program Files (x86)\AVG\AVG2015\avghookx.dll:avghookx.dll (72160000), size: 512000 (result: 0), SymType: '-nosymbols-', PDB: 'C:\Program Files (x86)\AVG\AVG2015\avghookx.dll', fileVersion: 15.0.0.5863
+C:\windows\SYSTEM32\shcore.dll:shcore.dll (72AA0000), size: 569344 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\shcore.dll', fileVersion: 6.3.9600.17666
+C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Mono\mono.dll:mono.dll (10000000), size: 2289664 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Mono\mono.dll'
+C:\windows\SYSTEM32\MSWSOCK.dll:MSWSOCK.dll (728A0000), size: 307200 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\MSWSOCK.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\dhcpcsvc6.DLL:dhcpcsvc6.DLL (6E3B0000), size: 77824 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\dhcpcsvc6.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\dhcpcsvc.DLL:dhcpcsvc.DLL (6E640000), size: 81920 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\dhcpcsvc.DLL', fileVersion: 6.3.9600.17415
+C:\windows\system32\napinsp.dll:napinsp.dll (6F420000), size: 69632 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\napinsp.dll', fileVersion: 6.3.9600.17415
+C:\windows\system32\pnrpnsp.dll:pnrpnsp.dll (6F400000), size: 90112 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\pnrpnsp.dll', fileVersion: 6.3.9600.17415
+C:\windows\system32\NLAapi.dll:NLAapi.dll (6F3E0000), size: 81920 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\NLAapi.dll', fileVersion: 6.3.9600.17415
+C:\windows\System32\winrnr.dll:winrnr.dll (6F350000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\windows\System32\winrnr.dll', fileVersion: 6.3.9600.17415
+C:\windows\system32\wshbth.dll:wshbth.dll (6F340000), size: 65536 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\wshbth.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\kernel.appcore.dll:kernel.appcore.dll (72A90000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\kernel.appcore.dll', fileVersion: 6.3.9600.17415
+C:\windows\system32\uxtheme.dll:uxtheme.dll (6DE40000), size: 970752 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\uxtheme.dll', fileVersion: 6.3.9600.17415
+C:\windows\system32\dwmapi.dll:dwmapi.dll (6FB30000), size: 106496 (result: 0), SymType: '-exported-', PDB: 'C:\windows\system32\dwmapi.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\d3d9.dll:d3d9.dll (6FB50000), size: 1912832 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\d3d9.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\igdumdim32.dll:igdumdim32.dll (64090000), size: 23359488 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\igdumdim32.dll', fileVersion: 10.18.14.4029
+C:\windows\SYSTEM32\igdusc32.dll:igdusc32.dll (66310000), size: 8867840 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\igdusc32.dll', fileVersion: 10.18.14.4029
+C:\windows\SYSTEM32\MMDevAPI.DLL:MMDevAPI.DLL (6DFC0000), size: 339968 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\MMDevAPI.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\wdmaud.drv:wdmaud.drv (6DF80000), size: 221184 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\wdmaud.drv', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\ksuser.dll:ksuser.dll (6FD30000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\ksuser.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\AVRT.dll:AVRT.dll (6E3D0000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\AVRT.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\AUDIOSES.DLL:AUDIOSES.DLL (67C50000), size: 393216 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\AUDIOSES.DLL', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\powrprof.dll:powrprof.dll (6EC50000), size: 262144 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\powrprof.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\msacm32.drv:msacm32.drv (6DF70000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\msacm32.drv', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\midimap.dll:midimap.dll (6DF60000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\midimap.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\dsound.dll:dsound.dll (67BC0000), size: 528384 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\dsound.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\clbcatq.dll:clbcatq.dll (75740000), size: 577536 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\clbcatq.dll', fileVersion: 2001.12.10530.17415
+C:\windows\SYSTEM32\xinput1_3.dll:xinput1_3.dll (0B920000), size: 90112 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\xinput1_3.dll', fileVersion: 9.18.944.0
+C:\windows\SYSTEM32\SETUPAPI.dll:SETUPAPI.dll (758C0000), size: 1773568 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\SETUPAPI.dll', fileVersion: 6.3.9600.17415
+C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Plugins\OculusPlugin.dll:OculusPlugin.dll (67B20000), size: 638976 (result: 0), SymType: '-exported-', PDB: 'C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Plugins\OculusPlugin.dll'
+C:\windows\SYSTEM32\dxgi.dll:dxgi.dll (69C80000), size: 430080 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\dxgi.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\dbghelp.dll:dbghelp.dll (6F020000), size: 1314816 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\dbghelp.dll', fileVersion: 6.3.9600.17415
+C:\windows\SYSTEM32\Xinput9_1_0.dll:Xinput9_1_0.dll (6DF50000), size: 24576 (result: 0), SymType: '-exported-', PDB: 'C:\windows\SYSTEM32\Xinput9_1_0.dll', fileVersion: 6.3.9600.17415
+
+========== OUTPUTING STACK TRACE ==================
+
+67B31A41 (OculusPlugin) ovr_WaitTillTime
+67B333EA (OculusPlugin) ovr_WaitTillTime
+67B244AE (OculusPlugin) ovrHmd_ConfigureTracking
+054DCDAD (Mono JIT Code) (wrapper managed-to-native) Ovr.Hmd:ovrHmd_ConfigureTracking (intptr,uint,uint)
+054DCD5B (Mono JIT Code) [C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\Assets\OVR\Scripts\OvrCapi.cs:1462] Ovr.Hmd:ConfigureTracking (uint,uint) 
+054DCD2A (Mono JIT Code) [C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\Assets\OVR\Scripts\OVRTracker.cs:100] OVRTracker:set_isEnabled (bool) 
+054DCAEF (Mono JIT Code) [C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\Assets\OVR\Scripts\OVRManager.cs:464] OVRManager:Update () 
+054CE451 (Mono JIT Code) (wrapper runtime-invoke) object:runtime_invoke_void__this__ (object,intptr,intptr,intptr)
+100F054D (mono) mono_set_defaults
+1005D812 (mono) mono_runtime_invoke
+00DCAABE (TestCreepy) scripting_method_invoke
+00E9100C (TestCreepy) ScriptingInvocationNoArgs::Invoke
+00E90E15 (TestCreepy) ScriptingInvocation::Invoke
+00DB8B4A (TestCreepy) MonoBehaviour::CallMethodIfAvailable
+00DBA788 (TestCreepy) MonoBehaviour::Update
+00E49D21 (TestCreepy) PlayerLoop
+00EFD6E5 (TestCreepy) PlayerMainWndProc
+00EFF601 (TestCreepy) PlayerWinMain
+012848A8 (TestCreepy) WinMain
+012BBF99 (TestCreepy) _get_printf_count_output
+74E87C04 (KERNEL32) BaseThreadInitThunk
+7714AD1F (ntdll) RtlInitializeExceptionChain
+7714ACEA (ntdll) RtlInitializeExceptionChain
+
+========== END OF STACKTRACE ===========
+
+**** Crash! ****

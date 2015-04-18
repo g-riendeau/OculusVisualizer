@@ -151,10 +151,10 @@ namespace VolumetricLines
 			mesh.SetIndices(m_vline_indices, MeshTopology.Triangles, 0);
 			GetComponent<MeshFilter>().mesh = mesh;
 			// Need to duplicate the material, otherwise multiple volume lines would interfere
-			renderer.material = renderer.material;
+			GetComponent<Renderer>().material = GetComponent<Renderer>().material;
 			if (m_setMaterialColor)
 			{
-				renderer.sharedMaterial.color = m_lineColor;
+				GetComponent<Renderer>().sharedMaterial.color = m_lineColor;
 			}
 		}
 		
@@ -168,7 +168,7 @@ namespace VolumetricLines
 				SetStartAndEndPoints(m_startPos, m_endPos);
 				if (m_setMaterialColor)
 				{
-					renderer.sharedMaterial.color = m_lineColor;
+					GetComponent<Renderer>().sharedMaterial.color = m_lineColor;
 				}
 			}
 		}
