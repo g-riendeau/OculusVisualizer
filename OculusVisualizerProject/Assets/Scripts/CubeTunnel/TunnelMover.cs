@@ -269,12 +269,12 @@ public class TunnelMover : MonoBehaviour {
 		
 		for(int i = 0; i<cubes1.GetLength(0); i++){
 			for(int j = 1; j<cubes1.GetLength(1); j++){
-				cubes1[i,j].transform.localPosition = new Vector3 ((cubes1[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes1[i,j].posSansFlexion.y + amp*Mathf.Pow(j,2)*sinOffsetY,cubes1[i,j].transform.localPosition.z);
+				cubes1[i,j].transform.localPosition = new Vector3 ((cubes1[i,j].posSansFlexion.x+ amp*Mathf.Pow((float)j,2f)*sinOffsetX),cubes1[i,j].posSansFlexion.y + amp*Mathf.Pow((float)j,2f)*sinOffsetY,cubes1[i,j].transform.localPosition.z);
 			}
 		}
 		for(int i = 0; i<cubes2.GetLength(0); i++){
 			for(int j = 1; j<cubes2.GetLength(1); j++){
-				cubes2[i,j].transform.localPosition = new Vector3 ((cubes2[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes2[i,j].posSansFlexion.y+ amp*Mathf.Pow(j,2)*sinOffsetY,cubes2[i,j].transform.localPosition.z);
+				cubes2[i,j].transform.localPosition = new Vector3 ((cubes2[i,j].posSansFlexion.x+ amp*Mathf.Pow((float)j,2f)*sinOffsetX),cubes2[i,j].posSansFlexion.y+ amp*Mathf.Pow((float)j,2f)*sinOffsetY,cubes2[i,j].transform.localPosition.z);
 			}
 		}
 		// Stop the flexion script when amp and the offset are small

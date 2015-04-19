@@ -63,7 +63,7 @@ public class PlanetSystem : MonoBehaviour {
 				cube.transform.localPosition = new Vector3( radius * Mathf.Sin (theta) * Mathf.Cos (phi),
 				                                            radius * Mathf.Sin (theta) * Mathf.Sin (phi),
 				                                            radius * Mathf.Cos (theta) );
-				cube.transform.localScale = new Vector3( Random.Range (1f,4f), 0.1f, Random.Range(1f,4f) );
+				cube.transform.localScale = new Vector3( Random.Range (1f,10f), 0.1f, Random.Range(1f,10f) );
 				cube.GetComponent<Renderer>().material = FloorMat;
 				cube.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f,1f,1f));
 				
