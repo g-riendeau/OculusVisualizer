@@ -65,9 +65,9 @@ public class TunnelMover : MonoBehaviour {
 
 		// 3e Tier
 		if (estDans (song.debut3eTiers-1.5f*Time.fixedDeltaTime, song.descenteAuxEnfers - song.debut3eTiers)) {
-			GoToPosition ( new Vector3( 0f,-10f,10f), song.debut3eTiers, 2f-Time.fixedDeltaTime);
-			GoToPosition (new Vector3 (0f, 0f, 10f), song.debut3eTiers+2f, 10f);
-			GoToAngle (720f, 360f, false, song.debut3eTiers+2f, 45f);
+			GoToPosition (new Vector3 (0f, -4f, -5f), song.debut3eTiers, 8f-Time.fixedDeltaTime);
+			GoToPosition (new Vector3 (0f, 0f, -10f), song.debut3eTiers+8f+Time.fixedDeltaTime, 8f); 
+			GoToAngle (720f, 360f, false, song.debut3eTiers, 47f);
 			GoToPosition (new Vector3 (0f, 0f, -40.5f), song.descenteAuxEnfers-18f, 15f);
 		}
 		if ( song.time() >= song.descenteAuxEnfers-1.5f*Time.fixedDeltaTime){
