@@ -19,7 +19,7 @@ Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerPro
 Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TestCreepy_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.221 seconds
+- Completed reload, in  0.199 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1280x800 59Hz; virtual: 5120x2160 at 0,0

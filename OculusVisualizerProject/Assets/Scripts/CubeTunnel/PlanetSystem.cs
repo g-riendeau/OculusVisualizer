@@ -4,8 +4,9 @@ using System.Collections;
 public class PlanetSystem : MonoBehaviour {
 
 	public Song song;
-	public Material FloorMat;
+	public CubeTunnel tunnel;
 
+	private Material FloorMat;
 	private const int nCubes = 32;
 	private const int nFois = 2;
 	public CubeInfo[,] cubePlanets = new CubeInfo[ nCubes, nFois ];
@@ -15,7 +16,7 @@ public class PlanetSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		FloorMat = tunnel.FloorMat;
 	}
 	
 	// Update is called once per frame
@@ -63,7 +64,7 @@ public class PlanetSystem : MonoBehaviour {
 				cube.transform.localPosition = new Vector3( radius * Mathf.Sin (theta) * Mathf.Cos (phi),
 				                                            radius * Mathf.Sin (theta) * Mathf.Sin (phi),
 				                                            radius * Mathf.Cos (theta) );
-				cube.transform.localScale = new Vector3( Random.Range (1f,4f), 0.1f, Random.Range(1f,4f) );
+				cube.transform.localScale = new Vector3( Random.Range (1f,10f), 0.1f, Random.Range(1f,10f) );
 				cube.GetComponent<Renderer>().material = FloorMat;
 				cube.GetComponent<Renderer>().material.SetColor("_Color", new Color(1f,1f,1f));
 				
