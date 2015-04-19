@@ -65,9 +65,9 @@ public class TunnelMover : MonoBehaviour {
 
 		// 3e Tier
 		if (estDans (song.debut3eTiers-1.5f*Time.fixedDeltaTime, song.descenteAuxEnfers - song.debut3eTiers)) {
-			GoToPosition ( new Vector3( 0f,-10f,10f), song.debut3eTiers, 2f-Time.fixedDeltaTime);
-			GoToPosition (new Vector3 (0f, 0f, 10f), song.debut3eTiers+2f, 10f);
-			GoToAngle (720f, 360f, false, song.debut3eTiers+2f, 45f);
+			GoToPosition (new Vector3 (0f, -4f, -5f), song.debut3eTiers, 8f-Time.fixedDeltaTime);
+			GoToPosition (new Vector3 (0f, 0f, -10f), song.debut3eTiers+8f+Time.fixedDeltaTime, 8f); 
+			GoToAngle (720f, 360f, false, song.debut3eTiers, 47f);
 			GoToPosition (new Vector3 (0f, 0f, -40.5f), song.descenteAuxEnfers-18f, 15f);
 		}
 		if ( song.time() >= song.descenteAuxEnfers-1.5f*Time.fixedDeltaTime){
@@ -270,12 +270,12 @@ public class TunnelMover : MonoBehaviour {
 		
 		for(int i = 0; i<cubes1.GetLength(0); i++){
 			for(int j = 1; j<cubes1.GetLength(1); j++){
-				cubes1[i,j].transform.localPosition = new Vector3 ((cubes1[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes1[i,j].posSansFlexion.y + amp*Mathf.Pow(j,2)*sinOffsetY,cubes1[i,j].transform.localPosition.z);
+				cubes1[i,j].transform.localPosition = new Vector3 ((cubes1[i,j].posSansFlexion.x+ amp*Mathf.Pow((float)j,2f)*sinOffsetX),cubes1[i,j].posSansFlexion.y + amp*Mathf.Pow((float)j,2f)*sinOffsetY,cubes1[i,j].transform.localPosition.z);
 			}
 		}
 		for(int i = 0; i<cubes2.GetLength(0); i++){
 			for(int j = 1; j<cubes2.GetLength(1); j++){
-				cubes2[i,j].transform.localPosition = new Vector3 ((cubes2[i,j].posSansFlexion.x+ amp*Mathf.Pow(j,2)*sinOffsetX),cubes2[i,j].posSansFlexion.y+ amp*Mathf.Pow(j,2)*sinOffsetY,cubes2[i,j].transform.localPosition.z);
+				cubes2[i,j].transform.localPosition = new Vector3 ((cubes2[i,j].posSansFlexion.x+ amp*Mathf.Pow((float)j,2f)*sinOffsetX),cubes2[i,j].posSansFlexion.y+ amp*Mathf.Pow((float)j,2f)*sinOffsetY,cubes2[i,j].transform.localPosition.z);
 			}
 		}
 		// Stop the flexion script when amp and the offset are small
