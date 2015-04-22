@@ -17,6 +17,7 @@ public class Song : MonoBehaviour {
 	public float length3eTiers;
 
 	public float descenteAuxEnfers;
+	public float supernovae;
 	
 	public float songTime;
 
@@ -42,7 +43,9 @@ public class Song : MonoBehaviour {
 		length2eTiers = 64f;
 		debut3eTiers = 223.75f;
 		length3eTiers = 102.25f;
-		descenteAuxEnfers = 271;
+		descenteAuxEnfers = 271f;
+		supernovae = 290f;
+		songTime = 326f;
 
 		flexionTime = new float[2] {0f,115f};
 		flexionLength = new float[2] {13f,64f};
@@ -52,7 +55,7 @@ public class Song : MonoBehaviour {
 		zSpinTime2 = 51f;
 		zSpinLength2 = 39f;
 
-		skyboxTime = new float[4] {224f,246f,278f,309f};
+		skyboxTime = new float[4] {debut3eTiers,248f,276f,289f};
 
 	}
 

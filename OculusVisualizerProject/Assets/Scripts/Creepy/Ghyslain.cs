@@ -24,7 +24,7 @@ public class Ghyslain : MonoBehaviour {
 	private float iniAttractionForceXZ;
 
 	// pour l'elimination
-	private float criticalDist = 200f;
+	private float criticalDist = 500f;
 //	private List<int> sphereToDeleteList = new List<int>();
 	
 	// parametres qui influencent la force
@@ -32,9 +32,11 @@ public class Ghyslain : MonoBehaviour {
 	private Vector3 relDist;
 	private float topSpeed = 15f;
 	private float cDrag = 0.5f;
+	private int objNbLowAlt = 10;  // Nombre d'objets qui restent à une altitude d'orbite basse p/r à Ghyslain
 
 	private float tempsEclair = 5;
 
+	// paramètres qui influencent le déplacement
 	private bool reachedDestination;
 	private GameObject destination;
 
@@ -125,7 +127,6 @@ public class Ghyslain : MonoBehaviour {
 				objetList.Remove( objetList[i] );
 			Debug.Log ("Objet destroyed cause it was out of range");
 			}
-			
 			// Forces
 			AddForceXZ ( relDist, objetList[i] );
 			AddForceY ( relDist, objetList[i], objetList.Count);
@@ -136,12 +137,12 @@ public class Ghyslain : MonoBehaviour {
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag ("EvilLight");
 		foreach (GameObject eLight in gos) {
-			eLight.light.intensity = Mathf.Lerp ( eLight.light.intensity,0,Time.deltaTime*3);
-			eLight.light.range = Mathf.Lerp ( eLight.light.range,0,Time.deltaTime*3);	
+			eLight.GetComponent<Light>().intensity = Mathf.Lerp ( eLight.GetComponent<Light>().intensity,0,Time.deltaTime*3);
+			eLight.GetComponent<Light>().range = Mathf.Lerp ( eLight.GetComponent<Light>().range,0,Time.deltaTime*3);	
 			
 		}
 		// Un éclair!
-		if (Time.realtimeSinceStartup > tempsEclair)	{
+		if (Time.time > tempsEclair)	{
 			CoupDeTonnerre();
 			tempsEclair = tempsEclair+Random.Range (4,20);			
 		}
@@ -158,8 +159,8 @@ public class Ghyslain : MonoBehaviour {
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag ("EvilLight");
 		foreach (GameObject eLight in gos) {
-			eLight.light.intensity = 2;
-			eLight.light.range = 500;	
+			eLight.GetComponent<Light>().intensity = 2;
+			eLight.GetComponent<Light>().range = 500;	
 			
 		}
 
@@ -170,7 +171,7 @@ public class Ghyslain : MonoBehaviour {
 			elcairLR.SetPosition( 0, transform.position);
 			
 			for (int i = 1; i < 10; i++) {
-				elcairLR.SetPosition( i, new Vector3(transform.position.x + Random.Range (-5,5),i*10-1,transform.position.z + Random.Range (-5,5)));
+				elcairLR.SetPosition( i, new Vector3(transform.position.x + Random.Range (-5,5),transform.position.y + i*10-1,transform.position.z + Random.Range (-5,5)));
 			}
 			StartCoroutine(WaitAndDestroy(0.1f,unEclair));
 		}
@@ -226,11 +227,11 @@ public class Ghyslain : MonoBehaviour {
 		}
 
 		// Application de la force axiale
-		objet.go.rigidbody.AddForce( new Vector3(forceXZ.x,0f,forceXZ.y) );
+		objet.go.GetComponent<Rigidbody>().AddForce( new Vector3(forceXZ.x,0f,forceXZ.y) );
 
 		// Force de Coriolis
-		if( Vector3.Cross((objet.go.transform.position-transform.position),- Vector3.Cross (yVector , objet.go.rigidbody.velocity)).y  > 0) {
-			objet.go.rigidbody.AddForce( - Vector3.Cross (yVector , objet.go.rigidbody.velocity)/2);
+		if( Vector3.Cross((objet.go.transform.position-transform.position),- Vector3.Cross (yVector , objet.go.GetComponent<Rigidbody>().velocity)).y  > 0) {
+			objet.go.GetComponent<Rigidbody>().AddForce( - Vector3.Cross (yVector , objet.go.GetComponent<Rigidbody>().velocity)/2);
 		}
 
 	}
@@ -259,11 +260,11 @@ public class Ghyslain : MonoBehaviour {
 
 */
 		float forceY = 0;
-		if (objet.id >= Mathf.Ceil(objetNb/2)){
+		if (objet.id >= objetNb - objNbLowAlt){
 			forceY = relDist.y/2;
 		}
 		else  {
-			forceY = objet.id+relDist.y;
+			forceY = (objetNb-objNbLowAlt-objet.id)/2+relDist.y/2;
 		}
 
 		// Terme de drag
@@ -272,7 +273,7 @@ public class Ghyslain : MonoBehaviour {
 		// Terme anti gravite
 		forceY += 9.81f;
 
-		objet.go.rigidbody.AddForce( new Vector3(0f, forceY, 0f) );
+		objet.go.GetComponent<Rigidbody>().AddForce( new Vector3(0f, forceY, 0f) );
 	}
 
 	// Calcul du drag---------------------------------------------------------------------------
@@ -280,45 +281,41 @@ public class Ghyslain : MonoBehaviour {
 		// Variables
 		Vector3 dragForce;
 		// Il n'y a de drag qu'au dessus d'une vitesse seuil
-		if (objet.go.rigidbody.velocity.magnitude < topSpeed){
+		if (objet.go.GetComponent<Rigidbody>().velocity.magnitude < topSpeed){
 			return;
 		}
 			// Drag en v^2
-			dragForce = - cDrag * objet.go.rigidbody.velocity.magnitude / topSpeed *
-				objet.go.rigidbody.velocity / topSpeed;
+			dragForce = - cDrag * objet.go.GetComponent<Rigidbody>().velocity.magnitude / topSpeed *
+				objet.go.GetComponent<Rigidbody>().velocity / topSpeed;
 
-		objet.go.rigidbody.AddForce( dragForce );
+		objet.go.GetComponent<Rigidbody>().AddForce( dragForce );
 	}
 
 
 	// Add a new objet to Gyslain gravitational pull
 	public void PullObjet(passiveObjet unObjet)  {
-		unObjet.go.transform.rigidbody.isKinematic = false;
-		if (unObjet.go.rigidbody.mass >=5) {
-			objetList.Add ( new activeObjet(unObjet.go, Random.Range(60f,70f), Random.Range(75f,100f), Random.Range(5000f,10000f), objetList.Count));
+		unObjet.go.transform.GetComponent<Rigidbody>().isKinematic = false;
+		if (unObjet.go.GetComponent<Rigidbody>().mass >=5) {
+			objetList.Add ( new activeObjet(unObjet.go, Random.Range(20f,35f), Random.Range(40f,100f), Random.Range(2000f,10000f), objetList.Count));
 		}
-		else if (unObjet.go.rigidbody.mass >=2) {
-			objetList.Add ( new activeObjet(unObjet.go, Random.Range(7f,20f), Random.Range(20f,60f), Random.Range(500f,5000f), objetList.Count));
+		else if (unObjet.go.GetComponent<Rigidbody>().mass >=2) {
+			objetList.Add ( new activeObjet(unObjet.go, Random.Range(7f,20f), Random.Range(20f,60f), Random.Range(1000f,5000f), objetList.Count));
 		}
-		else {
-			objetList.Add ( new activeObjet(unObjet.go, Random.Range(3f,10f), Random.Range(15f,35f), Random.Range(300f,1500f), objetList.Count));
+		else if (unObjet.go.GetComponent<Rigidbody>().mass >=1){
+			objetList.Add ( new activeObjet(unObjet.go, Random.Range(3f,10f), Random.Range(15f,35f), Random.Range(500f,2000f), objetList.Count));
+		}
+		else{
+			objetList.Add ( new activeObjet(unObjet.go, Random.Range(3f,10f), Random.Range(15f,35f), Random.Range(500f,2000f), objetList.Count));		
+		}
 
-		}
 		// Set la masse de tout les objets a 1.
-		unObjet.go.rigidbody.mass = 1;
+		unObjet.go.GetComponent<Rigidbody>().mass = 1;
 	}
 
 	// Add a new objet. A soft pull will attrack some objets in range
 	public void ObjetInRange(GameObject unObjet)  {
-
-		objetInRangeList.Add (new passiveObjet(unObjet,objetInRangeList.Count,(transform.position-unObjet.transform.position).magnitude, unObjet.rigidbody.mass));
+		objetInRangeList.Add (new passiveObjet(unObjet,objetInRangeList.Count,(transform.position-unObjet.transform.position).magnitude, unObjet.GetComponent<Rigidbody>().mass));
 	}
-
-	/*
-	// Add a new objet. A soft pull will attrack some objets in range
-	public void SphereOutOfRange(GameObject uneSphere)  {
-		objetInRangeList.Remove (uneSphere);
-	}
-	*/
+	
 }
 

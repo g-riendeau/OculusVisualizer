@@ -38,7 +38,6 @@ public class SkyBoxChanger : MonoBehaviour {
 			RenderSettings.skybox = sky3;
 			switchSky [3] = true;
 		}
-
 	}
 	
 

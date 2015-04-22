@@ -7,5 +7,5 @@ public class CubeInfo: MonoBehaviour {
 	public float jRatio;
 	public float jWidth;
 	public Vector3 posSansFlexion;
-
+	public Rigidbody cubeRB;
 }

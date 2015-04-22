@@ -26,6 +26,7 @@ public class Lights : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Bouge cette folle lumiere directionnel
+
 		DirLight1.transform.Rotate 	(0, Time.deltaTime*100f, 0);
 
 		i = 0;
@@ -52,4 +53,5 @@ public class Lights : MonoBehaviour {
 		}
 
 	}
+
 }
