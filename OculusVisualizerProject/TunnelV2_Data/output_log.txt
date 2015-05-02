@@ -19,10 +19,10 @@ Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerPro
 Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TunnelV2_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TunnelV2_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TunnelV2_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.220 seconds
+- Completed reload, in  0.216 seconds
 <RI> Initializing input.
 <RI> Input initialized.
-desktop: 1280x800 59Hz; virtual: 5120x2177 at 0,-17
+desktop: 1280x800 59Hz; virtual: 5120x2184 at 0,-24
 <RI> Initialized touch support.
 Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TunnelV2_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Simon\Documents\OculusVisualizer\OculusVisualizerProject\TunnelV2_Data\Managed\UnityScript.Lang.dll (this message is harmless)

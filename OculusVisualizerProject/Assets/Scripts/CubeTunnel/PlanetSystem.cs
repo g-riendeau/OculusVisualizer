@@ -4,7 +4,8 @@ using System.Collections;
 public class PlanetSystem : MonoBehaviour {
 
 	public Song song;
-	public Material FloorMat;
+	public CubeTunnel tunnel;
+	private Material FloorMat;
 
 	private const int nCubes = 32;
 	private const int nFois = 2;
@@ -15,7 +16,7 @@ public class PlanetSystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		FloorMat = tunnel.FloorMat;
 	}
 	
 	// Update is called once per frame

@@ -55,7 +55,7 @@ public class Song : MonoBehaviour {
 		zSpinTime2 = 51f;
 		zSpinLength2 = 39f;
 
-		skyboxTime = new float[4] {debut3eTiers,248f,276f,289f};
+		skyboxTime = new float[4] {debut3eTiers,247f,276f,289f};
 
 	}
 
