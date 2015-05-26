@@ -17,14 +17,13 @@ public class AudioProcessor : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate ()
+	public virtual void FixedUpdate ()
 	{
-		GetComponent<AudioSource>().GetSpectrumData (amplitudes, 0, FFTWindow.BlackmanHarris);
-
+		//ON ne rempli plus les amplitudes ici. On doit utiliser les classes enfant
+		//MicProcessor ou SongProcessor
 		// Pour fastForward la toune
 		if (Input.GetKeyDown ("f")) {
 			Time.timeScale = 8f;
@@ -39,12 +38,5 @@ public class AudioProcessor : MonoBehaviour
 			Debug.Log ("Normal speed");
 			GetComponent<AudioSource>().mute = false;					
 		}
-		if (Time.timeScale != 1f)
-			Debug.Log (Mathf.Round (song.time ()));
 	}
-
-	public void startPlaying (){
-		GetComponent<AudioSource>().Play ();
-	}
-
 }

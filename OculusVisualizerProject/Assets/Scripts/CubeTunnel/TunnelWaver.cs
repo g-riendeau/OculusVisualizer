@@ -7,8 +7,8 @@ using System.Linq;
 public class TunnelWaver : MonoBehaviour {
 
 	public Song song;
-	public AudioProcessor songProcessor ;
-	public AudioProcessor micProcessor ;
+	public SongProcessor songProcessor ;
+	public MicProcessor micProcessor ;
 	public CubeTunnel tunnel;
 	public PlanetSystem planets;
 

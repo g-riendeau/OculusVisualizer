@@ -34,7 +34,6 @@ public class TunnelMover : MonoBehaviour {
 		zSpinSpeed3 = 8f * 360f / song.length3eTiers;
 		omega3eTiers = 8f * Mathf.PI / song.length3eTiers;
 		rockTime2 = 215.5f;
-
 	}
 	
 

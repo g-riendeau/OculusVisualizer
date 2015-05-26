@@ -4,8 +4,9 @@ using System.Collections;
 public class Song : MonoBehaviour {
 
 	
-	public AudioProcessor songProcessor;
+	public SongProcessor songProcessor;
 	public bool songPlaying = false;
+	public bool firstFade = false;
 
 	public float startSong;
 	public float colorItUp;
@@ -64,6 +65,12 @@ public class Song : MonoBehaviour {
 			songProcessor.startPlaying();
 			songPlaying = true;
 		}
+
+		//Music fade tests
+		/*if(time () >= colorItUp && !firstFade){
+			songProcessor.leaveTunnel();
+			firstFade = true;
+		}*/
 	}
 
 
