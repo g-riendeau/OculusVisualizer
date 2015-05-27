@@ -334,6 +334,7 @@ MonoBehaviour:
   song: {fileID: 419488046}
   mainSong: {fileID: 332611558}
   outsideSong: {fileID: 332611559}
+  otherOutsideSong: {fileID: 8300000, guid: 2fa53614f73977c46bdcef0b09346dc4, type: 3}
 --- !u!4 &332611557
 Transform:
   m_ObjectHideFlags: 0
@@ -513,7 +514,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songProcessor: {fileID: 332611556}
   songPlaying: 0
-  firstFade: 0
+  outsideSongPlaying: 0
+  firstExitDone: 0
+  secondExitDone: 0
+  thirdExitDone: 0
+  lastExitDone: 0
+  firstEnterDone: 0
+  secondEnterDone: 0
+  thirdEnterDone: 0
+  lastEnterDone: 0
   startSong: 10
   colorItUp: 12.8999996
   debut2eTiers: 63
@@ -522,6 +531,14 @@ MonoBehaviour:
   length3eTiers: 0
   descenteAuxEnfers: 0
   supernovae: 0
+  leave1: 0
+  enter1: 0
+  leave2: 0
+  enter2: 0
+  leave3: 0
+  enter3: 0
+  leave4: 0
+  enter4: 0
   songTime: 355
   flexionTime:
   - 0

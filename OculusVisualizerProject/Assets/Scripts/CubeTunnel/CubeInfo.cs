@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class CubeInfo: MonoBehaviour {
-	public float lastScale;
+	public float lastScaleY;
+	public float lastScaleZ;
 	public Color lastColor;
 	public float jRatio;
 	public float jWidth;

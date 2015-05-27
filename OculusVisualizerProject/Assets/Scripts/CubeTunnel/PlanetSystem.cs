@@ -82,7 +82,8 @@ public class PlanetSystem : MonoBehaviour {
 				cubePlanets[i,j].jRatio = 1f;
 				cubePlanets[i,j].jWidth = cube.transform.localScale.x;
 				cubePlanets[i,j].posSansFlexion = cube.transform.localPosition;
-				cubePlanets[i,j].lastScale = 0.1f;
+				cubePlanets[i,j].lastScaleY = 0.1f;
+				cubePlanets[i,j].lastScaleZ = 0.1f;
 				cubePlanets[i,j].lastColor = cube.GetComponent<Renderer>().material.color;
 
 				// ajout de rigidbody

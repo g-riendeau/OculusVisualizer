@@ -189,64 +189,78 @@ public class TunnelWaver : MonoBehaviour {
 		
 		///Valeurs connues:
 		/// MidsR:
-		cubes[idxMidRight,0].lastScale = cubes[idxMidRight,0].transform.localScale.y;
-		cubes[idxMidRight,0].transform.localScale = new Vector3( cubes[idxMidRight,0].jWidth, hauteurMoyennes, 1f) ;
+		cubes[idxMidRight,0].lastScaleY = cubes[idxMidRight,0].transform.localScale.y;
+		cubes[idxMidRight,0].lastScaleZ = cubes[idxMidRight,0].transform.localScale.z;
+
+		cubes[idxMidRight,0].transform.localScale = new Vector3( cubes[idxMidRight,0].jWidth, hauteurMoyennes, 1.0f + hauteurMoyennes/3.0f) ;
 		
 		//MidsL
-		cubes[idxMidLeft,0].lastScale = cubes[idxMidLeft,0].transform.localScale.y;
-		cubes[idxMidLeft,0].transform.localScale = new Vector3( cubes[idxMidLeft,0].jWidth, hauteurMoyennes, 1f) ;
+		cubes[idxMidLeft,0].lastScaleY = cubes[idxMidLeft,0].transform.localScale.y;
+		cubes[idxMidLeft,0].lastScaleZ = cubes[idxMidLeft,0].transform.localScale.z;
+		cubes[idxMidLeft,0].transform.localScale = new Vector3( cubes[idxMidLeft,0].jWidth, hauteurMoyennes,1.0f + hauteurMoyennes/3.0f) ;
 		
 		// Graves:
-		cubes[idxGraves,0].lastScale = cubes[idxGraves,0].transform.localScale.y;
-		cubes[idxGraves,0].transform.localScale = new Vector3( cubes[idxGraves,0].jWidth, hauteurBasses, 1f) ;
+		cubes[idxGraves,0].lastScaleY = cubes[idxGraves,0].transform.localScale.y;
+		cubes[idxGraves,0].lastScaleZ = cubes[idxGraves,0].transform.localScale.z;
+		cubes[idxGraves,0].transform.localScale = new Vector3( cubes[idxGraves,0].jWidth, hauteurBasses,1.0f + hauteurBasses/3.0f) ;
 		
 		// Aigues:
-		cubes[idxAigues,0].lastScale = cubes[idxAigues,0].transform.localScale.y;
-		cubes[idxAigues,0].transform.localScale = new Vector3( cubes[idxAigues,0].jWidth, hauteurAigues, 1f) ;
+		cubes[idxAigues,0].lastScaleY = cubes[idxAigues,0].transform.localScale.y;
+		cubes[idxAigues,0].lastScaleZ = cubes[idxAigues,0].transform.localScale.z;
+		cubes[idxAigues,0].transform.localScale = new Vector3( cubes[idxAigues,0].jWidth, hauteurAigues, 1.0f + hauteurAigues/3.0f) ;
 		
 		float prop1 = 0f;
 		float prop2 = 0f;
 		
 		//interpoller:
 		float scale = 0f;
+		float scalez = 0f;
 		int dist = idxAigues - idxMidRight;
 		for(int i = idxMidRight+1; i<idxAigues; i++){
-			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleY = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleZ = cubes[i,0].transform.localScale.z;
 			
 			prop1 = (1f - (float)(i-idxMidRight)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurMoyennes) + (prop2*hauteurAigues);
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
+			scalez = (prop1*(1.0f + hauteurMoyennes/3.0f)) + (prop2*(1.0f + hauteurAigues/3.0f));
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, scalez) ;
 		}
 		
 		dist = idxMidLeft - idxAigues;
 		for(int i = idxAigues+1; i<idxMidLeft; i++){
-			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleY = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleZ = cubes[i,0].transform.localScale.z;
 			
 			prop1 = (1f - (float)(i-idxAigues)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurAigues) + (prop2*hauteurMoyennes);
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
+			scalez = (prop1*(1.0f * hauteurAigues/3.0f)) + (prop2*(1.0f * hauteurMoyennes/3.0f));
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1.0f+scale/3) ;
 		}
 		
 		dist = idxGraves - idxMidLeft;
 		for(int i = idxMidLeft+1; i<idxGraves; i++){
-			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleY = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleZ = cubes[i,0].transform.localScale.z;
 			
 			prop1 = (1f - (float)(i-idxMidLeft)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurMoyennes) + (prop2*hauteurBasses);
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
+			scalez = (prop1*(1.0f+hauteurMoyennes/3.0f)) + (prop2*(1.0f+hauteurBasses/3.0f));
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, scalez) ;
 		}
 		
 		dist = largeur - idxGraves;
 		for(int i = idxGraves+1; i<largeur; i++){
-			cubes[i,0].lastScale = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleY = cubes[i,0].transform.localScale.y;
+			cubes[i,0].lastScaleZ = cubes[i,0].transform.localScale.z;
 			
 			prop1 = (1f - (float)(i-idxGraves)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurBasses) + (prop2*hauteurMoyennes);
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1f) ;
+			scalez = (prop1*(1.0f + hauteurBasses/3.0f)) + (prop2*(1.0f + hauteurMoyennes/3.0f));
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1.0f+scale/3);
 		}
 		
 	}
@@ -254,7 +268,8 @@ public class TunnelWaver : MonoBehaviour {
 	void CopyFirstRow(CubeInfo[,] original, CubeInfo[,] copy, int z0, int nZ){
 		for (int i = 0; i<original.GetLength(0); i++) {
 			for (int j = z0; j<(z0+nZ); j++) {
-				copy[i,j].lastScale = original[i,0].lastScale;
+				copy[i,j].lastScaleY = original[i,0].lastScaleY;
+				copy[i,j].lastScaleZ = original[i,0].lastScaleZ;
 				copy[i,j].transform.localScale = original[i,0].transform.localScale;
 				copy[i,j].lastColor = original[i,0].lastColor;
 				copy[i,j].GetComponent<Renderer>().material.SetColor("_Color",original[i,0].GetComponent<Renderer>().material.GetColor("_Color"));
@@ -326,8 +341,9 @@ public class TunnelWaver : MonoBehaviour {
 			for(int j = 1; j<cubes.GetLength(1); j++)	{
 				//Le jratio sert a prendre en compte l'effet conique. Si on ne divisait pas par jratio, 
 				//on aurait l'impression que les scale augmente avec la profondeur
-				cubes[i,j].lastScale = cubes[i,j].transform.localScale.y / cubes[i,j].jRatio;
-				cubes[i,j].transform.localScale = new Vector3( cubes[i,j].jWidth, cubes[i,j].jRatio * cubes[i,j-1].lastScale, 1f) ;
+				cubes[i,j].lastScaleY = cubes[i,j].transform.localScale.y / cubes[i,j].jRatio;
+				cubes[i,j].lastScaleZ = cubes[i,j].transform.localScale.z / cubes[i,j].jRatio;
+				cubes[i,j].transform.localScale = new Vector3( cubes[i,j].jWidth, cubes[i,j].jRatio * cubes[i,j-1].lastScaleY, cubes[i,j].jRatio * cubes[i,j-1].lastScaleZ) ;
 			}
 		}
 	} 

@@ -71,7 +71,8 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCone1Array[(int)i,(int)j].jRatio = jRatio;
 				cubeCone1Array[(int)i,(int)j].jWidth = jWidth;
 				cubeCone1Array[(int)i,(int)j].posSansFlexion = cube.transform.localPosition;
-				cubeCone1Array[(int)i,(int)j].lastScale = 0.1f;
+				cubeCone1Array[(int)i,(int)j].lastScaleY = 0.1f;
+				cubeCone1Array[(int)i,(int)j].lastScaleZ = 1.0f;
 				cubeCone1Array[(int)i,(int)j].lastColor = cube.GetComponent<Renderer>().material.color;
 
 			}
@@ -113,7 +114,8 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCone2Array[(int)i,(int)j].jRatio = jRatio;
 				cubeCone2Array[(int)i,(int)j].jWidth = jWidth;
 				cubeCone2Array[(int)i,(int)j].posSansFlexion = cube.transform.localPosition ;
-				cubeCone2Array[(int)i,(int)j].lastScale = 0.1f;
+				cubeCone2Array[(int)i,(int)j].lastScaleY = 0.1f;
+				cubeCone2Array[(int)i,(int)j].lastScaleZ = 1.0f;
 				cubeCone2Array[(int)i,(int)j].lastColor = cube.GetComponent<Renderer>().material.color;
 				
 			}
@@ -154,7 +156,8 @@ public class CubeTunnel : MonoBehaviour {
 				cubeCenterArray[(int)i,(int)j].jRatio = jRatio;
 				cubeCenterArray[(int)i,(int)j].jWidth = jWidth;
 				cubeCenterArray[(int)i,(int)j].posSansFlexion = cube.transform.localPosition;
-				cubeCenterArray[(int)i,(int)j].lastScale = 0.1f;
+				cubeCenterArray[(int)i,(int)j].lastScaleY = 0.1f;
+				cubeCenterArray[(int)i,(int)j].lastScaleZ = 1.0f;
 				cubeCenterArray[(int)i,(int)j].lastColor = cube.GetComponent<Renderer>().material.color;
 				
 			}

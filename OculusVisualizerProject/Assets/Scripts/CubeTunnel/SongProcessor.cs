@@ -6,6 +6,7 @@ public class SongProcessor : AudioProcessor
 {
 	public AudioSource mainSong; 
 	public AudioSource outsideSong;
+	public AudioClip otherOutsideSong;
 	private bool mainSongFadeOut = false;
 	private bool mainSongFadeIn=false;
 	private bool outsideSongFadeOut = false;
@@ -22,50 +23,90 @@ public class SongProcessor : AudioProcessor
 	public override void FixedUpdate ()
 	{
 		mainSong.GetSpectrumData (amplitudes, 0, FFTWindow.BlackmanHarris);
-		base.FixedUpdate();
+		//Accelerer
+		if (Input.GetKeyDown ("f")) {
+			Time.timeScale = 8f;
+			mainSong.pitch = 8f;
+			outsideSong.pitch = 8f;
+			//mainSong.mute = true;	
+			//outsideSong.mute = true;
+			Debug.Log ("x8");
+		}
+		// Pour Ralentir la toune
+		if (Input.GetKeyDown ("b")) {
+			Time.timeScale = 1f;
+			mainSong.pitch = 1f;
+			outsideSong.pitch = 1f;
+
+			//mainSong.mute = false;	
+			//outsideSong.mute = false;	
+			Debug.Log ("Normal speed");
+		}
 
 		if (mainSongFadeOut){
-			fadeOut(mainSong,mainSongFadeOut );
+			fadeOut(ref mainSong,ref mainSongFadeOut );
 		}
+
 		if (outsideSongFadeOut){
-			fadeOut(outsideSong, outsideSongFadeOut);
+			fadeOut(ref outsideSong, ref outsideSongFadeOut);
 		}
+
 		if (mainSongFadeIn){
-			fadeIn(mainSong, mainSongFadeIn);
+			fadeIn(ref mainSong, ref mainSongFadeIn);
 		}
+
 		if (outsideSongFadeIn){
-			fadeIn(outsideSong, outsideSongFadeIn);
+			fadeIn(ref outsideSong, ref outsideSongFadeIn);
 		}
 	}
 	public void startPlaying (){
 		mainSong.Play ();
+	}
+
+	public void startOutsideSong(){
 		outsideSong.Play ();
 	}
 
 	public void leaveTunnel(){
 		mainSongFadeOut = true;
 		outsideSongFadeIn = true;
-		Debug.Log("LEaving tunnel!!");
+		//Debug.Log("Leaving tunnel!!");
 	}
 	public void enterTunnel(){
 		mainSongFadeIn = true;
 		outsideSongFadeOut = true;
 	}
 
-	private void fadeOut(AudioSource audio, bool continu){
-		if(audio.volume > 0.01f){
-			audio.volume -= 0.2f * Time.fixedDeltaTime;
-		}
-		else
-			continu=false;
+	public void setOutsideSongTime(float theTime)
+	{
+		outsideSong.time = theTime;
 	}
 
-	private void fadeIn(AudioSource audio, bool continu){
-		if (audio.volume < 1f) {
-			audio.volume += 0.2f * Time.fixedDeltaTime;
+	public void changeOutsideSong()
+	{
+		outsideSong.clip = otherOutsideSong;
+		outsideSong.Play();
+	}
+
+	private void fadeOut(ref AudioSource audio, ref bool continu){
+		if(audio.volume > 0.01f){
+			audio.volume = Mathf.Max(0.01f, audio.volume -= 0.8f * Time.fixedDeltaTime);
+			//audio.volume = 0.01f;
 		}
-		else
+		else{
 			continu=false;
+		}
+	}
+
+	private void fadeIn(ref AudioSource audio, ref  bool continu){
+		if (audio.volume < 1.0f) {
+			audio.volume = Mathf.Min (1.0f, audio.volume += 0.8f * Time.fixedDeltaTime);
+			//audio.volume = 1.0f;
+		}
+		else{
+			//Debug.Log ("Fade in done");
+			continu=false;
+		}
 	}
 
 }
