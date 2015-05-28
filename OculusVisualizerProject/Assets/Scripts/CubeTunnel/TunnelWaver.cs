@@ -192,22 +192,22 @@ public class TunnelWaver : MonoBehaviour {
 		cubes[idxMidRight,0].lastScaleY = cubes[idxMidRight,0].transform.localScale.y;
 		cubes[idxMidRight,0].lastScaleZ = cubes[idxMidRight,0].transform.localScale.z;
 
-		cubes[idxMidRight,0].transform.localScale = new Vector3( cubes[idxMidRight,0].jWidth, hauteurMoyennes, 1.0f + hauteurMoyennes/3.0f) ;
+		cubes[idxMidRight,0].transform.localScale = new Vector3( cubes[idxMidRight,0].jWidth, hauteurMoyennes, 1.0f + hauteurMoyennes/5.0f) ;
 		
 		//MidsL
 		cubes[idxMidLeft,0].lastScaleY = cubes[idxMidLeft,0].transform.localScale.y;
 		cubes[idxMidLeft,0].lastScaleZ = cubes[idxMidLeft,0].transform.localScale.z;
-		cubes[idxMidLeft,0].transform.localScale = new Vector3( cubes[idxMidLeft,0].jWidth, hauteurMoyennes,1.0f + hauteurMoyennes/3.0f) ;
+		cubes[idxMidLeft,0].transform.localScale = new Vector3( cubes[idxMidLeft,0].jWidth, hauteurMoyennes,1.0f + hauteurMoyennes/5.0f) ;
 		
 		// Graves:
 		cubes[idxGraves,0].lastScaleY = cubes[idxGraves,0].transform.localScale.y;
 		cubes[idxGraves,0].lastScaleZ = cubes[idxGraves,0].transform.localScale.z;
-		cubes[idxGraves,0].transform.localScale = new Vector3( cubes[idxGraves,0].jWidth, hauteurBasses,1.0f + hauteurBasses/3.0f) ;
+		cubes[idxGraves,0].transform.localScale = new Vector3( cubes[idxGraves,0].jWidth, hauteurBasses,1.0f + hauteurBasses/5.0f) ;
 		
 		// Aigues:
 		cubes[idxAigues,0].lastScaleY = cubes[idxAigues,0].transform.localScale.y;
 		cubes[idxAigues,0].lastScaleZ = cubes[idxAigues,0].transform.localScale.z;
-		cubes[idxAigues,0].transform.localScale = new Vector3( cubes[idxAigues,0].jWidth, hauteurAigues, 1.0f + hauteurAigues/3.0f) ;
+		cubes[idxAigues,0].transform.localScale = new Vector3( cubes[idxAigues,0].jWidth, hauteurAigues, 1.0f + hauteurAigues/5.0f) ;
 		
 		float prop1 = 0f;
 		float prop2 = 0f;
@@ -223,7 +223,7 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxMidRight)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurMoyennes) + (prop2*hauteurAigues);
-			scalez = (prop1*(1.0f + hauteurMoyennes/3.0f)) + (prop2*(1.0f + hauteurAigues/3.0f));
+			scalez = (prop1*(1.0f + hauteurMoyennes/5.0f)) + (prop2*(1.0f + hauteurAigues/5.0f));
 			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, scalez) ;
 		}
 		
@@ -235,8 +235,8 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxAigues)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurAigues) + (prop2*hauteurMoyennes);
-			scalez = (prop1*(1.0f * hauteurAigues/3.0f)) + (prop2*(1.0f * hauteurMoyennes/3.0f));
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1.0f+scale/3) ;
+			scalez = (prop1*(1.0f + hauteurAigues/5.0f)) + (prop2*(1.0f + hauteurMoyennes/5.0f));
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, scalez) ;
 		}
 		
 		dist = idxGraves - idxMidLeft;
@@ -247,7 +247,7 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxMidLeft)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurMoyennes) + (prop2*hauteurBasses);
-			scalez = (prop1*(1.0f+hauteurMoyennes/3.0f)) + (prop2*(1.0f+hauteurBasses/3.0f));
+			scalez = (prop1*(1.0f+hauteurMoyennes/5.0f)) + (prop2*(1.0f+hauteurBasses/5.0f));
 			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, scalez) ;
 		}
 		
@@ -259,8 +259,8 @@ public class TunnelWaver : MonoBehaviour {
 			prop1 = (1f - (float)(i-idxGraves)/dist);
 			prop2 = 1f-prop1;
 			scale = (prop1*hauteurBasses) + (prop2*hauteurMoyennes);
-			scalez = (prop1*(1.0f + hauteurBasses/3.0f)) + (prop2*(1.0f + hauteurMoyennes/3.0f));
-			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, 1.0f+scale/3);
+			scalez = (prop1*(1.0f + hauteurBasses/5.0f)) + (prop2*(1.0f + hauteurMoyennes/5.0f));
+			cubes[i,0].transform.localScale = new Vector3( cubes[i,0].jWidth, scale, scalez);
 		}
 		
 	}
@@ -298,7 +298,7 @@ public class TunnelWaver : MonoBehaviour {
 		case 0 :
 			cuton = 0;
 			cutoff = 8;
-			scale = 120f;
+			scale = 100f;
 			break;
 		case 1 :
 			cuton = 16;
@@ -308,7 +308,7 @@ public class TunnelWaver : MonoBehaviour {
 		case 2 :
 			cuton = 512;
 			cutoff = 1024;
-			scale = 12000f;
+			scale = 16000f;
 			break;
 		default :
 			amplitudes = new float[1];
@@ -342,8 +342,8 @@ public class TunnelWaver : MonoBehaviour {
 				//Le jratio sert a prendre en compte l'effet conique. Si on ne divisait pas par jratio, 
 				//on aurait l'impression que les scale augmente avec la profondeur
 				cubes[i,j].lastScaleY = cubes[i,j].transform.localScale.y / cubes[i,j].jRatio;
-				cubes[i,j].lastScaleZ = cubes[i,j].transform.localScale.z / cubes[i,j].jRatio;
-				cubes[i,j].transform.localScale = new Vector3( cubes[i,j].jWidth, cubes[i,j].jRatio * cubes[i,j-1].lastScaleY, cubes[i,j].jRatio * cubes[i,j-1].lastScaleZ) ;
+				cubes[i,j].lastScaleZ = cubes[i,j].transform.localScale.z;
+				cubes[i,j].transform.localScale = new Vector3( cubes[i,j].jWidth, cubes[i,j].jRatio * cubes[i,j-1].lastScaleY, cubes[i,j-1].lastScaleZ) ;
 			}
 		}
 	} 

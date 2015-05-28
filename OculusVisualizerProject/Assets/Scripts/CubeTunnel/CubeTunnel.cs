@@ -11,7 +11,7 @@ public class CubeTunnel : MonoBehaviour {
 	private const float nCubes = 32f;  			 		// nb de cubes sur la circonference
 	private const float cRadius = 4f;   				// rayon du cylindre
 	private const float cHole = 0f;     		 		// fraction restante du rayon
-	private const float height = 0.1f; 			 		// hauteur des cubes par defaut
+	private const float height = 0.5f; 			 		// hauteur des cubes par defaut
 	// note : les cubes sont de longueur 1
 
 	// structures de cubes

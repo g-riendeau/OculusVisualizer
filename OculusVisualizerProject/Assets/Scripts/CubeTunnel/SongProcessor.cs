@@ -63,8 +63,11 @@ public class SongProcessor : AudioProcessor
 		mainSong.Play ();
 	}
 
-	public void startOutsideSong(){
-		outsideSong.Play ();
+	public void startOutsideSong(bool play){
+		if (play)
+			outsideSong.Play ();
+		else
+			outsideSong.Stop ();
 	}
 
 	public void leaveTunnel(){

@@ -26,6 +26,7 @@ public class Song : MonoBehaviour {
 	public bool secondEnterDone = false;
 	public bool thirdEnterDone = false;
 	public bool lastEnterDone = false;
+	public bool stopped = false;
 
 	//Main parts of song
 	public float startSong;
@@ -119,7 +120,7 @@ public class Song : MonoBehaviour {
 	private void handleOutsideSong(){
 		//Start outside song 
 		if(time () >= debut3eTiers && !outsideSongPlaying){
-			songProcessor.startOutsideSong();
+			songProcessor.startOutsideSong(true);
 			outsideSongPlaying = true;
 		}
 
@@ -173,6 +174,11 @@ public class Song : MonoBehaviour {
 			songProcessor.enterTunnel();
 			lastEnterDone = true;
 			Debug.Log("Entering...4");
+		}
+
+		if(time () >= enter4+5.0f && !stopped){
+			songProcessor.startOutsideSong(false);
+			stopped = true;
 		}
 		
 

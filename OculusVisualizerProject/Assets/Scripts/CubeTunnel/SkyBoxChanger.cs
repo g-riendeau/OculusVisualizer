@@ -13,7 +13,7 @@ public class SkyBoxChanger : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		Debug.Log("Changing to black!!");
 		RenderSettings.skybox = black;
 		RenderSettings.skybox.SetColor("_Color", Color.black);
 
@@ -21,6 +21,8 @@ public class SkyBoxChanger : MonoBehaviour {
 		for (int i=0; i<song.skyboxTime.Length; i++) {
 			switchSky [i] = false;
 		}
+
+		GetComponent<Camera>().backgroundColor = new Color(1.0f,1.0f,0.5f);
 	}
 	
 	// Update is called once per frame
