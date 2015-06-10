@@ -33,7 +33,7 @@ public class BlackScript : MonoBehaviour {
 		headTo = new List<Vector3>();
 		timesSinceLastSpike = new List<float>();
 		spikeTimeIntervals = new List<float>();
-		zStart = Mathf.Cos (Rad(transform.parent.localRotation.eulerAngles.y)) *100.0f + (transform.parent.localPosition.z);
+		zStart = Mathf.Cos (Rad(transform.parent.localRotation.eulerAngles.y)) *5.0f + (transform.parent.localPosition.z);
 
 		zStop = transform.parent.localPosition.z;
 		zSpeed = Mathf.Abs(5.0f*(zStart-zStop));
@@ -120,7 +120,7 @@ public class BlackScript : MonoBehaviour {
 		lines[max].SetPosition(0, p0s[0]);
 		lines[max].SetPosition(1, p1s[0]);
 		lines[max].SetWidth(0.5f, 0.01f);		
-		lines[max].material = new Material(Shader.Find("Particles/Multiply"));
+		lines[max].material = new Material(Shader.Find("Toon/Basic"));
 		lines[max].SetColors(Color.blue, Color.green);
 		timesSinceLastSpike.Add(0f);
 	}
